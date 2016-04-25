@@ -1,35 +1,20 @@
-﻿@model Isdg.Models.ApplicationUserViewModel
-
+﻿@using Isdg.Lib.Extensions;
+@model Isdg.Models.ApplicationUserViewModel
 <div class="user__edit hidden">
-@using (Ajax.BeginForm("Edit", "Users", new AjaxOptions()
-{
-    UpdateTargetId = "user_id_" + Model.Id
-}))
+@using (Ajax.BeginForm("Edit", "Users", new AjaxOptions() { UpdateTargetId = "user_id_" + Model.Id }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr />        
         @Html.HiddenFor(model => Model.Id)
         @Html.HiddenFor(model => Model.Email)
-          
+        @Html.HiddenFor(model => Model.UserName)
+        
         <div class="form-group">
-            @Html.LabelFor(model => Model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => Model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-              
-        <div class="form-group">
-            @Html.Label("Roles", new { @class = "control-label col-md-2" })
+            @Html.Label("Role", new { @class = "control-label col-md-2" })
             <span class=" col-md-10">
-                @foreach (var item in Model.RoleList)
-                {
-                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                    @Html.Label(item.Text, new { @class = "control-label" })
-                }
+                @Html.DropDownListFor(model => model.Role, Model.Role.ToSelectList(), new { @class = "form-control" })                
             </span>
         </div>
 

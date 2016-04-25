@@ -1,5 +1,7 @@
-﻿@model Isdg.Models.ApplicationUserViewModel
-<div id="user_id_@Model.Id">    
+﻿@using Isdg.Lib.Extensions;
+@model Isdg.Models.ApplicationUserViewModel
+<div id="user_id_@Model.Id">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="user">
         <div class="user__info"><span class="user__info_header">@Model.Email</span>
             <span class="links">
@@ -8,18 +10,13 @@
             </span>
             @Html.Partial("_Delete", Model)
         </div>
-        <div class="user__content">@Model.UserName</div>
-        <div class="user__roles">
-            @foreach (var item in Model.RoleList)
-                {
-                    if (item.Selected) 
-                    {
-                        <div class="user__role">@item.Text</div>
-                    }
-                }
-        </div>
+        <div class="user__content">
+            <p>@Model.UserName</p>
+            <p>@Model.Role.ToDescription()</p>
+            <p>@Html.DisplayNameFor(x => x.EmailConfirmed) @Html.DisplayFor(x => x.EmailConfirmed)</p>
+        </div>        
         @Html.Partial("_Edit", Model)        
-    </div>
+    </div>    
 </div>
 
 

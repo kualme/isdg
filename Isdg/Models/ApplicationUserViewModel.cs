@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,8 +14,21 @@ namespace Isdg.Models
     {
         public string Id { get; set; }
         public string Email { get; set; }
+        [Display(Name = "User name")]
         public string UserName { get; set; }
+        [Display(Name = "Is email confirmed")]
         public bool EmailConfirmed { get; set; }
-        public IEnumerable<SelectListItem> RoleList { get; set; }
-    }    
+        [Display(Name = "User role")]
+        public UserRole Role { get; set; }        
+    }
+
+    public enum UserRole
+    {
+        [Description("Untrusted member")]
+        Untrusted = 0,
+        [Description("Trusted member")]
+        Trusted = 1,
+        [Description("Administrator")]
+        Admin = 2
+    }
 }

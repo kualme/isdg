@@ -39,22 +39,14 @@ namespace Isdg.Controllers
             var model = new List<ApplicationUserViewModel>();
             foreach (var user in users)
             {                
-                model.Add(new ApplicationUserViewModel()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    EmailConfirmed = user.EmailConfirmed,
-                    UserName = user.UserName,
-                    RoleList = MakeRoleList(user)
-                });
+                model.Add(ToApplicationUserViewModel(user));
             }
-
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ApplicationUserViewModel model, params string[] selectedRole) 
+        public async Task<ActionResult> Edit(ApplicationUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -67,51 +59,88 @@ namespace Isdg.Controllers
                 user.UserName = model.Email;
                 user.Email = model.Email;
                 user.EmailConfirmed = model.EmailConfirmed;
-                                
-                var userRoles = await userManager.GetRolesAsync(user.Id);
-                selectedRole = selectedRole ?? new string[] { };
+
+                var roles = new string[] { model.Role.ToString() };
+                var userRoles = await userManager.GetRolesAsync(user.Id);                
                 var result = await userManager.AddToRolesAsync(user.Id,
-                    selectedRole.Except(userRoles).ToArray<string>());
+                    roles.Except(userRoles).ToArray<string>());
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                  ModelState.AddModelError("", result.Errors.First());
+                  return PartialView("_User", model);
                 }
+
                 result = await userManager.RemoveFromRolesAsync(user.Id,
-                    userRoles.Except(selectedRole).ToArray<string>());
+                    userRoles.Except(roles).ToArray<string>());
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                    return PartialView("_User", model);
                 }
-                return PartialView("_User");
+
+                return PartialView("_User", model);
             }
             ModelState.AddModelError("", "Something failed.");
-            return View();
+            return PartialView("_User", model);
         }
 
         public async Task<ActionResult> ConfirmDeleteUser(string userId) 
         {
-            var user = userManager.Users.SingleOrDefault(x => x.Id == userId);
-            await userManager.DeleteAsync(user);            
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            ModelState.AddModelError("" , result.Errors.First());
+            return PartialView("_User", user);
         }
 
-        private List<SelectListItem> MakeRoleList(ApplicationUser user)
+        public async Task<ActionResult> Edit(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }            
+            return View(ToApplicationUserViewModel(user));
+        }
+        
+        public async Task<ActionResult> Details(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ToApplicationUserViewModel(user));
+        }
+
+        public ApplicationUserViewModel ToApplicationUserViewModel(ApplicationUser user)
+        {
+            return new ApplicationUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                UserName = user.UserName,
+                Role = GetRole(user)
+            };
+        }
+
+        public UserRole GetRole(ApplicationUser user)
         {
             var roles = roleManager.Roles;
-            var roleList = new List<SelectListItem>();
+            var userRole = UserRole.Untrusted;
             foreach (var role in roles)
             {
-                roleList.Add(new SelectListItem()
-                {
-                    Value = role.Id,
-                    Selected = user.Roles.Any(x => x.RoleId == role.Id),
-                    Text = role.Name
-                });
+                if (user.Roles.Any(x => x.RoleId == role.Id))
+                    Enum.TryParse<UserRole>(role.Name, out userRole);
             }
-            return roleList;
+            return userRole;
         }
     }
 }
