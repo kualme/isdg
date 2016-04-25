@@ -1,10 +1,11 @@
-﻿@model Isdg.Core.Data.News
+﻿@using Isdg.Lib.Extensions;
+@model Isdg.Models.ApplicationUserViewModel
 
 @{
-    ViewBag.Title = "News Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>News Details</h2>
+<h2>User Details</h2>
 
 <div>
     <dl class="dl-horizontal">
@@ -17,47 +18,39 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsPublished)
+            @Html.DisplayNameFor(model => model.UserName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsPublished)
+            @Html.DisplayFor(model => model.UserName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AddedDate)
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AddedDate)
+            @Html.DisplayFor(model => model.EmailConfirmed)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
+            @Html.DisplayNameFor(model => model.Role)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IP)
+            @Model.Role.ToDescription()
         </dd>
     </dl>
 </div>
 
 <p>    
-    @Html.ActionLink("Back to list", "Index")
+    @Html.ActionLink("Back to list", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
 </p>

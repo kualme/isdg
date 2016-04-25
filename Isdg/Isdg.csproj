@@ -186,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Extensions\EnumExtensions.cs" />
     <Compile Include="MigrationsIsdgUsers\201604171459414_Initial.cs" />
     <Compile Include="MigrationsIsdgUsers\201604171459414_Initial.Designer.cs">
       <DependentUpon>201604171459414_Initial.cs</DependentUpon>
