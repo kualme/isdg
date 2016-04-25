@@ -1,0 +1,26 @@
+﻿@model Isdg.Models.ApplicationUserViewModel
+<div id="user_id_@Model.Id">    
+    <div class="user">
+        <div class="user__info"><span class="user__info_header">@Model.Email</span>
+            <span class="links">
+                <a role="button" onclick="showForm(this, 'user', 'user__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                <a role="button" onclick="showForm(this, 'user__info', 'user__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+            </span>
+            @Html.Partial("_Delete", Model)
+        </div>
+        <div class="user__content">@Model.UserName</div>
+        <div class="user__roles">
+            @foreach (var item in Model.RoleList)
+                {
+                    if (item.Selected) 
+                    {
+                        <div class="user__role">@item.Text</div>
+                    }
+                }
+        </div>
+        @Html.Partial("_Edit", Model)        
+    </div>
+</div>
+
+
+

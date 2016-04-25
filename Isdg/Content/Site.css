@@ -1,0 +1,89 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Common */
+.news, .user {
+    margin-bottom: 20px;
+}
+
+.news__info, .user__info {    
+    margin: 10px 0px 0px 10px;
+    line-height: 35px;
+}
+
+.news__content, .user__content {
+    margin: 0px 0px 30px 30px;
+}
+/* End Common */
+
+/* News */
+
+.news__info_date {
+    font-style: italic;
+    float: left;
+    width: 140px;
+}
+
+.news__add_open .glyphicon, .news__add_close .glyphicon {
+    font-size: 10px;
+}
+
+/* End News */
+
+/* Users */
+.user__info_header {
+    font-style: italic;
+    float: left;
+    width: 180px;
+}
+/* End Users */
+
+.links{
+    margin-left: 10px;
+}
+
+.links .glyphicon {
+    margin: 0px 3px 0px 3px;
+}
+
+.unpublished {
+    color: lightgray;
+}
+
+.unpublished .glyphicon{
+    color: lavender;
+}
+
+.unpublished .glyphicon:hover{
+    color: lightblue;
+}
+
+.form_inline {
+    display: inline;
+}
+
+.delete_confirmation {    
+    margin: 0px 10px 0px 10px;
+}

@@ -1,0 +1,14 @@
+﻿@model List<Isdg.Models.ApplicationUserViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+<div id="users">
+    @foreach (var item in Model)
+    {        
+        @Html.Partial("_User", item)
+    }
+</div>

@@ -1,0 +1,13 @@
+﻿@model Isdg.Models.ApplicationUserViewModel
+
+<span class="user__delete hidden">
+@using (Ajax.BeginForm("ConfirmDeleteUser", "Users", new AjaxOptions() {}, new { @class = "form_inline text-danger" }))
+{    
+    <span class="delete_confirmation">Are you sure you want to delete this user?</span>                
+    @Html.AntiForgeryToken()
+    <span class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('news', this)" />
+        <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('news__delete', this)" />
+    </span>
+}
+</span>

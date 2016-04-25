@@ -1,0 +1,16 @@
+﻿@using Isdg.Core.Data
+@model IEnumerable<News>
+
+@{
+    ViewBag.Title = "News";
+}
+
+<h2>News</h2>
+
+@Html.Partial("_Create", new News())
+<div id="news">
+    @foreach (var item in Model)
+    {        
+        @Html.Partial("_News", item)
+    }
+</div>
