@@ -16,9 +16,11 @@ using System.Collections.ObjectModel;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Net;
+using System.Web.Http;
 
 namespace Isdg.Controllers
-{    
+{
+    [System.Web.Mvc.Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private ApplicationUserManager userManager;
@@ -43,10 +45,9 @@ namespace Isdg.Controllers
             }
             return View(model);
         }
-
-        [HttpPost]
+                
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ApplicationUserViewModel model)
+        public async Task<ActionResult> EditUser([FromBody]ApplicationUserViewModel model, bool redirectToIndex = false)
         {
             if (ModelState.IsValid)
             {
@@ -67,22 +68,19 @@ namespace Isdg.Controllers
 
                 if (!result.Succeeded)
                 {
-                  ModelState.AddModelError("", result.Errors.First());
-                  return PartialView("_User", model);
+                    return HandleError(model, result, redirectToIndex);   
                 }
 
                 result = await userManager.RemoveFromRolesAsync(user.Id,
                     userRoles.Except(roles).ToArray<string>());
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return PartialView("_User", model);
+                    return HandleError(model, result, redirectToIndex);   
                 }
 
                 return PartialView("_User", model);
             }
-            ModelState.AddModelError("", "Something failed.");
-            return PartialView("_User", model);
+            return HandleError(model, null, redirectToIndex);   
         }
 
         public async Task<ActionResult> ConfirmDeleteUser(string userId) 
@@ -95,8 +93,7 @@ namespace Isdg.Controllers
             var result = await userManager.DeleteAsync(user);
             if (result.Succeeded)
                 return new HttpStatusCodeResult(HttpStatusCode.OK);
-            ModelState.AddModelError("" , result.Errors.First());
-            return PartialView("_User", user);
+            return HandleError(ToApplicationUserViewModel(user), result);
         }
 
         public async Task<ActionResult> Edit(string id)
@@ -119,7 +116,7 @@ namespace Isdg.Controllers
             return View(ToApplicationUserViewModel(user));
         }
 
-        public ApplicationUserViewModel ToApplicationUserViewModel(ApplicationUser user)
+        private ApplicationUserViewModel ToApplicationUserViewModel(ApplicationUser user)
         {
             return new ApplicationUserViewModel()
             {
@@ -131,7 +128,7 @@ namespace Isdg.Controllers
             };
         }
 
-        public UserRole GetRole(ApplicationUser user)
+        private UserRole GetRole(ApplicationUser user)
         {
             var roles = roleManager.Roles;
             var userRole = UserRole.Untrusted;
@@ -141,6 +138,16 @@ namespace Isdg.Controllers
                     Enum.TryParse<UserRole>(role.Name, out userRole);
             }
             return userRole;
+        }
+
+        private ActionResult HandleError(ApplicationUserViewModel model, IdentityResult result = null, bool redirectToIndex = false)
+        {
+            if (result == null)
+                ModelState.AddModelError("", "Something failed");
+            else ModelState.AddModelError("", result.Errors.First());
+            if (redirectToIndex)
+                return RedirectToAction("Index");
+            return PartialView("_User", model);
         }
     }
 }

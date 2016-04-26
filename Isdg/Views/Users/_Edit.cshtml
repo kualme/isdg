@@ -1,7 +1,7 @@
 ﻿@using Isdg.Lib.Extensions;
 @model Isdg.Models.ApplicationUserViewModel
 <div class="user__edit hidden">
-@using (Ajax.BeginForm("Edit", "Users", new AjaxOptions() { UpdateTargetId = "user_id_" + Model.Id }))
+@using (Ajax.BeginForm("EditUser", "Users", new { redirectToIndex = false }, new AjaxOptions() { UpdateTargetId = "user_id_" + Model.Id }))
 {
     @Html.AntiForgeryToken()
     

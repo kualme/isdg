@@ -10,6 +10,7 @@ using Isdg.Services.Messages;
 
 namespace Isdg.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmailController : Controller
     {
         private IEmailAccountService _emailAccountService;

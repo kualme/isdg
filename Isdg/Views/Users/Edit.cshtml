@@ -5,15 +5,13 @@
     ViewBag.Title = "Edit User";
 }
 
-<h2>Edit News</h2>
+<h2>Edit User</h2>
 
-
-@using (Html.BeginForm("Edit", "User"))
+@using (Html.BeginForm("EditUser", "Users", new { redirectToIndex = true }))
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>User</h4>
+    <div class="form-horizontal">        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
