@@ -29,8 +29,11 @@
                     <li>@Html.ActionLink("Publications", "About", "Home")</li>
                     <li>@Html.ActionLink("Albums", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Useful Links", "UsefulLinks", "Home")</li>
-                    <li>@Html.ActionLink("Mailout", "Index", "Email")</li>
-                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 
+                    {
+                        <li>@Html.ActionLink("Mailout", "Index", "Email")</li>                                        
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,7 +41,7 @@
     </div>
     <div class="container body-content">
         <div class="jumbotron">
-            <h2>International Society on Dynamic Games</h2>
+            <h2>@Html.ActionLink("International Society on Dynamic Games", "Index", "News")</h2>
         </div>
         @RenderBody()
         <hr />

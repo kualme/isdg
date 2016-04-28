@@ -1,21 +1,27 @@
-﻿@using Isdg.Core.Data
-@model News
-<div id="news_id_@Model.Id">
+﻿@using Isdg.Models
+@model NewsViewModel
+<div id="news_id_@Model.News.Id">
     @{
-        var newsStyle = Model.IsPublished ? "" : "unpublished";  
+        var newsStyle = Model.News.IsPublished ? "" : "unpublished";  
     }
     <div class="news @newsStyle">
-        <div class="news__info"><span class="news__info_date">@Html.DisplayFor(modelItem => Model.AddedDate)</span>
+        <div class="news__info"><span class="news__info_date">@Html.DisplayFor(modelItem => Model.News.AddedDate)</span>
             <span class="links">
-                <a role="button" onclick="showForm(this, 'news', 'news__edit')"><span class="glyphicon glyphicon-pencil"></span></a>
-                <a role="button" onclick="showForm(this, 'news', 'news__details')"><span class="glyphicon glyphicon-list"></span></a>
-                <a role="button" onclick="showForm(this, 'news__info', 'news__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                @if (Model.CanEditNews) 
+                {
+                    <a role="button" onclick="showForm(this, 'news', 'news__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                    <a role="button" onclick="showForm(this, 'news', 'news__details')"><span class="glyphicon glyphicon-list"></span></a>
+                }
+                @if (Model.CanDeleteNews)
+                {
+                    <a role="button" onclick="showForm(this, 'news__info', 'news__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                }
             </span>
-            @Html.Partial("_Delete", Model)
+            @Html.Partial("_Delete", Model.News)
         </div>
-        <div class="news__content">@Html.DisplayFor(modelItem => Model.Content)</div>            
-        @Html.Partial("_Edit", Model)
-        @Html.Partial("_Details", Model)
+        <div class="news__content">@Html.DisplayFor(modelItem => Model.News.Content)</div>            
+        @Html.Partial("_Edit", Model.News)
+        @Html.Partial("_Details", Model.News)
     </div>
 </div>
 
