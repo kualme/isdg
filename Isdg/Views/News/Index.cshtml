@@ -1,5 +1,5 @@
 ﻿@using Isdg.Core.Data
-@model IEnumerable<Isdg.Models.NewsViewModel>
+@model Isdg.Models.NewsListViewModel
 
 @{
     ViewBag.Title = "News";
@@ -7,12 +7,12 @@
 
 <div class="section-header"><h2>News</h2></div>
 
-@if (Model.First().CanCreateNews) 
+@if (Model.CanCreateNews) 
 {
     @Html.Partial("_Create", new News())
 }
 <div id="news">
-    @foreach (var item in Model)
+    @foreach (var item in Model.NewsList)
     {        
         @Html.Partial("_News", item)
     }

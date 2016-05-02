@@ -29,7 +29,7 @@ namespace Isdg.Controllers
         public ActionResult Index()
         {            
             var news = _newsService.GetAllNews(0, int.MaxValue, true);
-            return View(news.Select(ToNewsViewModel));
+            return View(ToNewsListViewModel(news));
         }
         
         public ActionResult Edit(int? id)
@@ -105,14 +105,20 @@ namespace Isdg.Controllers
             if (User.IsInRole(UserRole.Admin.ToString()))
             {
                 model.CanDeleteNews = true;
-                model.CanEditNews = true;
-                model.CanCreateNews = true;
+                model.CanEditNews = true;                
             }
             else if (User.IsInRole(UserRole.Trusted.ToString()))
             {             
-                model.CanEditNews = true;
-                model.CanCreateNews = true;
+                model.CanEditNews = true;                
             }
+            return model;
+        }
+
+        private NewsListViewModel ToNewsListViewModel(IEnumerable<News> news)
+        {
+            var model = new NewsListViewModel();
+            model.CanCreateNews = User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Trusted.ToString());
+            model.NewsList = news.Select(ToNewsViewModel).ToList();
             return model;
         }
     }
