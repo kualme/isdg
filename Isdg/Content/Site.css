@@ -1,6 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿body {    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -24,6 +22,25 @@ textarea {
 }
 
 /* Common */
+.common-header {
+    background-color: #42599A;
+    padding: 40px;
+    text-align: center;
+}
+
+.common-header a {
+    color: #fff;
+}
+
+.common-header a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.section-header {
+    text-align: center;
+}
+
 .news, .user {
     margin-bottom: 20px;
 }
@@ -36,6 +53,7 @@ textarea {
 .news__content, .user__content {
     margin: 0px 0px 30px 30px;
 }
+
 /* End Common */
 
 /* News */
