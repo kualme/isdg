@@ -13,33 +13,27 @@ using Isdg.Data;
 using Ninject;
 using Isdg.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace Isdg.Controllers
 {    
     public class NewsController : Controller
     {
-        private readonly INewsService _newsService;        
+        private readonly INewsService newsService;        
+        private ApplicationUserManager userManager;        
         
         [Inject]
         public NewsController(INewsService newsService) 
         {
-            this._newsService = newsService;            
+            var context = new ApplicationDbContext();
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));            
+            this.newsService = newsService;            
         }
                 
         public ActionResult Index()
         {            
-            var news = _newsService.GetAllNews(0, int.MaxValue, true);
+            var news = newsService.GetAllNews();
             return View(ToNewsListViewModel(news));
-        }
-        
-        public ActionResult Edit(int? id)
-        {
-            News model = new News();
-            if (id.HasValue)
-            {
-                model = _newsService.GetNewsById(id.Value);
-            }
-            return View(model);
         }
         
         [HttpPost]
@@ -51,65 +45,119 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;
-                _newsService.InsertNews(model);
-                return PartialView("_News", ToNewsViewModel(model));
+                try
+                {
+                    model.UserId = User.Identity.GetUserId();                
+                    newsService.InsertNews(model);
+                    return PartialView("_News", ToNewsViewModel(model));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Failed to create news");
+                    return PartialView("_News", null);
+                }                
             }
             else
             {
-                var editModel = _newsService.GetNewsById(model.Id);
-                editModel.Content = model.Content;
-                editModel.IsPublished = model.IsPublished;
-                editModel.ModifiedDate = System.DateTime.Now;
-                editModel.IP = Request.UserHostAddress;
-                _newsService.UpdateNews(editModel);
-                return PartialView("_News", ToNewsViewModel(editModel));
+                try
+                {
+                    var editModel = newsService.GetNewsById(model.Id);                
+                    editModel.Content = model.Content;
+                    editModel.IsPublished = model.IsPublished;
+                    editModel.ModifiedDate = System.DateTime.Now;
+                    editModel.IP = Request.UserHostAddress;                
+                    newsService.UpdateNews(editModel);
+                    return PartialView("_News", ToNewsViewModel(editModel));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Failed to update news");
+                    return PartialView("_News", model);
+                }                
             }                     
-        }
-
-        [HttpPost]
-        public ActionResult EditNews(News model)
-        {
-            if (model.Id == 0)
-            {                
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                var editModel = _newsService.GetNewsById(model.Id);
-                editModel.Content = model.Content;
-                editModel.IsPublished = model.IsPublished;
-                editModel.ModifiedDate = System.DateTime.Now;
-                editModel.IP = Request.UserHostAddress;
-                _newsService.UpdateNews(editModel);
-                return RedirectToAction("Index");
-            }
-        }
+        }        
         
         [HttpPost]
         public ActionResult ConfirmDeleteNews(int newsId)
         {
-            var model = _newsService.GetNewsById(newsId);
-            _newsService.DeleteNews(model);
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            try
+            {
+                var model = newsService.GetNewsById(newsId);            
+                newsService.DeleteNews(model);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Failed to delete news");
+                return PartialView("_News", null);
+            }            
         }
 
+        [System.Web.Mvc.Authorize(Roles = "Admin")]
+        public ActionResult Edit(int? id)
+        {
+            News model = new News();
+            if (id.HasValue)
+            {
+                model = newsService.GetNewsById(id.Value);
+            }
+            return View(model);
+        }
+                
+        [HttpPost]
+        [System.Web.Mvc.Authorize(Roles = "Admin")]
+        public ActionResult EditNews(News model)
+        {
+            try
+            {
+                var editModel = newsService.GetNewsById(model.Id);
+                editModel.Content = model.Content;
+                editModel.IsPublished = model.IsPublished;
+                editModel.ModifiedDate = System.DateTime.Now;
+                editModel.IP = Request.UserHostAddress;                
+                newsService.UpdateNews(editModel);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Failed to edit news");
+                return View("Edit", model);
+            }            
+        }
+
+        [System.Web.Mvc.Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
-            News model = _newsService.GetNewsById(id);
+            News model = newsService.GetNewsById(id);
             return View(model);
         }
 
         private NewsViewModel ToNewsViewModel(News news)
         {
-            var model = new NewsViewModel() { News = news };
+            var model = new NewsViewModel() { News = news, Show = true };            
+            var user = userManager.Users.FirstOrDefault(x => x.Id == news.UserId);
+            model.UserName = user == null ? "" : user.UserName;
             if (User.IsInRole(UserRole.Admin.ToString()))
             {
                 model.CanDeleteNews = true;
-                model.CanEditNews = true;                
+                model.CanEditNews = true;
+                model.CanSeeDetails = true;
             }
             else if (User.IsInRole(UserRole.Trusted.ToString()))
-            {             
-                model.CanEditNews = true;                
+            {
+                model.CanSeeDetails = true;
+                if (User.Identity.GetUserId().Equals(news.UserId))
+                {
+                    model.CanEditNews = true;
+                }
+                else 
+                {
+                    if (!news.IsPublished) model.Show = false;
+                }
+            }
+            else 
+            {
+                if (!news.IsPublished) model.Show = false;
             }
             return model;
         }

@@ -22,7 +22,7 @@ namespace Isdg.Services.Information
         /// <param name="pageSize">Page size</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>News</returns>
-        IPagedList<News> GetAllNews(int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
+        IPagedList<News> GetAllNews(int pageIndex = 0, int pageSize = int.MaxValue);
                 
         /// <summary>
         /// Get news

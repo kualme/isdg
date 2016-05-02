@@ -1,54 +1,70 @@
-﻿@model Isdg.Core.Data.News
+﻿@model Isdg.Models.NewsViewModel
 
 <div class="news__details hidden">
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.News.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.News.Id)
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayNameFor(model => model.News.Content)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
+            @Html.DisplayFor(model => model.News.Content)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsPublished)
+            @Html.DisplayNameFor(model => model.News.IsPublished)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsPublished)
+            @Html.DisplayFor(model => model.News.IsPublished)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AddedDate)
+            @Html.DisplayNameFor(model => model.News.AddedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AddedDate)
+            @Html.DisplayFor(model => model.News.AddedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
+            @Html.DisplayNameFor(model => model.News.ModifiedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
+            @Html.DisplayFor(model => model.News.ModifiedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IP)
+            @Html.DisplayNameFor(model => model.News.IP)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IP)
+            @Html.DisplayFor(model => model.News.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.News.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.News.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
         </dd>
     </dl>
     <span class="form-actions no-color">        

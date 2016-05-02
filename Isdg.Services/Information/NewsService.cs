@@ -41,22 +41,10 @@ namespace Isdg.Services.Information
         /// <param name="pageSize">Page size</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>News</returns>
-        public virtual IPagedList<News> GetAllNews(int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
+        public virtual IPagedList<News> GetAllNews(int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _newsRepository.Table;
-            if (!showHidden)
-                query = query.Where(c => c.IsPublished);
-                        
-            query = query.OrderByDescending(c => c.AddedDate);
-            
-            if (!showHidden)
-            {
-                // Тут надо про роли замутить
-                // Если пользователь админ или trusted member, то показывать спрятанные?
-                //ACL (access control list)
-                //var allowedCustomerRolesIds = _workContext.CurrentCustomer.CustomerRoles
-                //    .Where(cr => cr.Active).Select(cr => cr.Id).ToList();                
-            }
+            query = query.OrderByDescending(c => c.AddedDate);            
                         
             //paging
             return new PagedList<News>(query.ToList(), pageIndex, pageSize);
