@@ -1,4 +1,4 @@
-namespace Isdg.MigrationsIsdgUsers
+namespace Isdg.UsersMigrations
 {
     using System;
     using System.Data.Entity.Migrations;

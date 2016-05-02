@@ -1,22 +1,22 @@
-namespace Isdg.MigrationsIsdgUsers
+namespace Isdg.IsdgMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Isdg.Models.ApplicationDbContext>
+    internal sealed class IsdgConfiguration : DbMigrationsConfiguration<Isdg.Models.IsdgObjectContext>
     {
-        public Configuration()
+        public IsdgConfiguration()
         {
-            AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"MigrationsIsdgUsers";
+            AutomaticMigrationsEnabled = true;
+            MigrationsDirectory = @"IsdgMigrations";
         }
 
-        protected override void Seed(Isdg.Models.ApplicationDbContext context)
+        protected override void Seed(Isdg.Models.IsdgObjectContext context)
         {
             //  This method will be called after migrating to the latest version.
-
+            
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //

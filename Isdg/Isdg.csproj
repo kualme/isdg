@@ -187,17 +187,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605021121579_Initial.cs" />
+    <Compile Include="IsdgMigrations\201605021121579_Initial.Designer.cs">
+      <DependentUpon>201605021121579_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsdgMigrations\201605021139447_UserInNews.cs" />
+    <Compile Include="IsdgMigrations\201605021139447_UserInNews.Designer.cs">
+      <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
-    <Compile Include="MigrationsIsdgUsers\201604171459414_Initial.cs" />
-    <Compile Include="MigrationsIsdgUsers\201604171459414_Initial.Designer.cs">
-      <DependentUpon>201604171459414_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MigrationsIsdgUsers\Configuration.cs" />
-    <Compile Include="MigrationsIsdg\201604171508292_Initial.cs" />
-    <Compile Include="MigrationsIsdg\201604171508292_Initial.Designer.cs">
-      <DependentUpon>201604171508292_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MigrationsIsdg\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -206,6 +205,11 @@
     <Compile Include="Models\TestEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UsersMigrations\201605021126565_Initial.cs" />
+    <Compile Include="UsersMigrations\201605021126565_Initial.Designer.cs">
+      <DependentUpon>201605021126565_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersMigrations\UsersConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -325,11 +329,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MigrationsIsdgUsers\201604171459414_Initial.resx">
-      <DependentUpon>201604171459414_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="IsdgMigrations\201605021121579_Initial.resx">
+      <DependentUpon>201605021121579_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MigrationsIsdg\201604171508292_Initial.resx">
-      <DependentUpon>201604171508292_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="IsdgMigrations\201605021139447_UserInNews.resx">
+      <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersMigrations\201605021126565_Initial.resx">
+      <DependentUpon>201605021126565_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

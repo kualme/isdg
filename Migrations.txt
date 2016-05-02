@@ -1,0 +1,12 @@
+Создание первых миграций для двух контекстов:
+1.	Enable-Migrations -ContextTypeName IsdgObjectContext -ContextProjectName Isdg.Data -MigrationsDirectory IsdgMigrations -EnableAutomaticMigrations
+2.	Переименовываем сгенерированный класс Configuration на IsdgConfiguration
+3.	Add-Migration -Name Initial -ConfigurationTypeName IsdgConfiguration
+4.	Update-Database -ConfigurationTypeName IsdgConfiguration
+5.	Enable-Migrations -ContextTypeName ApplicationDbContext -MigrationsDirectory UsersMigrations -EnableAutomaticMigrations
+6.	Переименовываем сгенерированный класс Configuration на UsersConfiguration
+7.	Add-Migration -Name Initial -ConfigurationTypeName UsersConfiguration
+8.	Update-Database -ConfigurationTypeName UsersConfiguration	
+	
+	
+	get-help Update-Database -detailed
