@@ -9,7 +9,9 @@ namespace Isdg
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquerysite").Include(
-                        "~/Scripts/Site.js"));
+                        "~/Scripts/Site.js",
+                        "~/Scripts/ckeditor/ckeditor.js",
+                        "~/Scripts/ckeditor/sample.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryunobtrusive").Include(
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
@@ -31,7 +33,9 @@ namespace Isdg
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/sb-admin.css",                      
+                      "~/Content/sb-admin.css",
+                      "~/Content/ckeditor/neo.css",
+                      "~/Content/ckeditor/samples.css",
                       "~/Content/site.css"));
         }
     }

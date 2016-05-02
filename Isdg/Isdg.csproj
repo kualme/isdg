@@ -195,6 +195,10 @@
     <Compile Include="IsdgMigrations\201605021139447_UserInNews.Designer.cs">
       <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605021910129_News.cs" />
+    <Compile Include="IsdgMigrations\201605021910129_News.Designer.cs">
+      <DependentUpon>201605021910129_News.cs</DependentUpon>
+    </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -214,6 +218,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ckeditor\neo.css" />
+    <Content Include="Content\ckeditor\samples.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -228,6 +234,8 @@
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\sample.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
@@ -334,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605021139447_UserInNews.resx">
       <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605021910129_News.resx">
+      <DependentUpon>201605021910129_News.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605021126565_Initial.resx">
       <DependentUpon>201605021126565_Initial.cs</DependentUpon>
