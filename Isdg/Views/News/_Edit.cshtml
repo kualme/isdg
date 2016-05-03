@@ -2,7 +2,8 @@
 <div class="news__edit hidden">
 @using (Ajax.BeginForm("CreateEditNews", "News", new AjaxOptions()
 {
-    UpdateTargetId = "news_id_" + Model.Id
+    UpdateTargetId = "news_id_" + Model.Id,
+    OnComplete = "bindCkeditor()"
 }))
 {
     @Html.AntiForgeryToken()
@@ -13,15 +14,15 @@
         @Html.HiddenFor(model => Model.Id)        
                 
         <div class="form-group">
-            @Html.LabelFor(model => Model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => Model.Content, htmlAttributes: new { @class = "control-label col-md-1" })
             <div class="col-md-10">
-                @Html.EditorFor(model => Model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => Model.Content, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => Model.IsPublished, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => Model.IsPublished, htmlAttributes: new { @class = "control-label col-md-1" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => Model.IsPublished)                    
@@ -30,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-1 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default btn-sm" />
                 <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('news__edit', this)" />
             </div>

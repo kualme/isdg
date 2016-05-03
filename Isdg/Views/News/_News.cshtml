@@ -29,7 +29,7 @@ else
                     </span>
                     @Html.Partial("_Delete", Model.News)
                 </div>
-                <div class="news__content">@Html.DisplayFor(modelItem => Model.News.Content)</div>
+                <div class="news__content">@Html.Raw(Model.News.Content)</div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
                 @Html.Partial("_Edit", Model.News)
                 @Html.Partial("_Details", Model)

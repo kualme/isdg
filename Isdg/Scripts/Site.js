@@ -9,3 +9,17 @@
 function closeFormOnButton(className, elem) {    
     $(elem).parents('.' + className).addClass("hidden");
 }
+function openCreationForm() {
+    $('.news__add_open').hide();
+    $('.news__form_add').show();
+    $('.news__add_close').show();
+}
+function closeCreationForm() {
+    $('.news__add_open').show();
+    $('.news__form_add').hide();
+    $('.news__add_close').hide();
+}
+function bindCkeditor() {
+    $.each($('textarea'), function (index, textarea) { $(textarea).ckeditor(); });
+}
+$(bindCkeditor);

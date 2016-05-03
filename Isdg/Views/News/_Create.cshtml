@@ -3,7 +3,8 @@
 @using (Ajax.BeginForm("CreateEditNews", "News", new AjaxOptions()
 {
     UpdateTargetId = "news",
-    InsertionMode = InsertionMode.InsertBefore
+    InsertionMode = InsertionMode.InsertBefore,
+    OnComplete = "bindCkeditor()"
 }))
 {
     @Html.AntiForgeryToken()
@@ -16,15 +17,10 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-1" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <div id="editor">
-					<h1>Hello world!</h1>
-					<p>I'm an instance of <a href="http://ckeditor.com">CKEditor</a>.</p>
-				</div>
-            
+            </div>            
             <div class="form-group">
                 @Html.LabelFor(model => model.IsPublished, htmlAttributes: new { @class = "control-label col-md-1" })
                 <div class="col-md-10">
@@ -33,10 +29,9 @@
                         @Html.ValidationMessageFor(model => model.IsPublished, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-                    
+            </div>                    
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-offset-1 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default btn-sm" />
                 </div>
             </div>        
@@ -45,19 +40,3 @@
         <a role="button" class="news__add_close" style="display: none;" onclick="closeCreationForm()">Add News <span class="glyphicon glyphicon-chevron-up"></span></a>        
     </div>
 }
-
-<script type="text/javascript">    
-    function openCreationForm() {
-        $('.news__add_open').hide();
-        $('.news__form_add').show();
-        $('.news__add_close').show();
-    }
-    function closeCreationForm() {
-        $('.news__add_open').show();
-        $('.news__form_add').hide();
-        $('.news__add_close').hide();
-    }
-</script>
-<script>
-    initSample();
-</script>

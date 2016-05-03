@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using Isdg;
 
 namespace Isdg
 {
@@ -8,16 +9,20 @@ namespace Isdg
         //Дополнительные сведения об объединении см. по адресу: http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquerysite").Include(
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
+
+            var bundle = new ScriptBundle("~/bundles/jquerysite").Include(
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/Site.js",
                         "~/Scripts/ckeditor/ckeditor.js",
-                        "~/Scripts/ckeditor/sample.js"));
+                        "~/Scripts/ckeditor/adapters/jquery.js");
+            bundle.Orderer = new NonOrderingBundleOrderer();
 
+            bundles.Add(bundle);
+            
             bundles.Add(new ScriptBundle("~/bundles/jqueryunobtrusive").Include(
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

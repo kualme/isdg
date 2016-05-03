@@ -50,11 +50,17 @@
             </div>
          </div>        
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryunobtrusive")
+    
     @Scripts.Render("~/bundles/jquerysite")
+    @Scripts.Render("~/bundles/jqueryunobtrusive")
+    
     @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    
+    @*@Scripts.Render("~/bundles/ckeditor")
+    @Scripts.Render("~/bundles/adapter")*@
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)  
+          
 </body>
 </html>
