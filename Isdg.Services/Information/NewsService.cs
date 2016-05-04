@@ -38,8 +38,7 @@ namespace Isdg.Services.Information
         /// Get all news
         /// </summary>        
         /// <param name="pageIndex">Page index</param>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="showHidden">A value indicating whether to show hidden records</param>
+        /// <param name="pageSize">Page size</param>        
         /// <returns>News</returns>
         public virtual IPagedList<News> GetAllNews(int pageIndex = 0, int pageSize = int.MaxValue)
         {

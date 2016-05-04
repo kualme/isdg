@@ -39,6 +39,8 @@ namespace Isdg.App_Start
             kernel.Bind(typeof(IPagedList<>)).To(typeof(PagedList<>));
             kernel.Bind<IDbContext>().To<IsdgObjectContext>().WithConstructorArgument("nameOrConnectionString", "IsdgObjectContext");            
             kernel.Bind<INewsService>().To<NewsService>();
+            kernel.Bind<IImageService>().To<ImageService>();
+            kernel.Bind<IAlbumService>().To<AlbumService>();
             kernel.Bind<IMeetingService>().To<MeetingService>();
             kernel.Bind<IEmailAccountService>().To<EmailAccountService>();
             kernel.Bind<IEmailSender>().To<EmailSender>();   
