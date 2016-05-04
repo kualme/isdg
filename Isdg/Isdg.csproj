@@ -200,6 +200,10 @@
     <Compile Include="IsdgMigrations\201605021910129_News.Designer.cs">
       <DependentUpon>201605021910129_News.cs</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605040904181_Albums.cs" />
+    <Compile Include="IsdgMigrations\201605040904181_Albums.Designer.cs">
+      <DependentUpon>201605040904181_Albums.cs</DependentUpon>
+    </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -485,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605021910129_News.resx">
       <DependentUpon>201605021910129_News.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605040904181_Albums.resx">
+      <DependentUpon>201605040904181_Albums.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605021126565_Initial.resx">
       <DependentUpon>201605021126565_Initial.cs</DependentUpon>

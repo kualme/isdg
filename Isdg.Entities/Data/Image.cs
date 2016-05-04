@@ -10,6 +10,8 @@ namespace Isdg.Core.Data
     {
         public string Path { get; set; }
         public string PathToPreview { get; set; }
-        public string Caption { get; set; }        
+        public string Caption { get; set; }
+        public string UserId { get; set; }
+        public virtual Album Album { get; set; }        
     }
 }

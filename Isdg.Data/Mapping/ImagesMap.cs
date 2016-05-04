@@ -18,6 +18,7 @@ namespace Isdg.Data.Mapping
             Property(t => t.Path).IsRequired();
             Property(t => t.PathToPreview).IsRequired();
             Property(t => t.Caption).IsOptional();
+            HasRequired<Album>(t => t.Album).WithMany(s => s.Images);            
             ToTable("Images");
         }
     }

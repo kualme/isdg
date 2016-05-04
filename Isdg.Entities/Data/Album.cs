@@ -8,7 +8,11 @@ namespace Isdg.Core.Data
 {
     public class Album : BaseEntity
     {
+        public Album()
+        {
+            var Images = new List<Image>();
+        }
         public string Name { get; set; }
-        public List<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

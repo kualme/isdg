@@ -82,9 +82,11 @@
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
     <Compile Include="CommonHelper.cs" />
+    <Compile Include="Data\Album.cs" />
     <Compile Include="Data\EmailAccount.cs" />
     <Compile Include="Data\FacebookAuth.cs" />
     <Compile Include="Data\GoogleAuth.cs" />
+    <Compile Include="Data\Image.cs" />
     <Compile Include="Data\Meeting.cs" />
     <Compile Include="Data\News.cs" />
     <Compile Include="IPagedList.cs" />

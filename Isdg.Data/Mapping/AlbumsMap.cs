@@ -15,8 +15,7 @@ namespace Isdg.Data.Mapping
         {
             HasKey(t => t.Id);
             Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(t => t.Name).IsRequired();
-            HasMany<Image>(t => t.Images);            
+            Property(t => t.Name).IsRequired();            
             ToTable("Albums");
         }
     }
