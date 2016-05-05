@@ -12,6 +12,7 @@ namespace Isdg.Core.Data
         public string PathToPreview { get; set; }
         public string Caption { get; set; }
         public string UserId { get; set; }
+        public bool IsPublished { get; set; }
         public virtual Album Album { get; set; }        
     }
 }

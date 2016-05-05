@@ -41,6 +41,38 @@ namespace Isdg.Services.Information
         /// Update album
         /// </summary>
         /// <param name="album">album</param>
-        void UpdateAlbum(Album album);                
+        void UpdateAlbum(Album album);
+
+        /// <summary>
+        /// Delete image
+        /// </summary>
+        /// <param name="News">Image</param>
+        void DeleteImage(Image image);
+
+        /// <summary>
+        /// Get all image
+        /// </summary>        
+        /// <param name="albumId">Album identifier</param>
+        /// <returns>Images</returns>
+        List<Image> GetImagesFromAlbum(int albumId);
+
+        /// <summary>
+        /// Get image
+        /// </summary>
+        /// <param name="imageId">Image identifier</param>
+        /// <returns>Image</returns>
+        Image GetImageById(int imageId);
+
+        /// <summary>
+        /// Insert Image
+        /// </summary>
+        /// <param name="image">Image</param>
+        void InsertImage(Image image);
+
+        /// <summary>
+        /// Update image
+        /// </summary>
+        /// <param name="image">image</param>
+        void UpdateImage(Image image);
     }
 }

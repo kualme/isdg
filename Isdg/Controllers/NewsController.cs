@@ -19,7 +19,7 @@ namespace Isdg.Controllers
 {    
     public class NewsController : Controller
     {
-        private readonly INewsService newsService;        
+        private readonly INewsService newsService;
         private ApplicationUserManager userManager;        
         
         [Inject]

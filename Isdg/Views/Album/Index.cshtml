@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Isdg.Core.Data.Album>
+
+@{
+    ViewBag.Title = "Albums";
+}
+
+<div class="section-header"><h2>Albums</h2></div>
+
+@Html.Partial("_Create", new Isdg.Core.Data.Album())
+<div id="albums">
+    @foreach (var item in Model)
+    {        
+        @Html.Partial("_Album", item)
+    }
+</div>

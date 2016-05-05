@@ -1,0 +1,50 @@
+﻿@model Isdg.Core.Data.Album
+@if (Model == null)
+{    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })    
+}
+else 
+{
+    <div id="album_id_@Model.Id">    
+        <div class="album">        
+            <div class="album__info"><span class="album__name">@Model.Name</span>
+                <span class="links">                
+                    <a role="button" onclick="showForm(this, 'album', 'album__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                    
+                    <a role="button" onclick="showForm(this, 'album__info', 'album__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="/"><span class="glyphicon glyphicon-picture"></span></a>
+                </span>
+                @Html.Partial("_Delete", Model)
+            </div>
+            <hr />      
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
+            @Html.Partial("_Edit", Model)
+            @if (Model.Images.Count() > 0)
+            {
+                <div class="album__content" id="carousel_@Model.Id">
+                    <div class="carousel">
+                        <div class="mid"><img src="@Model.Images.First().Path" style="height:400px;"></div>
+                        <div class="jcarousel-buttons">
+                            <a role="button" class="jcarousel-prev"><i class="glyphicon glyphicon-circle-arrow-left"></i></a>
+                            <a role="button" class="jcarousel-next"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                        </div>
+                        <div class="carousel-pretty">                        
+                        <ul>
+                            @foreach (var image in Model.Images)
+                            {
+                                if (image.IsPublished) 
+                                {
+                                    <li><img src="@image.Path" style="max-width:100px;height:120px;cursor:pointer"></li>
+                                }
+                            }
+                        </ul>
+                        </div>                        
+                        <div class="clear"></div>
+                    </div>
+                    
+                    
+                </div>
+            }
+            @Html.Partial("_UploadImage", Model.Id)
+        </div>
+    </div>
+}

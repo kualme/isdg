@@ -45,8 +45,6 @@
     <Compile Include="Information\MeetingService.cs" />
     <Compile Include="Information\IAlbumService.cs" />
     <Compile Include="Information\AlbumService.cs" />
-    <Compile Include="Information\IImageService.cs" />
-    <Compile Include="Information\ImageService.cs" />
     <Compile Include="Messages\EmailAccountService.cs" />
     <Compile Include="Messages\EmailSender.cs" />
     <Compile Include="Messages\IEmailAccountService.cs" />

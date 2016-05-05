@@ -41,17 +41,21 @@ textarea {
     text-align: center;
 }
 
-.news, .user {
+.news, .user, .album {
     margin-bottom: 20px;
 }
 
-.news__info, .user__info {    
+.news__info, .user__info, .album__info {    
     margin: 10px 0px 0px 10px;
     line-height: 35px;
 }
 
-.news__content, .user__content {
+.news__content, .user__content, .album__content {
     margin: 0px 0px 30px 30px;
+}
+
+.news__add_open .glyphicon, .news__add_close .glyphicon, .album__add_open .glyphicon, .album__add_close .glyphicon {
+    font-size: 10px;
 }
 
 /* End Common */
@@ -64,10 +68,6 @@ textarea {
     width: 140px;
 }
 
-.news__add_open .glyphicon, .news__add_close .glyphicon {
-    font-size: 10px;
-}
-
 /* End News */
 
 /* Users */
@@ -77,6 +77,54 @@ textarea {
     width: 180px;
 }
 /* End Users */
+
+/* JCarousel */
+
+.carousel-pretty {
+    width: inherit;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;    
+    background-color: #fff;
+    float: left;    
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+.carousel-pretty>ul>li>img {
+    width: 150px;
+    height: 120px;
+    vertical-align:middle;
+    margin: 10px 10px 10px 0;
+    border-radius: 4px;
+}
+
+.jcarousel-buttons {
+    width: inherit;
+    text-align:center;
+    font-size: 20px;  
+    margin-top:5px;
+}
+
+.carousel>.mid>img {
+    border-radius: 4px;
+    height: 500px;
+    display: block;
+    margin:auto;
+}
+
+.clear {
+    clear: both;
+}
+
+/* End JCarousel */
+
+/* Album */
+.album__name {
+    font-size: 22px;
+}
+/* End Album*/
 
 .links{
     margin-left: 10px;

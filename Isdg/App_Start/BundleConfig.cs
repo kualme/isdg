@@ -9,23 +9,19 @@ namespace Isdg
         //Дополнительные сведения об объединении см. по адресу: http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Scripts/jquery-{version}.js"));
-
-            var bundle = new ScriptBundle("~/bundles/jquerysite").Include(
+            var bundle = new ScriptBundle("~/bundles/common").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/Site.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/jquery.validate*",
                         "~/Scripts/ckeditor/ckeditor.js",
-                        "~/Scripts/ckeditor/adapters/jquery.js");
+                        "~/Scripts/ckeditor/adapters/jquery.js",
+                        "~/Scripts/Site.js"
+                        );
             bundle.Orderer = new NonOrderingBundleOrderer();
-
             bundles.Add(bundle);
-            
-            bundles.Add(new ScriptBundle("~/bundles/jqueryunobtrusive").Include(
-                        "~/Scripts/jquery.unobtrusive-ajax.js"));
-            
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/carousel").Include(
+                        "~/Scripts/jcarousellite_*"));
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,
             // используйте средство сборки на сайте http://modernizr.com, чтобы выбрать только нужные тесты.

@@ -237,5 +237,7 @@ namespace Isdg.Models
 
         #endregion
 
+        public System.Data.Entity.DbSet<Isdg.Core.Data.Album> Albums { get; set; }
+
     }
 }

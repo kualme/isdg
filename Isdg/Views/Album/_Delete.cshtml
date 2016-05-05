@@ -1,0 +1,12 @@
+﻿@model Isdg.Core.Data.Album
+<span class="album__delete hidden">
+@using (Ajax.BeginForm("ConfirmDeleteAlbum", "Album", new { albumId = Model.Id }, new AjaxOptions() { UpdateTargetId = "album_id_" + Model.Id}, new { @class = "form_inline text-danger" }))
+{    
+    <span class="delete_confirmation">Are you sure you want to delete this album?</span>                
+    @Html.AntiForgeryToken()
+    <span class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('album', this)" />
+        <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('album__delete', this)" />
+    </span>
+}
+</span>
