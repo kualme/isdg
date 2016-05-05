@@ -18,7 +18,7 @@ else
             <hr />      
             @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
             @Html.Partial("_Edit", Model)
-            @if (Model.Images.Count() > 0)
+            @if (Model.Images != null && Model.Images.Count() > 0)
             {
                 <div class="album__content" id="carousel_@Model.Id">
                     <div class="carousel">

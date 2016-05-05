@@ -160,10 +160,10 @@ namespace Isdg.Controllers
                 };
                 albumService.InsertImage(image);
             }
-            var message = "Images has been added successfully";
-            if (!User.IsInRole(UserRole.Admin.ToString()))
+            var message = Request.Files.Count == 1 ? "Image has been added successfully" : "Images have been added successfully";
+            if (!isPublished)
                 message += ". They will be published after validation.";
-            return new JsonResult() { Data = new { message = "Images has been added successfully" } };
+            return new JsonResult() { Data = new { message } };
         }
     }
 }

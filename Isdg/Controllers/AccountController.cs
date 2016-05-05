@@ -166,7 +166,7 @@ namespace Isdg.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);                    
                     new EmailSender().SendEmail("Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>", model.Email);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "News");
                 }
                 AddErrors(result);
             }
@@ -395,7 +395,7 @@ namespace Isdg.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "News");
         }
 
         //
@@ -452,7 +452,7 @@ namespace Isdg.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "News");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
