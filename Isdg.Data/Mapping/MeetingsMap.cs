@@ -12,6 +12,7 @@ namespace Isdg.Data.Mapping
             Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Title).IsRequired();
             Property(t => t.Place).IsRequired();
+            Property(t => t.Href).IsRequired();
             Property(t => t.StartDate).IsRequired();
             Property(t => t.EndDate).IsRequired();
             Property(t => t.MeetingType).IsRequired();

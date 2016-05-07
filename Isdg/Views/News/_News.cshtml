@@ -16,20 +16,23 @@ else
                     <span class="links">
                         @if (Model.CanEditNews) 
                         {
-                            <a role="button" onclick="showForm(this, 'news', 'news__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                            <a role="button" title="Edit news" onclick="showForm(this, 'news', 'news__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
                         }
                         @if (Model.CanSeeDetails) 
                         {
-                            <a role="button" onclick="showForm(this, 'news', 'news__details')"><span class="glyphicon glyphicon-list"></span></a>
+                            <a role="button" title="Show news details" onclick="showForm(this, 'news', 'news__details')"><span class="glyphicon glyphicon-list"></span></a>
                         }
                         @if (Model.CanDeleteNews)
                         {
-                            <a role="button" onclick="showForm(this, 'news__info', 'news__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a role="button" title="Delete news" onclick="showForm(this, 'news__info', 'news__delete')"><span class="glyphicon glyphicon-trash"></span></a>
                         }
                     </span>
                     @Html.Partial("_Delete", Model.News)
                 </div>
-                <div class="news__content">@Html.Raw(Model.News.Content)</div>
+                <div class="news__content">
+                    @Html.Raw(Model.News.Content)
+                    <div class="news__author">Published by @Model.UserName</div>
+                </div>                
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
                 @Html.Partial("_Edit", Model.News)
                 @Html.Partial("_Details", Model)

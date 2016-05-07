@@ -1,0 +1,26 @@
+﻿@using Isdg.Core.Data
+@model Isdg.Models.MeetingListViewModel
+
+@{
+    ViewBag.Title = "Related meetings";
+}
+
+<div class="section-header"><h2>Related meetings</h2></div>
+
+<p>Here, some conferences and workshops on game theory are mentioned. This list is not all-embracing.</p>
+@if (Model.CanCreateMeeting) 
+{
+    @Html.Partial("_Create", new Meeting())
+}
+<div id="meetings">
+    <p>The Coming Meetings</p>
+    @foreach (var item in Model.ComingMeetingsList)
+    {        
+        @Html.Partial("_Meeting", item)
+    }
+    <p>Past Events</p>
+    @foreach (var item in Model.ComingMeetingsList)
+    {        
+        @Html.Partial("_Meeting", item)
+    }
+</div>

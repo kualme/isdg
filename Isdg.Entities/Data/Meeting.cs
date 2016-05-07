@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Isdg.Core.Data
 {
@@ -11,10 +12,16 @@ namespace Isdg.Core.Data
     {
         public string Title { get; set; }
         public string Place { get; set; }
+        [Display(Name = "Link")]
+        public string Href { get; set; }
+        [Display(Name = "Start date")]
         public DateTime StartDate { get; set; }
+        [Display(Name = "End date")]
         public string EndDate { get; set; }
-        public MeetingType MeetingType { get; set; }
+        [Display(Name = "Meeting type")]
+        public MeetingType MeetingType { get; set; }        
         public bool IsIsdgMeeting { get; set; }
+        [Display(Name = "Published")]
         public bool IsPublished { get; set; }
     }
 

@@ -185,6 +185,7 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,10 @@
     <Compile Include="IsdgMigrations\201605041411085_Albums1.Designer.cs">
       <DependentUpon>201605041411085_Albums1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605060512510_Meeting.cs" />
+    <Compile Include="IsdgMigrations\201605060512510_Meeting.Designer.cs">
+      <DependentUpon>201605060512510_Meeting.cs</DependentUpon>
+    </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -219,6 +224,7 @@
     <Compile Include="Models\NewsViewModel.cs" />
     <Compile Include="Models\TestEmailModel.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
+    <Compile Include="Models\MeetingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UsersMigrations\201605021126565_Initial.cs" />
@@ -470,6 +476,14 @@
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\_Album.cshtml" />
     <Content Include="Views\Album\_UploadImage.cshtml" />
+    <Content Include="Views\Meetings\_Create.cshtml" />
+    <Content Include="Views\Meetings\_Delete.cshtml" />
+    <Content Include="Views\Meetings\_Details.cshtml" />
+    <Content Include="Views\Meetings\_Edit.cshtml" />
+    <Content Include="Views\Meetings\_Meeting.cshtml" />
+    <Content Include="Views\Meetings\Details.cshtml" />
+    <Content Include="Views\Meetings\Edit.cshtml" />
+    <Content Include="Views\Meetings\Related.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -510,6 +524,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605041411085_Albums1.resx">
       <DependentUpon>201605041411085_Albums1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605060512510_Meeting.resx">
+      <DependentUpon>201605060512510_Meeting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605021126565_Initial.resx">
       <DependentUpon>201605021126565_Initial.cs</DependentUpon>

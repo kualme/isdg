@@ -45,6 +45,8 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;
+                if (!User.IsInRole(UserRole.Admin.ToString()))
+                    model.IsPublished = false;
                 try
                 {
                     model.UserId = User.Identity.GetUserId();                
@@ -134,7 +136,7 @@ namespace Isdg.Controllers
 
         private NewsViewModel ToNewsViewModel(News news)
         {
-            var model = new NewsViewModel() { News = news, Show = true };            
+            var model = new NewsViewModel() { News = news, Show = news.IsPublished };            
             var user = userManager.Users.FirstOrDefault(x => x.Id == news.UserId);
             model.UserName = user == null ? "" : user.UserName;
             if (User.IsInRole(UserRole.Admin.ToString()))
@@ -142,23 +144,16 @@ namespace Isdg.Controllers
                 model.CanDeleteNews = true;
                 model.CanEditNews = true;
                 model.CanSeeDetails = true;
+                model.Show = true;                
             }
             else if (User.IsInRole(UserRole.Trusted.ToString()))
-            {
-                model.CanSeeDetails = true;
+            {                
                 if (User.Identity.GetUserId().Equals(news.UserId))
                 {
                     model.CanEditNews = true;
-                }
-                else 
-                {
-                    if (!news.IsPublished) model.Show = false;
-                }
-            }
-            else 
-            {
-                if (!news.IsPublished) model.Show = false;
-            }
+                    model.Show = true;
+                }                
+            }            
             return model;
         }
 

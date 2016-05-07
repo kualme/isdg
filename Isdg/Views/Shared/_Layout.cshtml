@@ -27,9 +27,9 @@
                     <li>@Html.ActionLink("About ISDG", "About", "Home")</li>
                     <li>@Html.ActionLink("Statutes of ISDG", "Statutes", "Home")</li>
                     <li>@Html.ActionLink("ISDG meetings", "Index", "Meetings")</li>
-                    <li>@Html.ActionLink("Related Meetings", "Index", "Meetings")</li>
+                    <li>@Html.ActionLink("Related Meetings", "Related", "Meetings")</li>
                     <li>@Html.ActionLink("Publications", "About", "Home")</li>
-                    <li>@Html.ActionLink("Albums", "Index", "Album")</li>
+                    @*<li>@Html.ActionLink("Albums", "Index", "Album")</li>*@
                     <li>@Html.ActionLink("Useful Links", "UsefulLinks", "Home")</li>
                     @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 
                     {

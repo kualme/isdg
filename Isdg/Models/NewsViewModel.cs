@@ -19,7 +19,7 @@ namespace Isdg.Models
         public bool CanDeleteNews { get; set; }
         public bool CanEditNews { get; set; }
         public bool CanSeeDetails { get; set; }
-        public bool Show { get; set; }
+        public bool Show { get; set; }        
         [Display(Name = "User name")]
         public string UserName { get; set; }
     }

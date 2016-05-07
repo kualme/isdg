@@ -68,6 +68,10 @@ textarea {
     width: 140px;
 }
 
+.news__author {
+    font-style: italic;
+}
+
 /* End News */
 
 /* Users */

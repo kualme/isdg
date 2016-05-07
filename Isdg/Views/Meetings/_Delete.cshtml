@@ -1,0 +1,13 @@
+﻿@model Isdg.Core.Data.Meeting
+
+<span class="meeting__delete hidden">
+@using (Ajax.BeginForm("ConfirmDeleteMeeting", "Meetings", new { meetingId = Model.Id }, new AjaxOptions() { UpdateTargetId = "meeting_id_" + Model.Id}, new { @class = "form_inline text-danger" }))
+{    
+    <span class="delete_confirmation">Are you sure you want to delete this meeting?</span>                
+    @Html.AntiForgeryToken()
+    <span class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('meeting', this)" />
+        <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('meeting__delete', this)" />
+    </span>
+}
+</span>

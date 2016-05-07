@@ -1,0 +1,44 @@
+﻿@using Isdg.Models
+@model MeetingViewModel
+@if (Model == null)
+{    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })    
+}
+else 
+{
+    if (Model.Show) {
+        <div id="meeting_id_@Model.meeting.Id">
+            @{
+                var meetingStyle = Model.Meeting.IsPublished ? "" : "unpublished";  
+            }
+            <div class="meeting @meetingStyle">        
+                <div class="meeting__info">
+                    <span class="links">
+                        @if (Model.CanEditMeetings) 
+                        {
+                            <a role="button" title="Edit meeting" onclick="showForm(this, 'meeting', 'meeting__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                        }
+                        @if (Model.CanSeeDetails) 
+                        {
+                            <a role="button" title="Show meeting details" onclick="showForm(this, 'meeting', 'meeting__details')"><span class="glyphicon glyphicon-list"></span></a>
+                        }
+                        @if (Model.CanDeleteMeetings)
+                        {
+                            <a role="button" title="Delete meeting" onclick="showForm(this, 'meeting__info', 'meeting__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                        }
+                    </span>
+                    @Html.Partial("_Delete", Model.Meeting)
+                </div>
+                <div class="meeting__content">
+                    <a href="@Model.Meeting.Href">@Model.Meeting.Title</a>, @Model.Meeting.Place, @Model.MeetingDate <a role="button" class="glyphicon glyphicon-question-sign" title="Published by @Model.UserName", @Html.DisplayFor(modelItem => Model.Meeting.AddedDate)></a>                    
+                </div>                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.Partial("_Edit", Model.Meeting)
+                @Html.Partial("_Details", Model)
+            </div>
+        </div>
+    }
+}
+
+
+
