@@ -21,6 +21,10 @@ textarea {
     max-width: 280px;
 }
 
+a:hover, a:focus {
+    text-decoration:none;
+}
+
 /* Common */
 .common-header {
     background-color: #42599A;
@@ -129,6 +133,24 @@ textarea {
     font-size: 22px;
 }
 /* End Album*/
+
+/* Meetings */
+.meeting__content {
+    line-height: 35px;
+}
+
+.meeting__title {
+    font-weight: bold;
+    margin: 30px;
+    line-height: 35px;
+}
+
+.meeting__year {
+    font-style: italic;
+    margin: 30px;
+    line-height: 35px;
+}
+/* End Meetings*/
 
 .links{
     margin-left: 10px;

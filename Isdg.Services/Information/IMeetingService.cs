@@ -19,12 +19,11 @@ namespace Isdg.Services.Information
         /// Get all meetings
         /// </summary>        
         /// <param name="pageIndex">Page index</param>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="showHidden">A value indicating whether to show hidden records</param>
-        /// <param name="type">Meeting type</param>
-        /// <param name="isIsdg">Is Isdg meeting</param>
+        /// <param name="pageSize">Page size</param>        
+        /// <param name="type">Meeting type</param>        
+        /// <param name="isIsdg">Is ISDG meeting</param>
         /// <returns>News</returns>
-        IPagedList<Meeting> GetAllMeetings(int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false, MeetingType type = MeetingType.Unknown, bool isIsdg = true);
+        IPagedList<Meeting> GetAllMeetings(int pageIndex = 0, int pageSize = int.MaxValue, MeetingType type = MeetingType.Unknown, bool isIsdg = true);
                 
         /// <summary>
         /// Get meeting

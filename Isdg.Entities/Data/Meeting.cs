@@ -15,14 +15,19 @@ namespace Isdg.Core.Data
         [Display(Name = "Link")]
         public string Href { get; set; }
         [Display(Name = "Start date")]
-        public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime StartDate { get; set; }        
         [Display(Name = "End date")]
-        public string EndDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EndDate { get; set; }        
         [Display(Name = "Meeting type")]
         public MeetingType MeetingType { get; set; }        
         public bool IsIsdgMeeting { get; set; }
         [Display(Name = "Published")]
         public bool IsPublished { get; set; }
+        public string UserId { get; set; }
     }
 
     public enum MeetingType

@@ -481,8 +481,6 @@
     <Content Include="Views\Meetings\_Details.cshtml" />
     <Content Include="Views\Meetings\_Edit.cshtml" />
     <Content Include="Views\Meetings\_Meeting.cshtml" />
-    <Content Include="Views\Meetings\Details.cshtml" />
-    <Content Include="Views\Meetings\Edit.cshtml" />
     <Content Include="Views\Meetings\Related.cshtml" />
   </ItemGroup>
   <ItemGroup>

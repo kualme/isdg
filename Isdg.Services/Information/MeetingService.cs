@@ -38,34 +38,19 @@ namespace Isdg.Services.Information
         /// Get all meetings
         /// </summary>        
         /// <param name="pageIndex">Page index</param>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="showHidden">A value indicating whether to show hidden records</param>
+        /// <param name="pageSize">Page size</param>        
+        /// <param name="type">Meeting type</param>        
+        /// <param name="isIsdg">Is ISDG meeting</param>        
         /// <returns>Meeting</returns>
-        public virtual IPagedList<Meeting> GetAllMeetings(int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false, MeetingType type = MeetingType.Unknown, bool isIsdg = true)
+        public virtual IPagedList<Meeting> GetAllMeetings(int pageIndex = 0, int pageSize = int.MaxValue, MeetingType type = MeetingType.Unknown, bool isIsdg = true)
         {
             var query = _meetingRepository.Table;
-            if (!showHidden)
-                query = query.Where(c => c.IsPublished);
-                        
             query = query.OrderByDescending(c => c.ModifiedDate);
             
-            if (!showHidden)
-            {
-                // Тут надо про роли замутить
-                // Если пользователь админ или trusted member, то показывать спрятанные?
-                //ACL (access control list)
-                //var allowedCustomerRolesIds = _workContext.CurrentCustomer.CustomerRoles
-                //    .Where(cr => cr.Active).Select(cr => cr.Id).ToList();                
-            }
-
-            if (type != MeetingType.Unknown) 
-            {
-                query = query.Where(c => c.MeetingType == type);
-            }
+            query = query.Where(c => c.MeetingType == type);            
 
             query = query.Where(c => c.IsIsdgMeeting == isIsdg);
-                        
-            //paging
+            
             return new PagedList<Meeting>(query.ToList(), pageIndex, pageSize);
         }
                 

@@ -160,7 +160,7 @@ namespace Isdg.Controllers
         private NewsListViewModel ToNewsListViewModel(IEnumerable<News> news)
         {
             var model = new NewsListViewModel();
-            model.CanCreateNews = User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Trusted.ToString());
+            model.CanCreateNews = User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Trusted.ToString()) || User.IsInRole(UserRole.Untrusted.ToString());
             model.NewsList = news.Select(ToNewsViewModel).ToList();
             return model;
         }

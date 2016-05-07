@@ -13,14 +13,24 @@
     @Html.Partial("_Create", new Meeting())
 }
 <div id="meetings">
-    <p>The Coming Meetings</p>
-    @foreach (var item in Model.ComingMeetingsList)
-    {        
-        @Html.Partial("_Meeting", item)
+    @if (Model.ComingMeetingsList.Count() > 0)
+    {
+        <span class="meeting__title">The Coming Meetings</span>
+        foreach (var item in Model.ComingMeetingsList)
+        {        
+            @Html.Partial("_Meeting", item);
+        }
     }
-    <p>Past Events</p>
-    @foreach (var item in Model.ComingMeetingsList)
-    {        
-        @Html.Partial("_Meeting", item)
+    @if (Model.PastMeetingsDict.Count() > 0) 
+    {
+        <span class="meeting__title">Past Events</span>
+        foreach (var meetingsPair in Model.PastMeetingsDict)
+        {
+            <span class="meeting__year">meetingsPair.Key</span>
+            foreach (var item in meetingsPair.Value) 
+            {
+                @Html.Partial("_Meeting", item);
+            }
+        }
     }
 </div>

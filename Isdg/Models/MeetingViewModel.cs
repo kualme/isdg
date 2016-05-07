@@ -10,8 +10,14 @@ namespace Isdg.Models
     public class MeetingListViewModel 
     {
         public List<MeetingViewModel> ComingMeetingsList { get; set; }
-        public List<MeetingViewModel> PastMeetingsList { get; set; }
+        public Dictionary<string, List<MeetingViewModel>> PastMeetingsDict { get; set; }
         public bool CanCreateMeeting { get; set; }
+
+        public MeetingListViewModel()
+        {
+            ComingMeetingsList = new List<MeetingViewModel>();
+            PastMeetingsDict = new Dictionary<string, List<MeetingViewModel>>();
+        }
     }
 
     public class MeetingViewModel
