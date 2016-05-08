@@ -89,7 +89,7 @@ namespace Isdg.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("", "Failed login attempt.");
                     return View(model);
             }
         }
@@ -132,7 +132,7 @@ namespace Isdg.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неправильный код.");
+                    ModelState.AddModelError("", "Wrong code.");
                     return View(model);
             }
         }
@@ -163,8 +163,8 @@ namespace Isdg.Controllers
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);                    
-                    new EmailSender().SendEmail("Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>", model.Email);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    new EmailSender().SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
 
                     return RedirectToAction("Index", "News");
                 }
@@ -215,8 +215,8 @@ namespace Isdg.Controllers
                 // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                 // Отправка сообщения электронной почты с этой ссылкой
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);                
-                new EmailSender().SendEmail("Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>", model.Email);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                new EmailSender().SendEmail("Reset Password", "Reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
