@@ -14,19 +14,16 @@ using Ninject;
 using Isdg.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using Isdg.Lib;
 
 namespace Isdg.Controllers
 {    
-    public class NewsController : Controller
+    public class NewsController : BaseController
     {
         private readonly INewsService newsService;
-        private ApplicationUserManager userManager;        
         
-        [Inject]
         public NewsController(INewsService newsService) 
-        {
-            var context = new ApplicationDbContext();
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));            
+        {            
             this.newsService = newsService;            
         }
                 
@@ -45,7 +42,7 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;
-                if (!User.IsInRole(UserRole.Admin.ToString()))
+                if (!UserHelper.IsAdmin())
                     model.IsPublished = false;
                 try
                 {
@@ -95,7 +92,7 @@ namespace Isdg.Controllers
             }            
         }
 
-        [System.Web.Mvc.Authorize(Roles = "Admin")]
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
         public ActionResult Edit(int? id)
         {
             News model = new News();
@@ -107,7 +104,7 @@ namespace Isdg.Controllers
         }
                 
         [HttpPost]
-        [System.Web.Mvc.Authorize(Roles = "Admin")]
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
         public ActionResult EditNews(News model)
         {
             try
@@ -127,7 +124,7 @@ namespace Isdg.Controllers
             }            
         }
 
-        [System.Web.Mvc.Authorize(Roles = "Admin")]
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
         public ActionResult Details(int id)
         {
             News model = newsService.GetNewsById(id);
@@ -137,16 +134,16 @@ namespace Isdg.Controllers
         private NewsViewModel ToNewsViewModel(News news)
         {
             var model = new NewsViewModel() { News = news, Show = news.IsPublished };            
-            var user = userManager.Users.FirstOrDefault(x => x.Id == news.UserId);
+            var user = UserManager.Users.FirstOrDefault(x => x.Id == news.UserId);
             model.UserName = user == null ? "" : user.UserName;
-            if (User.IsInRole(UserRole.Admin.ToString()))
+            if (UserHelper.IsAdmin())
             {
                 model.CanDeleteNews = true;
                 model.CanEditNews = true;
                 model.CanSeeDetails = true;
                 model.Show = true;                
             }
-            else if (User.IsInRole(UserRole.Trusted.ToString()))
+            else if (UserHelper.IsTrusted())
             {                
                 if (User.Identity.GetUserId().Equals(news.UserId))
                 {
@@ -160,7 +157,7 @@ namespace Isdg.Controllers
         private NewsListViewModel ToNewsListViewModel(IEnumerable<News> news)
         {
             var model = new NewsListViewModel();
-            model.CanCreateNews = User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Trusted.ToString()) || User.IsInRole(UserRole.Untrusted.ToString());
+            model.CanCreateNews = UserHelper.HasAnyRole();
             model.NewsList = news.Select(ToNewsViewModel).ToList();
             return model;
         }

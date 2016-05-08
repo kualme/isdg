@@ -5,12 +5,13 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Isdg.Core.Data;
+using Isdg.Lib;
 using Isdg.Models;
 using Isdg.Services.Messages;
 
 namespace Isdg.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AuthorizeWithRoles(Role = UserRole.Admin)]
     public class EmailController : Controller
     {
         private IEmailAccountService _emailAccountService;

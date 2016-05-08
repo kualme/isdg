@@ -10,12 +10,12 @@
 <p>Here, some conferences and workshops on game theory are mentioned. This list is not all-embracing.</p>
 @if (Model.CanCreateMeeting) 
 {
-    @Html.Partial("_Create", new Meeting())
+    @Html.Partial("_Create", new Meeting() { StartDate = DateTime.Now, EndDate = DateTime.Now })
 }
 <div id="meetings">
     @if (Model.ComingMeetingsList.Count() > 0)
     {
-        <span class="meeting__title">The Coming Meetings</span>
+        <div class="meeting__title">The Coming Meetings</div>
         foreach (var item in Model.ComingMeetingsList)
         {        
             @Html.Partial("_Meeting", item);
@@ -23,10 +23,10 @@
     }
     @if (Model.PastMeetingsDict.Count() > 0) 
     {
-        <span class="meeting__title">Past Events</span>
+        <div class="meeting__title">Past Events</div>
         foreach (var meetingsPair in Model.PastMeetingsDict)
         {
-            <span class="meeting__year">meetingsPair.Key</span>
+            <div class="meeting__year">@meetingsPair.Key</div>
             foreach (var item in meetingsPair.Value) 
             {
                 @Html.Partial("_Meeting", item);

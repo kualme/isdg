@@ -15,12 +15,10 @@ namespace Isdg.Core.Data
         [Display(Name = "Link")]
         public string Href { get; set; }
         [Display(Name = "Start date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }        
         [Display(Name = "End date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }        
         [Display(Name = "Meeting type")]
         public MeetingType MeetingType { get; set; }        

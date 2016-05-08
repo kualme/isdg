@@ -3,45 +3,37 @@
 <div class="meeting__details hidden">
     <hr />
     <dl class="dl-horizontal">
-        @*<dt>
-            @Html.DisplayNameFor(model => model.News.Id)
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.News.Id)
+            @Html.DisplayFor(model => model.Meeting.Id)
         </dd>
                 
         <dt>
-            @Html.DisplayNameFor(model => model.News.AddedDate)
+            @Html.DisplayNameFor(model => model.Meeting.AddedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.News.AddedDate)
+            @Html.DisplayFor(model => model.Meeting.AddedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.News.ModifiedDate)
+            @Html.DisplayNameFor(model => model.Meeting.ModifiedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.News.ModifiedDate)
+            @Html.DisplayFor(model => model.Meeting.ModifiedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.News.IP)
+            @Html.DisplayNameFor(model => model.Meeting.IP)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.News.IP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.News.IP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.News.IP)
-        </dd>
+            @Html.DisplayFor(model => model.Meeting.IP)
+        </dd>        
 
         <dt>
             @Html.DisplayNameFor(model => model.UserName)
@@ -49,7 +41,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.UserName)
-        </dd>*@
+        </dd>
     </dl>
     <span class="form-actions no-color">        
         <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('meeting__details', this)" />

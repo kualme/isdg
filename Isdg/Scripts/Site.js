@@ -76,3 +76,9 @@ function bindCarousel() {
     });
 }
 $(bindCarousel);
+function showSuccessMessage(formClass, entity) {    
+    var form = $("." + formClass);
+    var success = form.children('.success-message')
+    success.removeClass("hidden");
+    success.text(entity + " is successfully added and will be published after validation")
+}

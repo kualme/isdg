@@ -35,8 +35,8 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;                
-                if (!User.IsInRole(UserRole.Admin.ToString()))
-                    model.IsPublished = false;
+                if (User.IsInRole(UserRole.Admin.ToString()))
+                    model.IsPublished = true;
                 try
                 {
                     model.UserId = User.Identity.GetUserId();
@@ -95,13 +95,13 @@ namespace Isdg.Controllers
             var model = new MeetingViewModel() { Meeting = meeting, Show = meeting.IsPublished};            
             if (meeting.StartDate == meeting.EndDate)
                 model.MeetingDate = meeting.StartDate.ToString("MMMM d, yyyy");
-            else if (meeting.StartDate.Month == meeting.EndDate.Month)
+            else if (meeting.StartDate.Year == meeting.EndDate.Year && meeting.StartDate.Month == meeting.EndDate.Month)
                 model.MeetingDate = String.Format("{0} {1}-{2}, {3}", meeting.StartDate.ToString("MMMM"), meeting.StartDate.Day, meeting.EndDate.Day, meeting.StartDate.Year);
             else if (meeting.StartDate.Year == meeting.EndDate.Year)
                 model.MeetingDate = String.Format("{0} {1}-{2} {3}, {4}", meeting.StartDate.ToString("MMMM"), meeting.StartDate.Day, meeting.EndDate.ToString("MMMM"), meeting.EndDate.Day, meeting.StartDate.Year);
-            else model.MeetingDate = String.Format("{0}-{1}", meeting.StartDate.ToString("MMMM d, yyyy"), meeting.EndDate.ToString("d MMMM, yyyy"));
+            else model.MeetingDate = String.Format("{0}-{1}", meeting.StartDate.ToString("MMMM d, yyyy"), meeting.EndDate.ToString("MMMM d, yyyy"));
             var user = UserManager.Users.FirstOrDefault(x => x.Id == meeting.UserId);
-            var userName = user == null ? "" : user.UserName;
+            model.UserName = user == null ? "" : user.UserName;
             if (User.IsInRole(UserRole.Admin.ToString()))
             {
                 model.CanDeleteMeetings = true;

@@ -3,7 +3,8 @@
 @using (Ajax.BeginForm("CreateEditMeeting", "Meetings", new AjaxOptions()
 {
     UpdateTargetId = "meetings",
-    InsertionMode = InsertionMode.InsertBefore    
+    InsertionMode = InsertionMode.InsertBefore,
+    OnSuccess = Isdg.Lib.UserHelper.IsAdmin() ? "" : "showSuccessMessage('meeting__form_add', 'Meeting')"    
 }))
 {
     @Html.AntiForgeryToken()
@@ -39,6 +40,7 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    <span class="hint">Date in format mm/dd/yyyy</span>
                 </div>
             </div>
             <div class="form-group">
@@ -46,13 +48,15 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                    <span class="hint">Date in format mm/dd/yyyy</span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-1 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default btn-sm" />
+                    <input type="submit" value="Create" class="btn btn-default btn-sm" />                    
                 </div>
-            </div>        
+            </div>
+            <div class="text-success success-message hidden"></div>        
             <hr />
         </div>        
         <a role="button" class="meeting__add_close" style="display: none;" onclick="closeCreationForm('meeting')">Add meeting <span class="glyphicon glyphicon-chevron-up"></span></a>        

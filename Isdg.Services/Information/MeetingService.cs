@@ -45,7 +45,7 @@ namespace Isdg.Services.Information
         public virtual IPagedList<Meeting> GetAllMeetings(int pageIndex = 0, int pageSize = int.MaxValue, MeetingType type = MeetingType.Unknown, bool isIsdg = true)
         {
             var query = _meetingRepository.Table;
-            query = query.OrderByDescending(c => c.ModifiedDate);
+            query = query.OrderByDescending(c => c.StartDate);
             
             query = query.Where(c => c.MeetingType == type);            
 

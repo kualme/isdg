@@ -216,7 +216,9 @@
       <DependentUpon>201605060512510_Meeting.cs</DependentUpon>
     </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
+    <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
+    <Compile Include="Lib\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />

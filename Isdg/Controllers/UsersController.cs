@@ -17,10 +17,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
+using Isdg.Lib;
 
 namespace Isdg.Controllers
 {
-    [System.Web.Mvc.Authorize(Roles = "Admin")]
+    [AuthorizeWithRoles(Role = UserRole.Admin)]
     public class UsersController : Controller
     {
         private ApplicationUserManager userManager;
