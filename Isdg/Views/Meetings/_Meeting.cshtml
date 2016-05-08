@@ -14,18 +14,18 @@ else
             <div class="meeting @meetingStyle">                
                 <div class="meeting__content">
                     <a href="@Model.Meeting.Href">@Model.Meeting.Title</a>, @Model.Meeting.Place, @Model.MeetingDate <span class="links">
-                        <a role="button" class="glyphicon glyphicon-question-sign" title="Published by @Model.UserName, @Html.DisplayFor(modelItem => Model.Meeting.AddedDate)"></a>
+                        <a role="button" class="fa fa-question-circle" title="Published by @Model.UserName, @Html.DisplayFor(modelItem => Model.Meeting.AddedDate)"></a>
                         @if (Model.CanEditMeetings) 
                         {
-                            <a role="button" title="Edit meeting" onclick="showForm(this, 'meeting', 'meeting__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                            <a role="button" title="Edit meeting" onclick="showForm(this, 'meeting', 'meeting__edit')"><span class="fa fa-pencil"></span></a>                
                         }
                         @if (Model.CanSeeDetails) 
                         {
-                            <a role="button" title="Show meeting details" onclick="showForm(this, 'meeting', 'meeting__details')"><span class="glyphicon glyphicon-option-vertical"></span></a>
+                            <a role="button" title="Show meeting details" onclick="showForm(this, 'meeting', 'meeting__details')"><span class="fa fa-plus"></span></a>
                         }
                         @if (Model.CanDeleteMeetings)
                         {
-                            <a role="button" title="Delete meeting" onclick="showForm(this, 'meeting__content', 'meeting__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a role="button" title="Delete meeting" onclick="showForm(this, 'meeting__content', 'meeting__delete')"><span class="fa fa-trash"></span></a>
                         }
                     </span>
                     @Html.Partial("_Delete", Model.Meeting)  

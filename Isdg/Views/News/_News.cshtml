@@ -16,15 +16,15 @@ else
                     <span class="links">
                         @if (Model.CanEditNews) 
                         {
-                            <a role="button" title="Edit news" onclick="showForm(this, 'news', 'news__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                
+                            <a role="button" title="Edit news" onclick="showForm(this, 'news', 'news__edit')"><span class="fa fa-pencil"></span></a>                
                         }
                         @if (Model.CanSeeDetails) 
                         {
-                            <a role="button" title="Show news details" onclick="showForm(this, 'news', 'news__details')"><span class="glyphicon glyphicon-list"></span></a>
+                            <a role="button" title="Show news details" onclick="showForm(this, 'news', 'news__details')"><span class="fa fa-plus"></span></a>
                         }
                         @if (Model.CanDeleteNews)
                         {
-                            <a role="button" title="Delete news" onclick="showForm(this, 'news__info', 'news__delete')"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a role="button" title="Delete news" onclick="showForm(this, 'news__info', 'news__delete')"><span class="fa fa-trash"></span></a>
                         }
                     </span>
                     @Html.Partial("_Delete", Model.News)

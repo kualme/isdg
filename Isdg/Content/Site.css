@@ -69,8 +69,8 @@ a:hover, a:focus {
     margin: 0px 0px 30px 30px;
 }
 
-.news__add_open .glyphicon, .news__add_close .glyphicon, .album__add_open .glyphicon, .album__add_close .glyphicon {
-    font-size: 10px;
+.news__add_open .fa, .news__add_close .fa, .album__add_open .fa, .album__add_close .fa, .meeting__add_open .fa, .meeting__add_close .fa {
+    font-size: 12px;
 }
 
 /* End Common */
@@ -167,8 +167,9 @@ a:hover, a:focus {
     margin-left: 10px;
 }
 
-.links .glyphicon {
+.links .fa {
     margin: 0px 3px 0px 3px;
+    font-size: 16px;
 }
 
 .unpublished {

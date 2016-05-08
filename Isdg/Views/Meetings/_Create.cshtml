@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">        
-        <a role="button" class="meeting__add_open" onclick="openCreationForm('meeting')">Add meeting <span class="glyphicon glyphicon-chevron-down"></span></a>        
+        <a role="button" class="meeting__add_open" onclick="openCreationForm('meeting')">Add meeting <span class="fa fa-angle-double-down"></span></a>        
         <hr />
         <div class="meeting__form_add" style="display: none;">            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -59,6 +59,6 @@
             <div class="text-success success-message hidden"></div>        
             <hr />
         </div>        
-        <a role="button" class="meeting__add_close" style="display: none;" onclick="closeCreationForm('meeting')">Add meeting <span class="glyphicon glyphicon-chevron-up"></span></a>        
+        <a role="button" class="meeting__add_close" style="display: none;" onclick="closeCreationForm('meeting')">Add meeting <span class="fa fa-angle-double-up"></span></a>        
     </div>
 }
