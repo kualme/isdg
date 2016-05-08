@@ -14,28 +14,28 @@ namespace Isdg.Models
         public string ReturnUrl { get; set; }
     }
 
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]        
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Remember browser")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
+    //public class SendCodeViewModel
+    //{
+    //    public string SelectedProvider { get; set; }
+    //    public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    //    public string ReturnUrl { get; set; }
+    //    public bool RememberMe { get; set; }
+    //}
+    //
+    //public class VerifyCodeViewModel
+    //{
+    //    [Required]
+    //    public string Provider { get; set; }
+    //
+    //    [Required]        
+    //    public string Code { get; set; }
+    //    public string ReturnUrl { get; set; }
+    //
+    //    [Display(Name = "Remember browser")]
+    //    public bool RememberBrowser { get; set; }
+    //
+    //    public bool RememberMe { get; set; }
+    //}
 
     public class ForgotViewModel
     {
@@ -64,7 +64,7 @@ namespace Isdg.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} must contain at least {2} characters.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} must be at least {2} characters.", MinimumLength = 6)]
         [DataType(DataType.Password)]        
         public string Password { get; set; }
 
@@ -81,7 +81,7 @@ namespace Isdg.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} must contain at least {2} characters.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} must be at least {2} characters.", MinimumLength = 6)]
         [DataType(DataType.Password)]        
         public string Password { get; set; }
 

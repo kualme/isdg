@@ -36,6 +36,10 @@ a:hover, a:focus {
     cursor: pointer;
     vertical-align: middle;
 }
+
+.hint {
+    color: #ccc;
+}
 /* Common */
 .common-header {
     background-color: #42599A;

@@ -53,9 +53,8 @@ namespace Isdg
             // Настройка логики проверки паролей
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
+                RequiredLength = 6,                
+                RequireDigit = true,                
                 RequireLowercase = true,
                 RequireUppercase = true,
             };

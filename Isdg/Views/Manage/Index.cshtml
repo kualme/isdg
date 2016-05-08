@@ -22,11 +22,11 @@
             }
             ]
         </dd>
-        <dt>External logins:</dt>
+        @*<dt>External logins:</dt>
         <dd>
             @Model.Logins.Count [
             @Html.ActionLink("Manage logins", "ManageLogins") ]
-        </dd>
+        </dd>*@
         @*
             Номера телефонов можно использовать в качестве второго проверочного фактора для системы двухфакторной проверки подлинности.
              
@@ -78,6 +78,6 @@
                         </text>
                     }
                 }*@
-        </dd>
+        @*</dd>*@
     </dl>
 </div>
