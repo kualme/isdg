@@ -1,0 +1,41 @@
+﻿@using Isdg.Models
+@model SendedEmailViewModel
+@if (Model == null)
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}
+else 
+{       
+    <hr />
+    <dl class="dl-horizontal">            
+        
+        <dt>
+            When:
+        </dt>
+        <dd>
+            @Model.When.ToString("MMMM d, yyyy, hh:mm tt");
+        </dd>
+
+        <dt>
+            From:
+        </dt>
+        <dd>
+            @Model.UserName;
+        </dd>
+    
+        <dt>
+            Subject:
+        </dt>
+        <dd>
+            @Model.Subject;
+        </dd>
+    
+        <dt>
+            Body:
+        </dt>
+        <dd>
+            @Html.Raw(Model.Body)
+        </dd>
+    
+    </dl>
+}

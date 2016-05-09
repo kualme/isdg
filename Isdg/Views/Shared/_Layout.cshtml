@@ -33,7 +33,7 @@
                     <li>@Html.ActionLink("Useful Links", "UsefulLinks", "Home")</li>
                     @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 
                     {
-                        <li>@Html.ActionLink("Mailout", "Index", "Email")</li>
+                        <li>@Html.ActionLink("Newsletter", "Index", "Newsletter")</li>
                         <li>@Html.ActionLink("Users", "Index", "Users")</li>
                     }
                 </ul>
