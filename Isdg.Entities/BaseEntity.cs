@@ -11,7 +11,7 @@ namespace Isdg.Core
     {
         [Display(Name = "Identifier")]
         public int Id { get; set; }
-        [Display(Name = "Added date")]
+        [Display(Name = "Creation date")]
         [DisplayFormat(DataFormatString = "{0:MMMM d, yyyy}")]
         public DateTime AddedDate { get; set; }
         [Display(Name = "Modified date")]

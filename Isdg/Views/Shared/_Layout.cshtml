@@ -24,11 +24,13 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>@Html.ActionLink("News", "Index", "News")</li>
-                    <li>@Html.ActionLink("About ISDG", "About", "Home")</li>
-                    <li>@Html.ActionLink("Statutes of ISDG", "Statutes", "Home")</li>
-                    <li>@Html.ActionLink("ISDG meetings", "Index", "Meetings")</li>
+                    <li>@Html.ActionLink("About ISDG", "AboutIsdg", "Home")</li>
+                    <li>@Html.ActionLink("Statutes of ISDG", "StatutesOfIsdg", "Home")</li>
+                    <li>@Html.ActionLink("Executive Board", "ExecutiveBoard", "Home")</li>
+                    <li>@Html.ActionLink("Isaacs' Award", "IsaacsAward", "Home")</li>
+                    <li>@Html.ActionLink("ISDG meetings", "IsdgMeetings", "Home")</li>
                     <li>@Html.ActionLink("Related Meetings", "Related", "Meetings")</li>
-                    <li>@Html.ActionLink("Publications", "About", "Home")</li>
+                    <li>@Html.ActionLink("Publications", "Publications", "Home")</li>
                     @*<li>@Html.ActionLink("Albums", "Index", "Album")</li>*@
                     <li>@Html.ActionLink("Useful Links", "UsefulLinks", "Home")</li>
                     @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 

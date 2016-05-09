@@ -20,7 +20,9 @@ function closeCreationForm(commonClassName) {
     $('.' + commonClassName + "__add_close").hide();
 }
 function bindCkeditor() {
-    $.each($("textarea"), function (index, textarea) { $(textarea).ckeditor(); });
+    $.each($("textarea"), function (index, textarea) {
+        var editor = $(textarea).ckeditor();
+    });
 }
 $(bindCkeditor);
 $(function () {

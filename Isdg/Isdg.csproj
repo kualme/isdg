@@ -199,6 +199,10 @@
     <Compile Include="IsdgMigrations\201605091644507_SendedEmail.Designer.cs">
       <DependentUpon>201605091644507_SendedEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605091809398_Text.cs" />
+    <Compile Include="IsdgMigrations\201605091809398_Text.Designer.cs">
+      <DependentUpon>201605091809398_Text.cs</DependentUpon>
+    </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
@@ -211,6 +215,7 @@
     <Compile Include="Models\SendEmailModel.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\MeetingViewModel.cs" />
+    <Compile Include="Models\TextViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UsersMigrations\201605091417444_Initial.cs" />
@@ -471,6 +476,9 @@
     <Content Include="Views\Manage\EditAccount.cshtml" />
     <Content Include="Views\Newsletter\_SendedEmail.cshtml" />
     <Content Include="Views\Newsletter\_Create.cshtml" />
+    <Content Include="Views\Home\Content.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -502,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605091644507_SendedEmail.resx">
       <DependentUpon>201605091644507_SendedEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605091809398_Text.resx">
+      <DependentUpon>201605091809398_Text.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605091417444_Initial.resx">
       <DependentUpon>201605091417444_Initial.cs</DependentUpon>

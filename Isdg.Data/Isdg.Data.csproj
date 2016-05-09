@@ -57,6 +57,7 @@
     <Compile Include="Mapping\MeetingsMap.cs" />
     <Compile Include="Mapping\NewsMap.cs" />
     <Compile Include="Mapping\SendedEmailsMap.cs" />
+    <Compile Include="Mapping\TextsMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
