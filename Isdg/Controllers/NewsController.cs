@@ -42,8 +42,8 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;
-                if (!UserHelper.IsAdmin())
-                    model.IsPublished = false;
+                if (UserHelper.IsAdmin())
+                    model.IsPublished = true;
                 try
                 {
                     model.UserId = User.Identity.GetUserId();                

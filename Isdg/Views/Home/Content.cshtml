@@ -1,5 +1,5 @@
 ﻿@model Isdg.Models.TextViewModel
-<div class="section-header"><h2>@ViewBag.Title @if (Isdg.Lib.UserHelper.IsAdmin()){<a href="@Url.Action("EditText", new { key = Model.Key })"><span class="fa fa-pencil"></span></a>}</h2></div>
+<div class="section-header"><h2>@ViewBag.Title @if (Isdg.Lib.UserHelper.IsAdmin()){<a title="Edit text" href="@Url.Action("EditText", new { key = Model.Key })"><span class="fa fa-pencil"></span></a>}</h2></div>
 <hr />
 @Html.Raw(Model.Content)
 <i>Published by @Model.UserName</i>

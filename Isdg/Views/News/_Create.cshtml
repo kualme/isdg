@@ -4,6 +4,7 @@
 {
     UpdateTargetId = "news",
     InsertionMode = InsertionMode.InsertBefore,
+    OnSuccess = Isdg.Lib.UserHelper.IsAdmin() ? "" : "showSuccessMessage('news__form_add', 'News')",
     OnComplete = "bindCkeditor()"
 }))
 {
@@ -25,7 +26,8 @@
                 <div class="col-md-offset-1 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default btn-sm" />
                 </div>
-            </div>        
+            </div>
+            <div class="text-success success-message hidden"></div>                
             <hr />
         </div>        
         <a role="button" class="news__add_close" style="display: none;" onclick="closeCreationForm('news')">Add News <span class="fa fa-angle-double-up"></span></a>        
