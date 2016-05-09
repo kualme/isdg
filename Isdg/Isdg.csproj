@@ -182,7 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\NewsletterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
@@ -191,29 +191,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="IsdgMigrations\201605021121579_Initial.cs" />
-    <Compile Include="IsdgMigrations\201605021121579_Initial.Designer.cs">
-      <DependentUpon>201605021121579_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IsdgMigrations\201605021139447_UserInNews.cs" />
-    <Compile Include="IsdgMigrations\201605021139447_UserInNews.Designer.cs">
-      <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IsdgMigrations\201605021910129_News.cs" />
-    <Compile Include="IsdgMigrations\201605021910129_News.Designer.cs">
-      <DependentUpon>201605021910129_News.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IsdgMigrations\201605040904181_Albums.cs" />
-    <Compile Include="IsdgMigrations\201605040904181_Albums.Designer.cs">
-      <DependentUpon>201605040904181_Albums.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IsdgMigrations\201605041411085_Albums1.cs" />
-    <Compile Include="IsdgMigrations\201605041411085_Albums1.Designer.cs">
-      <DependentUpon>201605041411085_Albums1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IsdgMigrations\201605060512510_Meeting.cs" />
-    <Compile Include="IsdgMigrations\201605060512510_Meeting.Designer.cs">
-      <DependentUpon>201605060512510_Meeting.cs</DependentUpon>
+    <Compile Include="IsdgMigrations\201605091416235_Initial.cs" />
+    <Compile Include="IsdgMigrations\201605091416235_Initial.Designer.cs">
+      <DependentUpon>201605091416235_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
@@ -224,14 +204,18 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NewsViewModel.cs" />
-    <Compile Include="Models\TestEmailModel.cs" />
+    <Compile Include="Models\SendEmailModel.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\MeetingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UsersMigrations\201605021126565_Initial.cs" />
-    <Compile Include="UsersMigrations\201605021126565_Initial.Designer.cs">
-      <DependentUpon>201605021126565_Initial.cs</DependentUpon>
+    <Compile Include="UsersMigrations\201605091417444_Initial.cs" />
+    <Compile Include="UsersMigrations\201605091417444_Initial.Designer.cs">
+      <DependentUpon>201605091417444_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersMigrations\201605091540088_Username.cs" />
+    <Compile Include="UsersMigrations\201605091540088_Username.Designer.cs">
+      <DependentUpon>201605091540088_Username.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersMigrations\UsersConfiguration.cs" />
   </ItemGroup>
@@ -488,6 +472,7 @@
     <Content Include="Views\Meetings\_Edit.cshtml" />
     <Content Include="Views\Meetings\_Meeting.cshtml" />
     <Content Include="Views\Meetings\Related.cshtml" />
+    <Content Include="Views\Manage\EditAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -514,26 +499,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="IsdgMigrations\201605021121579_Initial.resx">
-      <DependentUpon>201605021121579_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="IsdgMigrations\201605091416235_Initial.resx">
+      <DependentUpon>201605091416235_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IsdgMigrations\201605021139447_UserInNews.resx">
-      <DependentUpon>201605021139447_UserInNews.cs</DependentUpon>
+    <EmbeddedResource Include="UsersMigrations\201605091417444_Initial.resx">
+      <DependentUpon>201605091417444_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IsdgMigrations\201605021910129_News.resx">
-      <DependentUpon>201605021910129_News.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IsdgMigrations\201605040904181_Albums.resx">
-      <DependentUpon>201605040904181_Albums.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IsdgMigrations\201605041411085_Albums1.resx">
-      <DependentUpon>201605041411085_Albums1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IsdgMigrations\201605060512510_Meeting.resx">
-      <DependentUpon>201605060512510_Meeting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UsersMigrations\201605021126565_Initial.resx">
-      <DependentUpon>201605021126565_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="UsersMigrations\201605091540088_Username.resx">
+      <DependentUpon>201605091540088_Username.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

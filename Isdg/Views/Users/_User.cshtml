@@ -14,6 +14,7 @@
             <p>@Model.UserName</p>
             <p>@Model.Role.ToDescription()</p>
             <p>@Html.DisplayNameFor(x => x.EmailConfirmed) @Html.DisplayFor(x => x.EmailConfirmed)</p>
+            <p>@Html.DisplayNameFor(x => x.ReceiveNewsletter) @Html.DisplayFor(x => x.ReceiveNewsletter)</p>
         </div>        
         @Html.Partial("_Edit", Model)        
     </div>    

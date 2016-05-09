@@ -17,6 +17,10 @@ namespace Isdg.Models
             // Здесь добавьте утверждения пользователя
             return userIdentity;
         }
+
+        public bool ReceiveNewsletter { get; set; }
+
+        public string UsernameToDisplay { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -53,7 +53,6 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IsdgObjectContext.cs" />
     <Compile Include="Mapping\AlbumsMap.cs" />
-    <Compile Include="Mapping\EmailAccountsMap.cs" />
     <Compile Include="Mapping\ImagesMap.cs" />
     <Compile Include="Mapping\MeetingsMap.cs" />
     <Compile Include="Mapping\NewsMap.cs" />

@@ -1,0 +1,36 @@
+﻿@model Isdg.Models.EditAccountViewModel
+@{
+    ViewBag.Title = "Edit account";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditAccount", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()    
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="unshifted-checkbox">
+                @Html.CheckBoxFor(m => m.ReceiveNewsletter)
+                @Html.LabelFor(m => m.ReceiveNewsletter)
+            </div>
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

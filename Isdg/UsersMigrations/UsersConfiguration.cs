@@ -4,8 +4,6 @@ namespace Isdg.UsersMigrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Isdg.Models;
-    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class UsersConfiguration : DbMigrationsConfiguration<Isdg.Models.ApplicationDbContext>
     {
@@ -17,8 +15,18 @@ namespace Isdg.UsersMigrations
 
         protected override void Seed(Isdg.Models.ApplicationDbContext context)
         {
-            context.Roles.AddOrUpdate(new IdentityRole[] { new IdentityRole("Untrusted"), new IdentityRole("Trusted"), new IdentityRole("Admin") });
-            context.Users.AddOrUpdate(new ApplicationUser() { Email = "admin@test.com", EmailConfirmed = true, UserName = "Administrator", PasswordHash = "Admin@123456" });            
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
         }
     }
 }

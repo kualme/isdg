@@ -58,6 +58,17 @@ namespace Isdg.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class EditAccountViewModel
+    {
+        [Required]        
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Receive newsletter")]
+        public bool ReceiveNewsletter { get; set; }
+    }
+
     //public class AddPhoneNumberViewModel
     //{
     //    [Required]

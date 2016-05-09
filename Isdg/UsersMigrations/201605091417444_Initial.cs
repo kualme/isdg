@@ -35,6 +35,7 @@ namespace Isdg.UsersMigrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        ReceiveNewsletter = c.Boolean(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

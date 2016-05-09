@@ -22,23 +22,12 @@ using Isdg.Lib;
 namespace Isdg.Controllers
 {
     [AuthorizeWithRoles(Role = UserRole.Admin)]
-    public class UsersController : Controller
-    {
-        private ApplicationUserManager userManager;
-        private RoleManager<IdentityRole> roleManager;
-        private ApplicationDbContext context;
-        
-        public UsersController()
-        {
-            context = new ApplicationDbContext();
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-        }
-        
+    public class UsersController : BaseController
+    {        
         public ActionResult Index()
         {
-            var users = userManager.Users.ToList();
-            var roles = roleManager.Roles;
+            var users = UserManager.Users.ToList();
+            var roles = RoleManager.Roles;
             var model = new List<ApplicationUserViewModel>();
             foreach (var user in users)
             {                
@@ -52,19 +41,15 @@ namespace Isdg.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(model.Id);
+                var user = await UserManager.FindByIdAsync(model.Id);
                 if (user == null)
                 {
                     return HttpNotFound();
                 }
 
-                user.UserName = model.Email;
-                user.Email = model.Email;
-                user.EmailConfirmed = model.EmailConfirmed;
-
                 var roles = new string[] { model.Role.ToString() };
-                var userRoles = await userManager.GetRolesAsync(user.Id);                
-                var result = await userManager.AddToRolesAsync(user.Id,
+                var userRoles = await UserManager.GetRolesAsync(user.Id);                
+                var result = await UserManager.AddToRolesAsync(user.Id,
                     roles.Except(userRoles).ToArray<string>());
 
                 if (!result.Succeeded)
@@ -72,7 +57,7 @@ namespace Isdg.Controllers
                     return HandleError(model, result, redirectToIndex);   
                 }
 
-                result = await userManager.RemoveFromRolesAsync(user.Id,
+                result = await UserManager.RemoveFromRolesAsync(user.Id,
                     userRoles.Except(roles).ToArray<string>());
                 if (!result.Succeeded)
                 {
@@ -86,12 +71,12 @@ namespace Isdg.Controllers
 
         public async Task<ActionResult> ConfirmDeleteUser(string userId) 
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await UserManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            var result = await userManager.DeleteAsync(user);
+            var result = await UserManager.DeleteAsync(user);
             if (result.Succeeded)
                 return new HttpStatusCodeResult(HttpStatusCode.OK);
             return HandleError(ToApplicationUserViewModel(user), result);
@@ -99,7 +84,7 @@ namespace Isdg.Controllers
 
         public async Task<ActionResult> Edit(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await UserManager.FindByIdAsync(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -109,7 +94,7 @@ namespace Isdg.Controllers
         
         public async Task<ActionResult> Details(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await UserManager.FindByIdAsync(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -124,14 +109,15 @@ namespace Isdg.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 EmailConfirmed = user.EmailConfirmed,
-                UserName = user.UserName,
+                UserName = user.UsernameToDisplay,
+                ReceiveNewsletter = user.ReceiveNewsletter,
                 Role = GetRole(user)
             };
         }
 
         private UserRole GetRole(ApplicationUser user)
         {
-            var roles = roleManager.Roles;
+            var roles = RoleManager.Roles;
             var userRole = UserRole.Untrusted;
             foreach (var role in roles)
             {

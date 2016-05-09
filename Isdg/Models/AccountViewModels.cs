@@ -7,6 +7,14 @@ namespace Isdg.Models
     {
         [Required]        
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Receive newsletter")]
+        public bool ReceiveNewsletter { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -72,6 +80,14 @@ namespace Isdg.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Password and confirmation do not match.")]
         public string ConfirmPassword { get; set; }
+        
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Receive newsletter")]
+        public bool ReceiveNewsletter { get; set; }
     }
 
     public class ResetPasswordViewModel

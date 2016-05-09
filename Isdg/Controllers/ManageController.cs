@@ -61,6 +61,7 @@ namespace Isdg.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 //: message == ManageMessageId.AddPhoneSuccess ? "Your phone number has been added."
                 //: message == ManageMessageId.RemovePhoneSuccess ? "Your phone number has been deleted."
+                : message == ManageMessageId.EditAccountSuccess ? "New account details has been saved."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -210,6 +211,37 @@ namespace Isdg.Controllers
         //    }
         //    return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         //}
+
+        public async Task<ActionResult> EditAccount()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var model = new EditAccountViewModel() { UserName = user.UsernameToDisplay, ReceiveNewsletter = user.ReceiveNewsletter };
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAccount(EditAccountViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                user.ReceiveNewsletter = model.ReceiveNewsletter;
+                user.UsernameToDisplay = model.UserName;
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", new { Message = ManageMessageId.EditAccountSuccess });
+                }
+                AddErrors(result);
+            }            
+            return View(model);
+        }
 
         //
         // GET: /Manage/ChangePassword
@@ -379,7 +411,8 @@ namespace Isdg.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            EditAccountSuccess
         }
 
 #endregion

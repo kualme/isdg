@@ -7,9 +7,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Isdg.Models
 {    
-    public class TestEmailModel
+    public class SendEmailModel
     {
-        public string Address { get; set; }
-        public string DisplayName { get; set; }
+        public string Subject { get; set; }
+        public string Bidy { get; set; }
     }
 }

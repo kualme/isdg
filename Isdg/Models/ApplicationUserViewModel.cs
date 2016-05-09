@@ -18,6 +18,8 @@ namespace Isdg.Models
         public string UserName { get; set; }
         [Display(Name = "Is email confirmed")]
         public bool EmailConfirmed { get; set; }
+        [Display(Name = "Is newsletter received")]
+        public bool ReceiveNewsletter { get; set; }
         [Display(Name = "User role")]
         public UserRole Role { get; set; }        
     }

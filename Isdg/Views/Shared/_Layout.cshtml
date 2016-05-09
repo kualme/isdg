@@ -20,7 +20,7 @@
                 </button>
                 @Html.ActionLink("ISDG", "Index", "News", new { @class = "navbar-brand" })
             </div>
-            @Html.Partial("_LoginPartial")                
+            @Html.Action("Login", "Home")
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>@Html.ActionLink("News", "Index", "News")</li>

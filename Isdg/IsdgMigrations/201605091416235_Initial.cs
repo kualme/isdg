@@ -8,23 +8,35 @@ namespace Isdg.IsdgMigrations
         public override void Up()
         {
             CreateTable(
-                "dbo.EmailAccounts",
+                "dbo.Albums",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Email = c.String(nullable: false),
-                        DisplayName = c.String(nullable: false),
-                        Host = c.String(nullable: false),
-                        Port = c.Int(nullable: false),
-                        Username = c.String(nullable: false),
-                        Password = c.String(nullable: false),
-                        EnableSsl = c.Boolean(nullable: false),
-                        UseDefaultCredentials = c.Boolean(nullable: false),
+                        Name = c.String(nullable: false),
                         AddedDate = c.DateTime(nullable: false),
                         ModifiedDate = c.DateTime(nullable: false),
-                        IP = c.String(nullable: false),
+                        IP = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Path = c.String(nullable: false),
+                        PathToPreview = c.String(nullable: false),
+                        Caption = c.String(),
+                        UserId = c.String(),
+                        IsPublished = c.Boolean(nullable: false),
+                        AddedDate = c.DateTime(nullable: false),
+                        ModifiedDate = c.DateTime(nullable: false),
+                        IP = c.String(),
+                        Album_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Albums", t => t.Album_Id, cascadeDelete: true)
+                .Index(t => t.Album_Id);
             
             CreateTable(
                 "dbo.Meetings",
@@ -33,11 +45,13 @@ namespace Isdg.IsdgMigrations
                         Id = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false),
                         Place = c.String(nullable: false),
+                        Href = c.String(nullable: false),
                         StartDate = c.DateTime(nullable: false),
-                        EndDate = c.String(nullable: false),
+                        EndDate = c.DateTime(nullable: false),
                         MeetingType = c.Int(nullable: false),
                         IsIsdgMeeting = c.Boolean(nullable: false),
                         IsPublished = c.Boolean(nullable: false),
+                        UserId = c.String(),
                         AddedDate = c.DateTime(nullable: false),
                         ModifiedDate = c.DateTime(nullable: false),
                         IP = c.String(),
@@ -51,6 +65,7 @@ namespace Isdg.IsdgMigrations
                         Id = c.Int(nullable: false, identity: true),
                         Content = c.String(nullable: false),
                         IsPublished = c.Boolean(nullable: false),
+                        UserId = c.String(nullable: false),
                         AddedDate = c.DateTime(nullable: false),
                         ModifiedDate = c.DateTime(nullable: false),
                         IP = c.String(),
@@ -61,9 +76,12 @@ namespace Isdg.IsdgMigrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Images", "Album_Id", "dbo.Albums");
+            DropIndex("dbo.Images", new[] { "Album_Id" });
             DropTable("dbo.News");
             DropTable("dbo.Meetings");
-            DropTable("dbo.EmailAccounts");
+            DropTable("dbo.Images");
+            DropTable("dbo.Albums");
         }
     }
 }

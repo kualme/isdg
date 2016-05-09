@@ -10,22 +10,15 @@
         @Html.HiddenFor(model => Model.Id)
         @Html.HiddenFor(model => Model.Email)
         @Html.HiddenFor(model => Model.UserName)
+        @Html.HiddenFor(model => Model.ReceiveNewsletter)
+        @Html.HiddenFor(model => Model.EmailConfirmed)
         
         <div class="form-group">
             @Html.Label("Role", new { @class = "control-label col-md-2" })
             <span class=" col-md-10">
                 @Html.DropDownListFor(model => model.Role, Model.Role.ToSelectList(), new { @class = "form-control" })                
             </span>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.EmailConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => Model.EmailConfirmed)                    
-                </div>
-            </div>
-        </div>
+        </div>       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
