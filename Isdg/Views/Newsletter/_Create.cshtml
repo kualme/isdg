@@ -2,9 +2,9 @@
 @model Isdg.Models.SendEmailModel
 @using (Ajax.BeginForm("SendEmail", "Newsletter", new AjaxOptions()
 {
-    UpdateTargetId = "sended_emails",
+    UpdateTargetId = "sent_emails",
     InsertionMode = InsertionMode.InsertBefore,
-    OnComplete = "bindCkeditor()"
+    OnComplete = "bindCkeditor()"        
 }))
 {
     @Html.AntiForgeryToken()    

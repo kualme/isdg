@@ -121,7 +121,7 @@ namespace Isdg.Services.Messages
 
         private string MakePretty(string body)
         {
-            var header = "<div style=\"height:20px;margin-top:5px;margin-bottom:5px;background-color:#793962\"></div><div><div style=\"font-style:italic;font-weight:bold;font-size:14px;width: 200px;\">International Society of Dynamic Games</div><div style=\"font-weight:bold;font-size:68px;margin-left:35px;\">ISDG</div></div>";
+            var header = "<div></div><div style=\"height:20px;margin-top:5px;margin-bottom:5px;background-color:#793962\"></div><div><div style=\"font-style:italic;font-weight:bold;font-size:14px;width: 200px;\">International Society of Dynamic Games</div><div style=\"font-weight:bold;font-size:68px;margin-left:35px;\">ISDG</div></div>";
             var footer = "<div style=\"height:20px;margin-top:5px;margin-bottom:5px;background-color:#793962;text-align:center;\"><a style=\"color:#fff;\" href=\"http://isdg-site.org/\">ISDG</a></div>";
             return String.Format("{0}<p>{1}</p>{2}", header, body, footer);
         }

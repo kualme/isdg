@@ -1,5 +1,5 @@
 ﻿@using Isdg.Models
-@model IEnumerable<SendedEmailViewModel>
+@model IEnumerable<SentEmailViewModel>
 
 @{
     ViewBag.Title = "Newsletter";
@@ -8,13 +8,9 @@
 <div class="section-header"><h2>Newsletter</h2></div>
 @Html.Partial("_Create", new SendEmailModel())
 
-<div id="sended_emails">            
-    @if (Model != null && Model.Count() > 0) 
-    {
-        <div class="section-header"><h2>Sended emails</h2></div>    
-    }
+<div id="sent_emails">    
     @foreach (var item in Model) 
     {
-        @Html.Partial("_SendedEmail", item)    
+        @Html.Partial("_SentEmail", item)    
     }    
 </div>

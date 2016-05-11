@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="text-info">You have successfully authenticated through <strong>@ViewBag.LoginProvider</strong>. Enter your email and user name below and click "Register".</p>
+    <p class="text-info">You have successfully authenticated through <strong>@ViewBag.LoginProvider</strong>. Enter your email and user name below and click "Register". After registration please check your mail for confirmation letter.</p>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

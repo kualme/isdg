@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Isdg.Core.Data
 {
-    public class SendedEmail : BaseEntity
+    public class SentEmail : BaseEntity
     {
         public string Subject { get; set; }
         public string Body { get; set; }

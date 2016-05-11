@@ -18,9 +18,9 @@ namespace Isdg.Controllers
     public class NewsletterController : BaseController
     {        
         private IEmailSender emailSender;
-        private ISendedEmailService sendedEmailService;
+        private ISentEmailService sendedEmailService;
 
-        public NewsletterController(IEmailSender emailSender, ISendedEmailService sendedEmailService)
+        public NewsletterController(IEmailSender emailSender, ISentEmailService sendedEmailService)
         {            
             this.emailSender = emailSender;
             this.sendedEmailService = sendedEmailService;
@@ -28,10 +28,8 @@ namespace Isdg.Controllers
 
         public ActionResult Index()
         {
-            var emails = sendedEmailService.GetAllEmails();
-            var user = UserManager.FindById<ApplicationUser, string>(User.Identity.GetUserId());
-            var username = user == null ? "username" : user.UsernameToDisplay;
-            var model = emails.Select(x => new SendedEmailViewModel() { Subject = x.Subject, Body = x.Body, UserName = username, When = x.AddedDate });            
+            var emails = sendedEmailService.GetAllEmails();            
+            var model = emails.Select(x => new SentEmailViewModel() { Subject = x.Subject, Body = x.Body, UserName = UserHelper.GetUserName(UserManager), When = x.AddedDate });            
             return View(model);
         }
         
@@ -48,7 +46,7 @@ namespace Isdg.Controllers
                         emailSender.SendEmail(account, model.Subject, model.Body, account.Email, account.DisplayName, user.Email, user.UsernameToDisplay);
                 }
                 var currentDate = DateTime.Now;
-                var sendedEmail = new SendedEmail() { 
+                var sendedEmail = new SentEmail() { 
                     Subject = model.Subject, 
                     Body = model.Body, 
                     UserId = User.Identity.GetUserId(),
@@ -57,12 +55,12 @@ namespace Isdg.Controllers
                     IP = Request.UserHostAddress
                 };
                 sendedEmailService.InsertEmail(sendedEmail);
-                return PartialView("_SendedEmail", new SendedEmailViewModel() { Subject = model.Subject, Body = model.Body, When = currentDate, UserName = UserManager.FindById<ApplicationUser, string>(User.Identity.GetUserId()).UsernameToDisplay });
+                return PartialView("_SentEmail", new SentEmailViewModel() { Subject = model.Subject, Body = model.Body, When = currentDate, UserName = UserHelper.GetUserName(UserManager) });
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Failed to send email");                
-                return PartialView("_SendedEmail", null);
+                return PartialView("_SentEmail", null);
             }
         }        
     }    

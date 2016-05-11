@@ -47,8 +47,8 @@
     <Compile Include="Information\AlbumService.cs" />
     <Compile Include="Information\ITextService.cs" />
     <Compile Include="Information\TextService.cs" />
-    <Compile Include="Messages\SendedEmailService.cs" />
-    <Compile Include="Messages\ISendedEmailService.cs" />
+    <Compile Include="Messages\SentEmailService.cs" />
+    <Compile Include="Messages\ISentEmailService.cs" />
     <Compile Include="Messages\EmailSender.cs" />
     <Compile Include="Messages\IEmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

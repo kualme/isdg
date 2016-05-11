@@ -10,43 +10,43 @@ namespace Isdg.Services.Information
     /// <summary>
     /// Sended email service
     /// </summary>
-    public class SendedEmailService : ISendedEmailService
+    public class SentEmailService : ISentEmailService
     {
-        private readonly IRepository<SendedEmail> sendedEmailRepository;
+        private readonly IRepository<SentEmail> sentEmailRepository;
                 
         /// <summary>
         /// Ctor
         /// </summary>
-        /// <param name="sendedEmailRepository">Sended email repository</param>        
-        public SendedEmailService(IRepository<SendedEmail> sendedEmailRepository)
+        /// <param name="sendedEmailRepository">Sent email repository</param>        
+        public SentEmailService(IRepository<SentEmail> sentEmailRepository)
         {
-            this.sendedEmailRepository = sendedEmailRepository;
+            this.sentEmailRepository = sentEmailRepository;
         }
                 
         /// <summary>
-        /// Get all sended emails
+        /// Get all sent emails
         /// </summary>        
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>        
-        /// <returns>SendedEmail</returns>
-        public virtual IPagedList<SendedEmail> GetAllEmails(int pageIndex = 0, int pageSize = int.MaxValue)
+        /// <returns>SentEmail</returns>
+        public virtual IPagedList<SentEmail> GetAllEmails(int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            var query = sendedEmailRepository.Table;
+            var query = sentEmailRepository.Table;
             query = query.OrderByDescending(c => c.AddedDate);            
                         
             //paging
-            return new PagedList<SendedEmail>(query.ToList(), pageIndex, pageSize);
+            return new PagedList<SentEmail>(query.ToList(), pageIndex, pageSize);
         }
         
         /// <summary>
-        /// Insert sended email
+        /// Insert sent email
         /// </summary>
         /// <param name="email">email</param>
-        public virtual void InsertEmail(SendedEmail email)
+        public virtual void InsertEmail(SentEmail email)
         {
             if (email == null)
                 throw new ArgumentNullException("email");
-            sendedEmailRepository.Insert(email);
+            sentEmailRepository.Insert(email);
         }
     }
 }

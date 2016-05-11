@@ -19,7 +19,7 @@ namespace Isdg.Models
         public string Body { get; set; }
     }
 
-    public class SendedEmailViewModel
+    public class SentEmailViewModel
     {
         public string Subject { get; set; }
         public string Body { get; set; }

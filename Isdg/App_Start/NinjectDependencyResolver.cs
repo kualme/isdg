@@ -42,7 +42,7 @@ namespace Isdg.App_Start
             kernel.Bind<INewsService>().To<NewsService>();            
             kernel.Bind<IAlbumService>().To<AlbumService>();
             kernel.Bind<IMeetingService>().To<MeetingService>();
-            kernel.Bind<ISendedEmailService>().To<SendedEmailService>();
+            kernel.Bind<ISentEmailService>().To<SentEmailService>();
             kernel.Bind<ITextService>().To<TextService>();
             kernel.Bind<IEmailSender>().To<EmailSender>();   
         }

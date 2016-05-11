@@ -5,22 +5,22 @@ using Isdg.Core.Data;
 namespace Isdg.Services.Information
 {
     /// <summary>
-    /// Sended email service interface
+    /// Sent email service interface
     /// </summary>
-    public interface ISendedEmailService
+    public interface ISentEmailService
     {
         /// <summary>
-        /// Get all sended emails
+        /// Get all sent emails
         /// </summary>        
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>        
-        /// <returns>SendedEmail</returns>
-        IPagedList<SendedEmail> GetAllEmails(int pageIndex = 0, int pageSize = int.MaxValue);
+        /// <returns>SentEmail</returns>
+        IPagedList<SentEmail> GetAllEmails(int pageIndex = 0, int pageSize = int.MaxValue);
         
         /// <summary>
-        /// Insert sended email
+        /// Insert sent email
         /// </summary>
-        /// <param name="email">sended email</param>
-        void InsertEmail(SendedEmail email);
+        /// <param name="email">sent email</param>
+        void InsertEmail(SentEmail email);
     }
 }

@@ -203,6 +203,10 @@
     <Compile Include="IsdgMigrations\201605091809398_Text.Designer.cs">
       <DependentUpon>201605091809398_Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="IsdgMigrations\201605111449515_SentEmail.cs" />
+    <Compile Include="IsdgMigrations\201605111449515_SentEmail.Designer.cs">
+      <DependentUpon>201605111449515_SentEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
@@ -241,17 +245,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
-    <Content Include="Scripts\ckeditor\lang\en.js" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
-    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
-    <Content Include="Scripts\ckeditor\plugins\icons.png" />
-    <Content Include="Scripts\ckeditor\plugins\icons_hidpi.png" />
-    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
-    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
-    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.png" />
-    <Content Include="Scripts\ckeditor\plugins\link\images\hidpi\anchor.png" />
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\samples\old\assets\posteddata.php" />
     <Content Include="Scripts\ckeditor\samples\old\sample_posteddata.php" />
@@ -285,18 +285,87 @@
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\ckeditor\config.js" />
     <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Scripts\ckeditor\plugins\icons.png" />
+    <Content Include="Scripts\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template3.gif" />
     <Content Include="Scripts\ckeditor\samples\css\samples.css" />
     <Content Include="Scripts\ckeditor\samples\img\github-top.png" />
     <Content Include="Scripts\ckeditor\samples\img\header-bg.png" />
@@ -317,12 +386,12 @@
     <Content Include="Scripts\ckeditor\samples\old\dialog\assets\my_dialog.js" />
     <Content Include="Scripts\ckeditor\samples\old\dialog\dialog.html" />
     <Content Include="Scripts\ckeditor\samples\old\divreplace.html" />
-    <Content Include="Scripts\ckeditor\samples\old\enterkey\enterkey.html" />
     <Content Include="Scripts\ckeditor\samples\old\index.html" />
     <Content Include="Scripts\ckeditor\samples\old\inlineall.html" />
     <Content Include="Scripts\ckeditor\samples\old\inlinebycode.html" />
     <Content Include="Scripts\ckeditor\samples\old\inlinetextarea.html" />
     <Content Include="Scripts\ckeditor\samples\old\jquery.html" />
+    <Content Include="Scripts\ckeditor\samples\old\magicline\magicline.html" />
     <Content Include="Scripts\ckeditor\samples\old\readonly.html" />
     <Content Include="Scripts\ckeditor\samples\old\replacebyclass.html" />
     <Content Include="Scripts\ckeditor\samples\old\replacebycode.html" />
@@ -332,7 +401,6 @@
     <Content Include="Scripts\ckeditor\samples\old\toolbar\toolbar.html" />
     <Content Include="Scripts\ckeditor\samples\old\uicolor.html" />
     <Content Include="Scripts\ckeditor\samples\old\uilanguages.html" />
-    <Content Include="Scripts\ckeditor\samples\old\wysiwygarea\fullpage.html" />
     <Content Include="Scripts\ckeditor\samples\old\xhtmlstyle.html" />
     <Content Include="Scripts\ckeditor\samples\toolbarconfigurator\css\fontello.css" />
     <Content Include="Scripts\ckeditor\samples\toolbarconfigurator\font\fontello.svg" />
@@ -474,7 +542,7 @@
     <Content Include="Views\Meetings\_Meeting.cshtml" />
     <Content Include="Views\Meetings\Related.cshtml" />
     <Content Include="Views\Manage\EditAccount.cshtml" />
-    <Content Include="Views\Newsletter\_SendedEmail.cshtml" />
+    <Content Include="Views\Newsletter\_SentEmail.cshtml" />
     <Content Include="Views\Newsletter\_Create.cshtml" />
     <Content Include="Views\Home\Content.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
@@ -513,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605091809398_Text.resx">
       <DependentUpon>201605091809398_Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605111449515_SentEmail.resx">
+      <DependentUpon>201605111449515_SentEmail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605091417444_Initial.resx">
       <DependentUpon>201605091417444_Initial.cs</DependentUpon>

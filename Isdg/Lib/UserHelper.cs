@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Isdg.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Isdg.Lib
 {
@@ -26,6 +27,12 @@ namespace Isdg.Lib
         public static bool HasAnyRole()
         {
             return HttpContext.Current.User.IsInRole(UserRole.Admin.ToString()) || HttpContext.Current.User.IsInRole(UserRole.Trusted.ToString()) || HttpContext.Current.User.IsInRole(UserRole.Untrusted.ToString());
+        }
+
+        public static string GetUserName(ApplicationUserManager manager)
+        {
+            var user = manager.FindById<ApplicationUser, string>(HttpContext.Current.User.Identity.GetUserId());
+            return user == null ? "username" : user.UsernameToDisplay;
         }
     }
 }
