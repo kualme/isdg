@@ -24,15 +24,15 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>@Html.ActionLink("News", "Index", "News")</li>
-                    <li>@Html.ActionLink("About ISDG", "AboutIsdg", "Home")</li>
-                    <li>@Html.ActionLink("Statutes of ISDG", "StatutesOfIsdg", "Home")</li>
+                    <li>@Html.ActionLink("About ISDG", "ShowText", "Home", new { key = "About ISDG" }, null)</li>
+                    <li>@Html.ActionLink("Statutes of ISDG", "ShowText", "Home", new { key = "Statutes of ISDG" }, null)</li>
                     <li>@Html.ActionLink("Executive Board", "ExecutiveBoard", "Home")</li>
                     <li>@Html.ActionLink("Isaacs' Award", "IsaacsAward", "Home")</li>
-                    <li>@Html.ActionLink("ISDG meetings", "IsdgMeetings", "Home")</li>
+                    <li>@Html.ActionLink("ISDG meetings", "ShowText", "Home", new { key = "ISDG meetings" }, null)</li>
                     <li>@Html.ActionLink("Related Meetings", "Related", "Meetings")</li>
-                    <li>@Html.ActionLink("Publications", "Publications", "Home")</li>
+                    <li>@Html.ActionLink("Publications", "ShowText", "Home", new { key = "Publications" }, null)</li>
                     @*<li>@Html.ActionLink("Albums", "Index", "Album")</li>*@
-                    <li>@Html.ActionLink("Useful Links", "UsefulLinks", "Home")</li>
+                    <li>@Html.ActionLink("Useful Links", "ShowText", "Home", new { key = "Useful Links" }, null)</li>
                     @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 
                     {
                         <li>@Html.ActionLink("Newsletter", "Index", "Newsletter")</li>

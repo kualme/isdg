@@ -17,6 +17,6 @@ namespace Isdg.Models
         [AllowHtml]
         [Required]
         public string Content { get; set; }
-        public string UserName { get; set; }
+        public string UserName { get; set; }        
     }    
 }

@@ -21,16 +21,11 @@ function closeCreationForm(commonClassName) {
 }
 function bindCkeditor() {
     $.each($("textarea"), function (index, textarea) {
-        //if ($(textarea).hasClass("full"))
-        //{
-        //    var config = {
-        //        height: 400
-        //    };
-        //    $(textarea).ckeditor(config);
-        //}
-        //else if ($(textarea).hasClass("big"))
-        //    $(textarea).ckeditor({ height: 250 });
-        //else
+        if ($(textarea).hasClass("huge"))
+            $(textarea).ckeditor({ height: 400 });
+        else if ($(textarea).hasClass("medium"))
+            $(textarea).ckeditor({ height: 250 });
+        else
             $(textarea).ckeditor();
     });
 }

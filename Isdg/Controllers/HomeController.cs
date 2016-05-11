@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Isdg.Core.Data;
+using Isdg.Lib;
 using Isdg.Models;
 using Isdg.Services.Information;
 using Microsoft.AspNet.Identity;
@@ -21,42 +22,24 @@ namespace Isdg.Controllers
         }
 
         public ActionResult Login()
-        {
-            var user = UserManager.FindById<ApplicationUser, string>(User.Identity.GetUserId());
-            var username = user == null ? "username" : user.UsernameToDisplay;
-            return PartialView("_LoginPartial", username);
+        {            
+            return PartialView("_LoginPartial", UserHelper.GetUserName(UserManager));
         }
 
-        public ActionResult AboutIsdg()
+        public ActionResult ShowText(string key)
         {
-            return ProcessTexts("About ISDG", "AboutIsdg");            
+            ViewBag.Title = key;
+            var text = textService.GetTextByKey(key);
+            if (text == null)
+                return View("Create", new TextViewModel() { Key = key });            
+            return View("Text", new TextViewModel() { Key = key, Content = text.Value, UserName = UserHelper.GetUserName(UserManager) });
         }
-
-        public ActionResult StatutesOfIsdg()
-        {
-            return ProcessTexts("Statutes of ISDG", "StatutesOfIsdg");            
-        }
-
+                
         public ActionResult ExecutiveBoard()
         {
-            return ProcessTexts("Executive Board", "ExecutiveBoard");
+            return View();
         }
-
-        public ActionResult IsdgMeetings()
-        {
-            return ProcessTexts("ISDG Meetings", "IsdgMeetings");
-        }
-
-        public ActionResult Publications()
-        {
-            return ProcessTexts("Publications", "Publications");
-        }
-
-        public ActionResult UsefulLinks()
-        {
-            return ProcessTexts("Useful Links", "UsefulLinks");
-        }
-
+        
         public ActionResult IsaacsAward()
         {
             return View();
@@ -102,20 +85,9 @@ namespace Isdg.Controllers
             {
                 text.Value = model.Content;
                 textService.UpdateText(text);
-                return RedirectToAction(model.Key);
+                return ShowText(model.Key);
             }
             return View();            
-        }
-
-        private ActionResult ProcessTexts(string title, string key)
-        {
-            ViewBag.Title = title;
-            var text = textService.GetTextByKey(key);
-            if (text == null)
-                return View("Create", new TextViewModel() { Key = key });
-            var user = UserManager.FindById<ApplicationUser, string>(User.Identity.GetUserId());
-            var username = user == null ? "username" : user.UsernameToDisplay;
-            return View("Content", new TextViewModel() { Key = key, Content = text.Value, UserName = username });
         }
     }
 }
