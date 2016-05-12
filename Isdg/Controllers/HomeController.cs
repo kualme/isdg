@@ -59,7 +59,7 @@ namespace Isdg.Controllers
                 IP = Request.UserHostAddress
             };
             textService.InsertText(text);
-            return RedirectToAction(model.Key);
+            return ShowText(model.Key);
         }
                 
         public ActionResult EditText(string key)

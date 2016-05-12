@@ -13,9 +13,9 @@ namespace Isdg
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/jquery.validate*",
+                        "~/Scripts/Site.js",
                         "~/Scripts/ckeditor/ckeditor.js",
-                        "~/Scripts/ckeditor/adapters/jquery.js",
-                        "~/Scripts/Site.js"
+                        "~/Scripts/ckeditor/adapters/jquery.js"                        
                         );
             bundle.Orderer = new NonOrderingBundleOrderer();
             bundles.Add(bundle);

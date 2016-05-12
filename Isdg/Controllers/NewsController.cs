@@ -133,9 +133,7 @@ namespace Isdg.Controllers
 
         private NewsViewModel ToNewsViewModel(News news)
         {
-            var model = new NewsViewModel() { News = news, Show = news.IsPublished };            
-            var user = UserManager.Users.FirstOrDefault(x => x.Id == news.UserId);
-            model.UserName = user == null ? "" : user.UserName;
+            var model = new NewsViewModel() { News = news, Show = news.IsPublished, UserName = UserHelper.GetUserName(UserManager) };            
             if (UserHelper.IsAdmin())
             {
                 model.CanDeleteNews = true;

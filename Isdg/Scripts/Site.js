@@ -1,4 +1,5 @@
-﻿function showForm(elem, parentClass, formClass) {    
+﻿//window.CKEDITOR_BASEPATH = "http://test.isdg-site.org/Scripts/ckeditor/";
+function showForm(elem, parentClass, formClass) {
     var form = $(elem).parents("." + parentClass).children("." + formClass);
     if (form.hasClass("hidden")) {
         form.removeClass("hidden");
