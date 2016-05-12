@@ -47,11 +47,12 @@ namespace Isdg.Controllers
                 try
                 {
                     model.UserId = User.Identity.GetUserId();                
-                    newsService.InsertNews(model);
+                    newsService.InsertNews(model);                    
                     return PartialView("_News", ToNewsViewModel(model));
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to create news");
                     return PartialView("_News", null);
                 }                
@@ -65,11 +66,12 @@ namespace Isdg.Controllers
                     editModel.IsPublished = model.IsPublished;
                     editModel.ModifiedDate = System.DateTime.Now;
                     editModel.IP = Request.UserHostAddress;                
-                    newsService.UpdateNews(editModel);
+                    newsService.UpdateNews(editModel);                    
                     return PartialView("_News", ToNewsViewModel(editModel));
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to update news");
                     return PartialView("_News", model);
                 }                
@@ -82,11 +84,12 @@ namespace Isdg.Controllers
             try
             {
                 var model = newsService.GetNewsById(newsId);            
-                newsService.DeleteNews(model);
+                newsService.DeleteNews(model);                
                 return new HttpStatusCodeResult(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 ModelState.AddModelError("", "Failed to delete news");
                 return PartialView("_News", null);
             }            
@@ -119,6 +122,7 @@ namespace Isdg.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 ModelState.AddModelError("", "Failed to edit news");
                 return View("Edit", model);
             }            

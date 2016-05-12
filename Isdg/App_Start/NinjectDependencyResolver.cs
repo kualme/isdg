@@ -11,6 +11,7 @@ using Isdg.Data;
 using Isdg.Core;
 using Isdg.Core.Data;
 using Isdg.Models;
+using log4net;
 
 namespace Isdg.App_Start
 {
@@ -44,7 +45,8 @@ namespace Isdg.App_Start
             kernel.Bind<IMeetingService>().To<MeetingService>();
             kernel.Bind<ISentEmailService>().To<SentEmailService>();
             kernel.Bind<ITextService>().To<TextService>();
-            kernel.Bind<IEmailSender>().To<EmailSender>();   
+            kernel.Bind<IEmailSender>().To<EmailSender>();
+            kernel.Bind<ILog>().ToMethod(x => LogManager.GetLogger(x.Request.ParentRequest.ParentRequest.Target.Member.DeclaringType)).InSingletonScope();
         }
     }
 }

@@ -62,6 +62,7 @@ namespace Isdg.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to create album");
                     return PartialView("_Album", null);
                 }
@@ -79,6 +80,7 @@ namespace Isdg.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to update news");
                     return PartialView("_Album", album);
                 }
@@ -127,6 +129,7 @@ namespace Isdg.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 ModelState.AddModelError("", "Failed to delete news");
                 return PartialView("_Album", null);
             }            

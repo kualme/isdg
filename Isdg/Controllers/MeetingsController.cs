@@ -46,6 +46,7 @@ namespace Isdg.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to create meeting");
                     return PartialView("_Meeting", null);
                 }
@@ -69,6 +70,7 @@ namespace Isdg.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex);
                     ModelState.AddModelError("", "Failed to update meeting");
                     return PartialView("_Meeting", model);
                 }
@@ -86,6 +88,7 @@ namespace Isdg.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 ModelState.AddModelError("", "Failed to delete meeting");
                 return PartialView("_Meeting", null);
             }

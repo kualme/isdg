@@ -26,6 +26,7 @@ namespace Isdg.Controllers
             context = new ApplicationDbContext();
             userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));            
+            log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);            
         }
     }
 }

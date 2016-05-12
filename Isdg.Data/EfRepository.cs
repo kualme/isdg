@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Isdg.Core;
+using log4net;
 
 namespace Isdg.Data
 {
@@ -16,14 +17,16 @@ namespace Isdg.Data
     {
         private readonly IDbContext _context;
         private IDbSet<T> _entities;
+        private ILog log;
 
         /// <summary>
         /// Ctor
         /// </summary>
         /// <param name="context">Object context</param>
-        public EfRepository(IDbContext context)
+        public EfRepository(IDbContext context, ILog log)
         {
             this._context = context;
+            this.log = log;
         }
 
         public virtual T GetById(object id)
@@ -41,6 +44,8 @@ namespace Isdg.Data
                 this.Entities.Add(entity);
 
                 this._context.SaveChanges();
+
+                log.Info("Entity was created: " + typeof(T).ToString());
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -64,6 +69,8 @@ namespace Isdg.Data
                     throw new ArgumentNullException("entity");
 
                 this._context.SaveChanges();
+
+                log.Info("Entity was updated: " + typeof(T).ToString());
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -89,6 +96,8 @@ namespace Isdg.Data
                 this.Entities.Remove(entity);
 
                 this._context.SaveChanges();
+
+                log.Info("Entity was deleted: " + typeof(T).ToString());
             }
             catch (DbEntityValidationException dbEx)
             {

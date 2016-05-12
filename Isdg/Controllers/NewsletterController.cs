@@ -59,6 +59,7 @@ namespace Isdg.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 ModelState.AddModelError("", "Failed to send email");                
                 return PartialView("_SentEmail", null);
             }
