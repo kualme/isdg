@@ -73,7 +73,13 @@ a:hover, a:focus {
     margin: 0px 0px 30px 30px;
 }
 
-.news__add_open .fa, .news__add_close .fa, .album__add_open .fa, .album__add_close .fa, .meeting__add_open .fa, .meeting__add_close .fa {
+.news__add_open .fa,
+.news__add_close .fa,
+.album__add_open .fa,
+.album__add_close .fa,
+.meeting__add_open .fa,
+.meeting__add_close .fa,
+.meeting__year .fa {
     font-size: 12px;
 }
 
@@ -162,8 +168,17 @@ a:hover, a:focus {
 
 .meeting__year {
     font-style: italic;
-    margin-left: 30px;
+    padding-left: 30px;
     line-height: 35px;
+}
+
+.meeting__collapser .meeting__year {
+    cursor: pointer;
+}
+
+.meeting__collapser .meeting__year:hover {
+    cursor: pointer;    
+    background-color: #eee;
 }
 /* End Meetings*/
 

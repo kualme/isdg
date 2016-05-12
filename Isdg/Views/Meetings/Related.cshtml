@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Related meetings";
+    int index = 0;
 }
 
 <div class="section-header"><h2>Related meetings</h2></div>
@@ -22,15 +23,32 @@
         }
     }
     @if (Model.PastMeetingsDict.Count() > 0) 
-    {
+    {                
         <div class="meeting__title">Past Events</div>
         foreach (var meetingsPair in Model.PastMeetingsDict)
         {
-            <div class="meeting__year">@meetingsPair.Key</div>
-            foreach (var item in meetingsPair.Value) 
+            if (index == 0)
             {
-                @Html.Partial("_Meeting", item);
+                <div class="meeting__year">@meetingsPair.Key</div>            
+                foreach (var item in meetingsPair.Value) 
+                {
+                    @Html.Partial("_Meeting", item);
+                    index++;
+                }
             }
+            else
+            {             
+                <div class="meeting__collapser">
+                    <div class="meeting__year collapser" onclick="showForm(this, 'meeting__collapser', 'meeting__content')">@meetingsPair.Key <span class="fa fa-plus"></span></div>
+                    <div class="meeting__content collapser hidden">
+                    @foreach (var item in meetingsPair.Value) 
+                    {
+                        @Html.Partial("_Meeting", item);
+                        index++;
+                    }
+                    </div>
+                </div>  
+            }           
         }
     }
 </div>
