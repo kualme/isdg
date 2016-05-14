@@ -8,6 +8,8 @@ using Isdg.Core.Data;
 using Isdg.Lib;
 using Isdg.Models;
 using Isdg.Services.Information;
+using Isdg.Services.Messages;
+using log4net;
 using Microsoft.AspNet.Identity;
 
 namespace Isdg.Controllers
@@ -16,7 +18,7 @@ namespace Isdg.Controllers
     {
         private readonly IMeetingService meetingService;
 
-        public MeetingsController(IMeetingService meetingService) 
+        public MeetingsController(IMeetingService meetingService, ILog log, IEmailSender emailSender) : base(log, emailSender)
         {
             this.meetingService = meetingService;            
         }
@@ -42,6 +44,10 @@ namespace Isdg.Controllers
                 {
                     model.UserId = User.Identity.GetUserId();
                     meetingService.InsertMeeting(model);
+                    if (!UserHelper.IsAdmin())
+                    {
+                        EmailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "related meeting", Url.Action("Details", "Meetings", new { id = model.Id }, Request.Url.Scheme), User.Identity.GetUserName());
+                    }
                     return PartialView("_Meeting", ToMeetingViewModel(model));
                 }
                 catch (Exception ex)
@@ -94,6 +100,51 @@ namespace Isdg.Controllers
             }
         }
 
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
+        public ActionResult Edit(int? id)
+        {
+            var model = new Meeting();
+            if (id.HasValue)
+            {
+                model = meetingService.GetMeetingById(id.Value);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
+        public ActionResult EditMeeting(Meeting model)
+        {
+            try
+            {
+                var editModel = meetingService.GetMeetingById(model.Id);
+                editModel.Title = model.Title;
+                editModel.Place = model.Place;
+                editModel.StartDate = model.StartDate;
+                editModel.EndDate = model.EndDate;
+                editModel.IsPublished = model.IsPublished;
+                editModel.IsIsdgMeeting = model.IsIsdgMeeting;
+                editModel.MeetingType = model.MeetingType;
+                editModel.ModifiedDate = System.DateTime.Now;
+                editModel.IP = Request.UserHostAddress;
+                meetingService.UpdateMeeting(editModel);
+                return RedirectToAction("Related");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                ModelState.AddModelError("", "Failed to edit meeting");
+                return View("Edit", model);
+            }
+        }
+
+        [AuthorizeWithRoles(Role = UserRole.Admin)]
+        public ActionResult Details(int id)
+        {
+            var model = meetingService.GetMeetingById(id);
+            return View(model);
+        }
+
         private MeetingViewModel ToMeetingViewModel(Meeting meeting)
         {
             var model = new MeetingViewModel() { Meeting = meeting, Show = meeting.IsPublished};            
@@ -105,7 +156,7 @@ namespace Isdg.Controllers
                 model.MeetingDate = String.Format("{0} {1}-{2} {3}, {4}", meeting.StartDate.ToString("MMMM"), meeting.StartDate.Day, meeting.EndDate.ToString("MMMM"), meeting.EndDate.Day, meeting.StartDate.Year);
             else model.MeetingDate = String.Format("{0}-{1}", meeting.StartDate.ToString("MMMM d, yyyy"), meeting.EndDate.ToString("MMMM d, yyyy"));
             var user = UserManager.Users.FirstOrDefault(x => x.Id == meeting.UserId);
-            model.UserName = UserHelper.GetUserName(UserManager);
+            model.UserName = UserHelper.GetUserName(UserManager, meeting.UserId);
             if (UserHelper.IsAdmin())
             {
                 model.CanDeleteMeetings = true;

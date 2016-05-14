@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Isdg.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Isdg.Lib
 {
@@ -29,10 +30,25 @@ namespace Isdg.Lib
             return HttpContext.Current.User.IsInRole(UserRole.Admin.ToString()) || HttpContext.Current.User.IsInRole(UserRole.Trusted.ToString()) || HttpContext.Current.User.IsInRole(UserRole.Untrusted.ToString());
         }
 
-        public static string GetUserName(ApplicationUserManager manager)
+        public static string GetUserName(ApplicationUserManager manager, string userId = null)
         {
-            var user = manager.FindById<ApplicationUser, string>(HttpContext.Current.User.Identity.GetUserId());
+            if (userId == null) userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = manager.FindById<ApplicationUser, string>(userId);
             return user == null ? "username" : user.UsernameToDisplay;
+        }
+        
+        public static List<string> GetAllAdminEmails(ApplicationUserManager manager)
+        {
+            var adminEmails = new List<string>();
+            var users = manager.Users;            
+            foreach (var user in users)
+            {
+                if (manager.IsInRole(user.Id, UserRole.Admin.ToString()))
+                {
+                    adminEmails.Add(user.Email);
+                }                
+            }
+            return adminEmails;
         }
     }
 }

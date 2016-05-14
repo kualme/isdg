@@ -5,11 +5,15 @@
     ViewBag.Title = "News";
 }
 
-<div class="section-header"><h2>News</h2></div>
+<div class="section-header"><h2>@ViewBag.Title</h2></div>
 
 @if (Model.CanCreateNews) 
 {
     @Html.Partial("_Create", new News())
+}
+else
+{
+    <hr />
 }
 <div id="news">
     @foreach (var item in Model.NewsList)

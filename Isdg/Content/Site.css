@@ -195,11 +195,11 @@ a:hover, a:focus {
     color: lightgray;
 }
 
-.unpublished .glyphicon{
+.unpublished a{
     color: lavender;
 }
 
-.unpublished .glyphicon:hover{
+.unpublished a:hover{
     color: lightblue;
 }
 
@@ -209,4 +209,8 @@ a:hover, a:focus {
 
 .delete_confirmation {    
     margin: 0px 10px 0px 10px;
+}
+
+.fa-spinner {
+    margin-left:10px;
 }

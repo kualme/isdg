@@ -18,12 +18,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using Isdg.Lib;
+using log4net;
 
 namespace Isdg.Controllers
 {
     [AuthorizeWithRoles(Role = UserRole.Admin)]
     public class UsersController : BaseController
-    {        
+    {
+        public UsersController(ILog log, IEmailSender emailSender) : base(log, emailSender) { }
+
         public ActionResult Index()
         {
             var users = UserManager.Users.ToList();
@@ -64,6 +67,8 @@ namespace Isdg.Controllers
                     return HandleError(model, result, redirectToIndex);   
                 }
 
+                if (redirectToIndex)
+                    return RedirectToAction("Index");
                 return PartialView("_User", model);
             }
             return HandleError(model, null, redirectToIndex);   

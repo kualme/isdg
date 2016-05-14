@@ -8,6 +8,8 @@ using Isdg.Core.Data;
 using Isdg.Lib;
 using Isdg.Models;
 using Isdg.Services.Information;
+using Isdg.Services.Messages;
+using log4net;
 using Microsoft.AspNet.Identity;
 
 namespace Isdg.Controllers
@@ -16,7 +18,7 @@ namespace Isdg.Controllers
     {
         private ITextService textService;
 
-        public HomeController(ITextService textService)
+        public HomeController(ITextService textService, ILog log, IEmailSender emailSender) : base(log, emailSender)
         {
             this.textService = textService;
         }
@@ -32,7 +34,7 @@ namespace Isdg.Controllers
             var text = textService.GetTextByKey(key);
             if (text == null)
                 return View("Create", new TextViewModel() { Key = key });            
-            return View("Text", new TextViewModel() { Key = key, Content = text.Value, UserName = UserHelper.GetUserName(UserManager) });
+            return View("Text", new TextViewModel() { Key = key, Content = text.Value, UserName = UserHelper.GetUserName(UserManager, text.UserId) });
         }
                 
         public ActionResult ExecutiveBoard()

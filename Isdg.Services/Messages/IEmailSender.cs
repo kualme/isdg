@@ -9,6 +9,12 @@ namespace Isdg.Services.Messages
     /// </summary>
     public partial interface IEmailSender
     {
+        void SendEmailOnCreate(IEnumerable<string> emails, string entityName, string detailsUrl, string username = null);
+
+        void SendEmail(string subject, string body, string toAddress, string toName = "",
+            IEnumerable<string> bcc = null, IEnumerable<string> cc = null,
+            string attachmentFilePath = null, string attachmentFileName = null);
+
         /// <summary>
         /// Sends an email
         /// </summary>

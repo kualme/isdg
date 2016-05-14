@@ -13,6 +13,10 @@
 {
     @Html.Partial("_Create", new Meeting() { StartDate = DateTime.Now, EndDate = DateTime.Now })
 }
+else
+{
+    <hr />
+}
 <div id="meetings">
     @if (Model.ComingMeetingsList.Count() > 0)
     {

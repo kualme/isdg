@@ -11,14 +11,20 @@ function closeFormOnButton(className, elem) {
     $(elem).parents("." + className).addClass("hidden");
 }
 function openCreationForm(commonClassName) {
-    $('.' + commonClassName + "__add_open").hide();
-    $('.' + commonClassName + "__form_add").show();
-    $('.' + commonClassName + "__add_close").show();
+    $("." + commonClassName + "__add_open").hide();
+    $("." + commonClassName + "__form_add").show();
+    $("." + commonClassName + "__add_close").show();
 }
 function closeCreationForm(commonClassName) {
-    $('.' + commonClassName + "__add_open").show();
-    $('.' + commonClassName + "__form_add").hide();
-    $('.' + commonClassName + "__add_close").hide();
+    $("." + commonClassName + "__add_open").show();
+    $("." + commonClassName + "__form_add").hide();
+    $("." + commonClassName + "__add_close").hide();
+}
+function showSpinner() {
+    $(".fa-spinner").removeClass("hidden");
+}
+function hideSpinner() {
+    $(".fa-spinner").addClass("hidden");
 }
 function bindCkeditor() {
     $.each($("textarea"), function (index, textarea) {

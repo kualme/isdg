@@ -14,7 +14,20 @@ namespace Isdg.Services.Messages
     /// </summary>
     public class EmailSender : IEmailSender
     {
-
+        public void SendEmailOnCreate(IEnumerable<string> emails, string entityName, string detailsUrl, string username = null)
+        {
+            var emailAccount = Settings.EmailAccount;
+            var fromEmail = emailAccount.Email;
+            var fromName = emailAccount.DisplayName;
+            var subject = String.Format("New {0} has been created", entityName);
+            var body = String.Format("New {0} has been created{2}. Click <a href=\"{1}\">here</a> for more details.", entityName, detailsUrl, !String.IsNullOrEmpty(username) ? " by user " + username : "");
+            var fromAddress = new MailAddress(fromEmail, fromName);
+            foreach (var email in emails)
+            {
+                SendEmail(emailAccount, subject, body, fromAddress, new MailAddress(email, ""));
+            }
+        }
+        
         public void SendEmail(string subject, string body, string toAddress, string toName = "",
             IEnumerable<string> bcc = null, IEnumerable<string> cc = null,
             string attachmentFilePath = null, string attachmentFileName = null)

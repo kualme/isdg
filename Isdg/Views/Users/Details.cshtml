@@ -2,11 +2,11 @@
 @model Isdg.Models.ApplicationUserViewModel
 
 @{
-    ViewBag.Title = "User Details";
+    ViewBag.Title = "User details";
 }
 
-<h2>User Details</h2>
-
+<div class="section-header"><h2>@ViewBag.Title</h2></div>
+<hr />
 <div>
     <dl class="dl-horizontal">
         <dt>
@@ -32,7 +32,7 @@
         <dd>
             @Html.DisplayFor(model => model.UserName)
         </dd>
-
+                   
         <dt>
             @Html.DisplayNameFor(model => model.EmailConfirmed)
         </dt>
@@ -42,12 +42,21 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.ReceiveNewsletter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiveNewsletter)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Role)
         </dt>
 
         <dd>
             @Model.Role.ToDescription()
         </dd>
+             
     </dl>
 </div>
 

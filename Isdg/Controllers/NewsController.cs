@@ -15,14 +15,16 @@ using Isdg.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Isdg.Lib;
+using log4net;
+using Isdg.Services.Messages;
 
 namespace Isdg.Controllers
 {    
     public class NewsController : BaseController
     {
         private readonly INewsService newsService;
-        
-        public NewsController(INewsService newsService) 
+
+        public NewsController(INewsService newsService, ILog log, IEmailSender emailSender) : base(log, emailSender) 
         {            
             this.newsService = newsService;            
         }
@@ -47,7 +49,11 @@ namespace Isdg.Controllers
                 try
                 {
                     model.UserId = User.Identity.GetUserId();                
-                    newsService.InsertNews(model);                    
+                    newsService.InsertNews(model);
+                    if (!UserHelper.IsAdmin())
+                    {
+                        EmailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "news", Url.Action("Details", "News", new { id = model.Id }, Request.Url.Scheme), User.Identity.GetUserName());
+                    }
                     return PartialView("_News", ToNewsViewModel(model));
                 }
                 catch (Exception ex)
@@ -137,7 +143,7 @@ namespace Isdg.Controllers
 
         private NewsViewModel ToNewsViewModel(News news)
         {
-            var model = new NewsViewModel() { News = news, Show = news.IsPublished, UserName = UserHelper.GetUserName(UserManager) };            
+            var model = new NewsViewModel() { News = news, Show = news.IsPublished, UserName = UserHelper.GetUserName(UserManager, news.UserId) };            
             if (UserHelper.IsAdmin())
             {
                 model.CanDeleteNews = true;

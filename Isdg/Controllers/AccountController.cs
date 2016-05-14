@@ -12,6 +12,7 @@ using Isdg.Models;
 using Isdg.Services.Messages;
 using Isdg.Core.Data;
 using System.Configuration;
+using Isdg.Lib;
 
 namespace Isdg.Controllers
 {
@@ -20,15 +21,18 @@ namespace Isdg.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
-        public AccountController()
+        private IEmailSender emailSender;
+
+        public AccountController(IEmailSender emailSender)
         {
+            this.emailSender = emailSender;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
         {
             UserManager = userManager;
-            SignInManager = signInManager;        
+            SignInManager = signInManager;
+            this.emailSender = emailSender;
         }
 
         public ApplicationSignInManager SignInManager
@@ -164,8 +168,9 @@ namespace Isdg.Controllers
                     // Отправка сообщения электронной почты с этой ссылкой
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    new EmailSender().SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
-
+                    emailSender.SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
+                    emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
+                    
                     return RedirectToAction("Index", "News");
                 }
                 AddErrors(result);
@@ -381,8 +386,8 @@ namespace Isdg.Controllers
                         
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        new EmailSender().SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
-
+                        emailSender.SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
+                        emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
                         return RedirectToLocal(returnUrl);
                     }
                 }

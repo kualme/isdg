@@ -12,6 +12,8 @@ using Isdg.Models;
 using Isdg.Services.Information;
 using System.IO;
 using Microsoft.AspNet.Identity;
+using log4net;
+using Isdg.Services.Messages;
 
 namespace Isdg.Controllers
 {
@@ -19,7 +21,7 @@ namespace Isdg.Controllers
     {
         private readonly IAlbumService albumService;        
 
-        public AlbumController(IAlbumService albumService)
+        public AlbumController(IAlbumService albumService, ILog log, IEmailSender emailSender) : base(log, emailSender)
         {
             this.albumService = albumService;            
         }

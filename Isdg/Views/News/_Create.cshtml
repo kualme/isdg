@@ -5,7 +5,8 @@
     UpdateTargetId = "news",
     InsertionMode = InsertionMode.InsertBefore,
     OnSuccess = Isdg.Lib.UserHelper.IsAdmin() ? "" : "showSuccessMessage('news__form_add', 'News')",
-    OnComplete = "bindCkeditor()"
+    OnComplete = "bindCkeditor();hideSpinner()",
+    OnBegin = "showSpinner()"
 }))
 {
     @Html.AntiForgeryToken()
@@ -24,7 +25,7 @@
             </div>                          
             <div class="form-group">
                 <div class="col-md-offset-1 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default btn-sm" />
+                    <input type="submit" value="Create" class="btn btn-default" /><i class="fa fa-spinner fa-spin fa-lg fa-fw hidden"></i>
                 </div>
             </div>
             <div class="text-success success-message hidden"></div>                
