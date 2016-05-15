@@ -33,7 +33,7 @@
                     <li>@Html.ActionLink("Publications", "ShowText", "Home", new { key = "Publications" }, null)</li>
                     @*<li>@Html.ActionLink("Albums", "Index", "Album")</li>*@
                     <li>@Html.ActionLink("Useful Links", "ShowText", "Home", new { key = "Useful Links" }, null)</li>
-                    @if (User.IsInRole(Isdg.Models.UserRole.Admin.ToString())) 
+                    @if (Isdg.Lib.UserHelper.IsAdmin()) 
                     {
                         <li>@Html.ActionLink("Newsletter", "Index", "Newsletter")</li>
                         <li>@Html.ActionLink("Users", "Index", "Users")</li>

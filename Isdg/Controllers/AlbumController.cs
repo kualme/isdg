@@ -14,6 +14,7 @@ using System.IO;
 using Microsoft.AspNet.Identity;
 using log4net;
 using Isdg.Services.Messages;
+using Isdg.Lib;
 
 namespace Isdg.Controllers
 {
@@ -141,7 +142,7 @@ namespace Isdg.Controllers
         {
             var album = albumService.GetAlbumById(albumId);
             var userId = User.Identity.GetUserId();
-            var isPublished = User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Trusted.ToString());
+            var isPublished = UserHelper.IsAdminOrTrusted();
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 var file = Request.Files[i];
