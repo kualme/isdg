@@ -10,13 +10,18 @@ namespace Isdg.Core.Data
 {
     public class Meeting : BaseEntity
     {
+        [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Place is required")]
         public string Place { get; set; }
+        [Required(ErrorMessage = "Link is required")]
         [Display(Name = "Link")]
         public string Href { get; set; }
+        [Required(ErrorMessage = "Start date is required")]
         [Display(Name = "Start date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime StartDate { get; set; }        
+        public DateTime StartDate { get; set; }
+        [Required(ErrorMessage = "End date is required")]
         [Display(Name = "End date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }        
