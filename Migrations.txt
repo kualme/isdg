@@ -10,3 +10,19 @@
 	
 	
 	get-help Update-Database -detailed
+	
+	
+	CREATE TABLE [dbo].[ExecutiveBoardMembers] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Name] [nvarchar](max) NOT NULL,
+    [Href] [nvarchar](max),
+    [StartYear] [nvarchar](max) NOT NULL,
+    [EndYear] [nvarchar](max),
+    [IsPresident] [bit] NOT NULL,
+    [IsDead] [bit] NOT NULL,
+    [UserId] [nvarchar](max) NOT NULL,
+    [AddedDate] [datetime] NOT NULL,
+    [ModifiedDate] [datetime] NOT NULL,
+    [IP] [nvarchar](max),
+    CONSTRAINT [PK_dbo.ExecutiveBoardMembers] PRIMARY KEY ([Id])
+)

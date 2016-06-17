@@ -1,0 +1,34 @@
+﻿@using Isdg.Core.Data
+@model IEnumerable<ExecutiveBoardMember>
+
+@{
+    ViewBag.Title = "Executive board";
+}
+
+<div class="section-header"><h2>@ViewBag.Title</h2></div>
+<hr />
+<h3>Officers and the executive board</h3>
+<table>
+    <tr><td colspan="4"><b>President & Treasurer:</b></td></tr>
+    @foreach (var member in Model.Where(x => !x.IsFormer && x.IsPresident))
+    {
+        <tr>
+            @if (!String.IsNullOrEmpty(member.Href)) { <td><a href="@member.Href">@member.Name</a></td> } else { <td>member.Name</td> }
+            <td>@member.Workplace</td>
+            <td>@member.StartYear-@member.EndYear</td>
+            @if (!String.IsNullOrEmpty(member.Email)) { <td><a href="mailto:@member.Email">@member.Email</a></td> } else { <td></td> }
+            <td></td>
+        </tr> 
+    }
+    <tr><td colspan="4"><b>Members of the executive board:</b></td></tr>
+    @foreach (var member in Model.Where(x => !x.IsFormer && !x.IsPresident))
+    {
+        <tr>
+            @if (!String.IsNullOrEmpty(member.Href)) { <td><a href="@member.Href">@member.Name</a></td> } else { <td>member.Name</td> }
+            <td>@member.Workplace</td>
+            <td>@member.StartYear-@member.EndYear</td>
+            @if (!String.IsNullOrEmpty(member.Email)) { <td><a href="mailto:@member.Email">@member.Email</a></td> } else { <td></td> }
+            <td></td>
+        </tr> 
+    }
+</table>

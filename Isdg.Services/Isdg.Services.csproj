@@ -47,6 +47,8 @@
     <Compile Include="Information\AlbumService.cs" />
     <Compile Include="Information\ITextService.cs" />
     <Compile Include="Information\TextService.cs" />
+    <Compile Include="Information\IExecutiveBoardService.cs" />
+    <Compile Include="Information\ExecutiveBoardService.cs" />
     <Compile Include="Messages\SentEmailService.cs" />
     <Compile Include="Messages\ISentEmailService.cs" />
     <Compile Include="Messages\EmailSender.cs" />

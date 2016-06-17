@@ -194,6 +194,7 @@
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\ExecutiveBoardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,18 @@
     <Compile Include="IsdgMigrations\201605111449515_SentEmail.cs" />
     <Compile Include="IsdgMigrations\201605111449515_SentEmail.Designer.cs">
       <DependentUpon>201605111449515_SentEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsdgMigrations\201605151434420_ExecutiveBoardMember.cs" />
+    <Compile Include="IsdgMigrations\201605151434420_ExecutiveBoardMember.Designer.cs">
+      <DependentUpon>201605151434420_ExecutiveBoardMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsdgMigrations\201605151456350_ExecutiveBoardMember1.cs" />
+    <Compile Include="IsdgMigrations\201605151456350_ExecutiveBoardMember1.Designer.cs">
+      <DependentUpon>201605151456350_ExecutiveBoardMember1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsdgMigrations\201605151504510_ExecutiveBoardMember2.cs" />
+    <Compile Include="IsdgMigrations\201605151504510_ExecutiveBoardMember2.Designer.cs">
+      <DependentUpon>201605151504510_ExecutiveBoardMember2.cs</DependentUpon>
     </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
@@ -439,6 +452,15 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Meetings\Details.cshtml" />
     <Content Include="Views\Meetings\Edit.cshtml" />
+    <Content Include="Views\ExecutiveBoard\_Create.cshtml" />
+    <Content Include="Views\ExecutiveBoard\_Delete.cshtml" />
+    <Content Include="Views\ExecutiveBoard\_Details.cshtml" />
+    <Content Include="Views\ExecutiveBoard\_Edit.cshtml" />
+    <Content Include="Views\ExecutiveBoard\_News.cshtml" />
+    <Content Include="Views\ExecutiveBoard\Details.cshtml" />
+    <Content Include="Views\ExecutiveBoard\Edit.cshtml" />
+    <Content Include="Views\ExecutiveBoard\Index.cshtml" />
+    <Content Include="Views\ExecutiveBoard\MembersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,6 +498,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IsdgMigrations\201605111449515_SentEmail.resx">
       <DependentUpon>201605111449515_SentEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605151434420_ExecutiveBoardMember.resx">
+      <DependentUpon>201605151434420_ExecutiveBoardMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605151456350_ExecutiveBoardMember1.resx">
+      <DependentUpon>201605151456350_ExecutiveBoardMember1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsdgMigrations\201605151504510_ExecutiveBoardMember2.resx">
+      <DependentUpon>201605151504510_ExecutiveBoardMember2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersMigrations\201605091417444_Initial.resx">
       <DependentUpon>201605091417444_Initial.cs</DependentUpon>
