@@ -376,7 +376,13 @@ namespace Isdg.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReceiveNewsletter = model.ReceiveNewsletter, UsernameToDisplay = model.UserName };
-                var result = await UserManager.CreateAsync(user);
+                var foundUser = await UserManager.FindByEmailAsync(model.Email);
+                if (foundUser != null)
+                {
+                    // связываем аккаунты
+                    return View("LinkExternalAccount", model);
+                }
+                var result = await UserManager.CreateAsync(user);                
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);                    
@@ -396,6 +402,20 @@ namespace Isdg.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LinkExternalAccount(LinkExternalAccountViewModel model, string returnUrl)
+        {
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            if (loginInfo == null)
+            {
+                return RedirectToAction("LinkExternalAccount", new { Message = "Failed to link local and external accounts" });
+            }
+            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            return result.Succeeded ? RedirectToLocal(returnUrl) : RedirectToAction("LinkExternalAccount", new { Message = "Failed to link local and external accounts" });
         }
 
         //

@@ -17,6 +17,18 @@ namespace Isdg.Models
         public bool ReceiveNewsletter { get; set; }
     }
 
+    public class LinkExternalAccountViewModel
+    {
+        public string Id { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
@@ -86,7 +98,7 @@ namespace Isdg.Models
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Receive newsletter")]
+        [Display(Name = "Receive newsletters")]
         public bool ReceiveNewsletter { get; set; }
     }
 
