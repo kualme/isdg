@@ -46,7 +46,12 @@ namespace Isdg.App_Start
             kernel.Bind<ISentEmailService>().To<SentEmailService>();
             kernel.Bind<ITextService>().To<TextService>();
             kernel.Bind<IEmailSender>().To<EmailSender>();
-            kernel.Bind<ILog>().ToMethod(x => LogManager.GetLogger(x.Request.ParentRequest.ParentRequest.Target.Member.DeclaringType)).InSingletonScope();
+            kernel.Bind<ILog>().ToMethod(x => 
+                {
+                    return LogManager.GetLogger(x.Request.ParentContext == null ?
+                                  typeof(object) :
+                                  x.Request.ParentContext.Plan.Type);
+                }).InSingletonScope();
         }
     }
 }
