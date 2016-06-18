@@ -11,6 +11,8 @@ namespace Isdg.Services.Messages
     {
         void SendEmailOnCreate(IEnumerable<string> emails, string entityName, string detailsUrl, string username = null);
 
+        void SendConfirmationEmail(string email, string callbackUrl);
+
         void SendEmail(string subject, string body, string toAddress, string toName = "",
             IEnumerable<string> bcc = null, IEnumerable<string> cc = null,
             string attachmentFilePath = null, string attachmentFileName = null);

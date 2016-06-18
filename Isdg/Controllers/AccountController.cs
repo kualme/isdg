@@ -168,7 +168,7 @@ namespace Isdg.Controllers
                     // Отправка сообщения электронной почты с этой ссылкой
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    emailSender.SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
+                    emailSender.SendConfirmationEmail(model.Email, callbackUrl);
                     emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
                     
                     return RedirectToAction("Index", "News");
@@ -393,7 +393,7 @@ namespace Isdg.Controllers
                         
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        emailSender.SendEmail("Confirm your account", "Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>", model.Email);
+                        emailSender.SendConfirmationEmail(model.Email, callbackUrl);
                         emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
                         return RedirectToLocal(returnUrl);
                     }

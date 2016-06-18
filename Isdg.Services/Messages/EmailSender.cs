@@ -27,6 +27,13 @@ namespace Isdg.Services.Messages
                 SendEmail(emailAccount, subject, body, fromAddress, new MailAddress(email, ""));
             }
         }
+
+        public void SendConfirmationEmail(string email, string callbackUrl)
+        {
+            var body = "<p>Confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.</p>" +
+                "<p>You've received this e-mail because you've been registered on the site http://isdg-site.org/. If it isn't you, just ignore the letter.</p>";
+            SendEmail("Confirm your account", body, email);
+        }
         
         public void SendEmail(string subject, string body, string toAddress, string toName = "",
             IEnumerable<string> bcc = null, IEnumerable<string> cc = null,
