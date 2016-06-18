@@ -380,7 +380,8 @@ namespace Isdg.Controllers
                 if (foundUser != null)
                 {
                     // связываем аккаунты
-                    return View("LinkExternalAccount", model);
+                    var linkExternalAccountViewModel = new LinkExternalAccountViewModel() { Email = foundUser.Email };
+                    return View("LinkExternalAccount", linkExternalAccountViewModel);
                 }
                 var result = await UserManager.CreateAsync(user);                
                 if (result.Succeeded)
@@ -407,15 +408,32 @@ namespace Isdg.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LinkExternalAccount(LinkExternalAccountViewModel model, string returnUrl)
+        public async Task<ActionResult> LinkExternalAccount(LinkExternalAccountViewModel model)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                return RedirectToAction("LinkExternalAccount", new { Message = "Failed to link local and external accounts" });
+                ModelState.AddModelError("", "Failed to find internal account accounts");
+                return View("LinkExternalAccount", model);
             }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToLocal(returnUrl) : RedirectToAction("LinkExternalAccount", new { Message = "Failed to link local and external accounts" });
+            
+            var passwordIsCorrect = await UserManager.CheckPasswordAsync(user, model.Password);
+            if (!passwordIsCorrect)
+            {
+                ModelState.AddModelError("", "Password is incorrect");                
+                return View("LinkExternalAccount", model);
+            }
+            
+            var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+            var result = await UserManager.AddLoginAsync(user.Id, info.Login);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                return RedirectToAction("Index", "News");
+            }
+
+            ModelState.AddModelError("", "Failed to link local and external accounts");                
+            return View("LinkExternalAccount", model);
         }
 
         //

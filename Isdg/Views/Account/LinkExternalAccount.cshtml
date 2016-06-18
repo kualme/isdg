@@ -1,0 +1,31 @@
+﻿@model Isdg.Models.LinkExternalAccountViewModel
+@{
+    ViewBag.Title = "Registration";
+}
+<h2>@ViewBag.Title</h2>
+<h3>Linking your local account</h3>
+
+@using (Html.BeginForm("LinkExternalAccount", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Email);          
+    <p class="text-info">Email @Model.Email is already in use. If you'd like to link external account to this local account, please enter the password.</p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Link" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
