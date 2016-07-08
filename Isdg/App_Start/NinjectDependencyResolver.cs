@@ -42,6 +42,7 @@ namespace Isdg.App_Start
             kernel.Bind<IDbContext>().To<IsdgObjectContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", "IsdgObjectContext");            
             kernel.Bind<INewsService>().To<NewsService>();            
             kernel.Bind<IAlbumService>().To<AlbumService>();
+            kernel.Bind<IAwardService>().To<AwardService>();
             kernel.Bind<IMeetingService>().To<MeetingService>();
             kernel.Bind<ISentEmailService>().To<SentEmailService>();
             kernel.Bind<ITextService>().To<TextService>();

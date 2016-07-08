@@ -1,0 +1,25 @@
+﻿@using Isdg.Core.Data
+@model IEnumerable<Award>
+
+@{
+    ViewBag.Title = "Isaacs' Award";
+}
+
+<div class="section-header"><h2>@ViewBag.Title</h2></div>
+<hr />
+<p>The executive committee of the International Society of Dynamic Games decided in 2003 to establish a prize to recognize the &quot;outstanding contribution to the theory and applications of dynamic games&quot; of two scholars at each of its symposium, starting in 2004.  The prize was named after Rufus Isaacs, the acknowledged founding father of differential games.</p>
+
+@if (Isdg.Lib.UserHelper.IsAdmin()) 
+{
+    @Html.Partial("_Create", new Isdg.Models.CreateAwardViewModel())
+}
+else
+{
+    <hr />
+}
+<div id="awards">
+    @foreach (var item in Model)
+    {        
+        @Html.Partial("_Award", item)
+    }
+</div>

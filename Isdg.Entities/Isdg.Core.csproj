@@ -91,6 +91,7 @@
     <Compile Include="Data\News.cs" />
     <Compile Include="Data\SentEmail.cs" />
     <Compile Include="Data\Text.cs" />
+    <Compile Include="Data\Award.cs" />
     <Compile Include="IPagedList.cs" />
     <Compile Include="PagedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

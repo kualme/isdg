@@ -16,6 +16,7 @@ build/
 [Bb]in/
 [Oo]bj/
 logs/
+Content/Albums
 
 # NuGet Packages
 *.nupkg

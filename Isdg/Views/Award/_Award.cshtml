@@ -1,0 +1,46 @@
+﻿@using Isdg.Models
+@model Isdg.Core.Data.Award
+@if (Model == null)
+{    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })    
+}
+else 
+{
+    <div id="award_id_@Model.Id">        
+        <div class="award">        
+            <div class="award__info">@Model.Heading
+                @if (Isdg.Lib.UserHelper.IsAdmin()) 
+                {
+                    <span class="links">                    
+                        <a role="button" title="Edit award" onclick="showForm(this, 'award', 'award__edit')"><span class="fa fa-pencil"></span></a>                
+                        <a role="button" title="Show award details" onclick="showForm(this, 'award', 'award__details')"><span class="fa fa-plus"></span></a>                    
+                        <a role="button" title="Delete award" onclick="showForm(this, 'award__info', 'award__delete')"><span class="fa fa-trash"></span></a>                    
+                    </span>
+                }
+                @Html.Partial("_Delete", Model)
+            </div>
+            <div class="award__content">
+                @if (!String.IsNullOrEmpty(Model.PathToFirstPicture)) 
+                {
+                    if (!String.IsNullOrEmpty(Model.PathToSecondPicture))
+                    {
+                        <div><img src="@Model.PathToFirstPicture" /><img src="@Model.PathToSecondPicture"/></div> 
+                    }
+                    else
+                    {
+                        <div><img src="@Model.PathToFirstPicture" /></div> 
+                    }
+                }
+                @Html.Raw(Model.Content)
+                @*<div class="news__author">Published by @Model.UserName</div>*@
+            </div>                
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
+            @Html.Partial("_Edit", Model)
+            @Html.Partial("_Details", Model)
+        </div>
+    </div>
+    
+}
+
+
+

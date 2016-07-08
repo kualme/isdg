@@ -1,0 +1,65 @@
+﻿@model Isdg.Models.CreateAwardViewModel
+
+@using (Ajax.BeginForm("CreateEditAward", "Award", new AjaxOptions()
+{
+    UpdateTargetId = "awards",
+    InsertionMode = InsertionMode.InsertBefore,
+    OnComplete = "bindCkeditor();hideSpinner()",
+    OnBegin = "showSpinner()"
+}, new { encType = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">        
+        <a role="button" class="award__add_open" onclick="openCreationForm('award')">Add Award <span class="fa fa-angle-double-down"></span></a>        
+        <hr />
+        <div class="award__form_add" style="display: none;">            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Award.Heading, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Award.Heading, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Award.Heading, "", new { @class = "text-danger" })
+                </div>
+            </div>                          
+            <div class="form-group">
+                @Html.LabelFor(model => model.Award.Content, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Award.Content, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Award.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstImageUpload)
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FirstImageUpload, new { type = "file" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SecondImageUpload)
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SecondImageUpload, new { type = "file" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <label class="control-label col-md-2">Choose first image</label>
+                <input type="file" class="award__image-upload form-control" name="FirstImageUpload" data-index="0" accept="image/*" />
+            </div>                          
+            <div class="form-group">
+                <label class="control-label col-md-2">Choose second image (not required)</label>
+                <input type="file" class="award__image-upload form-control" name="SecondImageUpload" data-index="1" accept="image/*" />
+            </div>*@
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" /><i class="fa fa-spinner fa-spin fa-lg fa-fw hidden"></i>
+                </div>
+            </div>
+            <div class="text-success success-message hidden"></div>                
+            <hr />
+        </div>        
+        <a role="button" class="award__add_close award__submit" style="display: none;" onclick="closeCreationForm('award')">Add Award <span class="fa fa-angle-double-up"></span></a>        
+    </div>
+}

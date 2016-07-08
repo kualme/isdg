@@ -86,6 +86,7 @@ $(function () {
         });
     });
 });
+
 function bindCarousel() {
     $(".carousel").each(function () {
         var $this = $(this);

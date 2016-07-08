@@ -1,0 +1,13 @@
+﻿@model Isdg.Core.Data.Award
+
+<span class="award__delete hidden">
+@using (Ajax.BeginForm("ConfirmDeleteAward", "Award", new { awardId = Model.Id }, new AjaxOptions() { UpdateTargetId = "award_id_" + Model.Id}, new { @class = "form_inline text-danger" }))
+{    
+    <span class="delete_confirmation">Are you sure you want to delete this award?</span>                
+    @Html.AntiForgeryToken()
+    <span class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('award', this)" />
+        <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('award__delete', this)" />
+    </span>
+}
+</span>
