@@ -1,0 +1,15 @@
+﻿@model Isdg.Models.AlbumViewModel
+
+@{
+    ViewBag.Title = "Album details";
+}
+
+<div class="section-header"><h2>Album "@Model.Album.Name"</h2></div>
+<hr />
+<div id="images">
+    @foreach (var item in Model.Images)
+    {        
+        @Html.Partial("_Image", item)
+    }
+</div>
+<a class="image__info" href="@Url.Action("Index")">Back to albums</a>

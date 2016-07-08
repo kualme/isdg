@@ -26,6 +26,15 @@ function showSpinner() {
 function hideSpinner() {
     $(".fa-spinner").addClass("hidden");
 }
+function showAlbum(elem, parentClass, formClass) {
+    var form = $(elem).parents("." + parentClass).children("." + formClass);
+    if (form.hasClass("hidden")) {
+        form.removeClass("hidden");
+        bindCarousel();
+    } else {
+        form.addClass("hidden");
+    }
+}
 function bindCkeditor() {
     $.each($("textarea"), function (index, textarea) {
         if ($(textarea).hasClass("huge"))
@@ -43,6 +52,7 @@ $(function () {
         var imageUpload = $(parent.children()[0]).children('.album__image-upload');
         var errorMessage = parent.children('.error-message');
         var successMessage = parent.children('.success-message');
+        var spinner = parent.find(".fa-spinner");
         var albumId = imageUpload.data("albumId");
         var formData = new FormData();
         var totalFiles = imageUpload.prop('files').length;
@@ -57,6 +67,12 @@ $(function () {
             dataType: 'json',
             contentType: false,
             processData: false,
+            beforeSend: function () {
+                spinner.removeClass("hidden");
+                successMessage.addClass("hidden");
+                errorMessage.addClass("hidden");
+            },
+            complete: function () { spinner.addClass("hidden") },
             success: function (response) {
                 successMessage.removeClass("hidden");
                 errorMessage.addClass("hidden");
@@ -87,6 +103,7 @@ function bindCarousel() {
         var $this = $(this);
         var galleryId = "#" + $this.closest(".album__content").attr("id");
         $(galleryId + " .mid img").attr("src", $(this).attr("src"));
+        $(galleryId + " .mid-caption").text($(this).attr("title"))
     });
 }
 $(bindCarousel);

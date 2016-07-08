@@ -1,0 +1,12 @@
+﻿@model Isdg.Core.Data.Image
+<span class="image__delete hidden">
+@using (Ajax.BeginForm("ConfirmDeleteImage", "Album", new { imageId = Model.Id }, new AjaxOptions() { UpdateTargetId = "image_id_" + Model.Id}, new { @class = "form_inline text-danger" }))
+{    
+    <span class="delete_confirmation">Are you sure you want to delete this image?</span>                
+    @Html.AntiForgeryToken()
+    <span class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('image', this)" />
+        <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('image__delete', this)" />
+    </span>
+}
+</span>

@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Isdg.Core.Data;
 
 namespace Isdg.Models
 {
-    public class AlbumListViewModel 
+    public class AlbumsListViewModel
     {
-        public List<AlbumViewModel> Albums { get; set; }        
+        public AlbumsListViewModel()
+        {
+            Albums = new List<AlbumViewModel>();
+            Text = new TextViewModel();
+        }
+
+        public bool CanCreateAlbum { get; set; }
+        public List<AlbumViewModel> Albums { get; set; }
+        public TextViewModel Text { get; set; }
     }
 
     public class AlbumViewModel
     {
-        public List<Image> News { get; set; }
-        public bool CanDeleteNews { get; set; }
-        public bool CanEditNews { get; set; }
-        public bool CanSeeDetails { get; set; }
-        public bool Show { get; set; }
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        public AlbumViewModel()
+        {
+            Images = new List<ImageViewModel>();
+        }
+
+        public bool CanDeleteAlbum { get; set; }
+        public bool CanEditAlbumContent { get; set; }
+        public bool CanEditAlbumName { get; set; }
+        public Album Album { get; set; }
+        public List<ImageViewModel> Images { get; set; }
+        public bool Collapsed { get; set; }
     }
 }

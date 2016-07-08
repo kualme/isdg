@@ -24,11 +24,11 @@
 
         @if (Isdg.Lib.UserHelper.IsAdmin()) 
         {
-            <div class="form-group">
-                @Html.LabelFor(model => Model.IsPublished, htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => Model.IsPublished)                    
+            <div class="form-group">                
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="unshifted-checkbox">
+                        @Html.LabelFor(model => Model.IsPublished)
+                        @Html.CheckBoxFor(model => Model.IsPublished)                    
                     </div>
                 </div>
             </div>

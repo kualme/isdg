@@ -1,0 +1,23 @@
+﻿@model Isdg.Models.TextViewModel
+
+@if (Isdg.Lib.UserHelper.IsAdmin()) {
+    using (Html.BeginForm("CreateText", "Album", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()    
+        <div class="form-horizontal">        
+            @Html.HiddenFor(x => x.Key);
+            <div class="form-group">
+                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Content, new { @class = "huge" })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>                          
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>            
+        </div>
+    }
+}

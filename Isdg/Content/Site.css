@@ -64,7 +64,7 @@ a:hover, a:focus {
     margin-bottom: 20px;
 }
 
-.news__info, .user__info, .album__info {    
+.news__info, .user__info, .album__info, .image__info {    
     margin: 10px 0px 0px 10px;
     line-height: 35px;
 }
@@ -77,6 +77,8 @@ a:hover, a:focus {
 .news__add_close .fa,
 .album__add_open .fa,
 .album__add_close .fa,
+.image__add_open .fa,
+.image__add_close .fa,
 .meeting__add_open .fa,
 .meeting__add_close .fa,
 .meeting__year .fa {
@@ -122,9 +124,11 @@ a:hover, a:focus {
 }
 
 .carousel-pretty>ul>li>img {
-    width: 150px;
+    width: 120px;
+    cursor: pointer;
     height: 120px;
-    vertical-align:middle;
+    object-fit: cover;
+    vertical-align: middle;
     margin: 10px 10px 10px 0;
     border-radius: 4px;
 }
@@ -143,6 +147,12 @@ a:hover, a:focus {
     margin:auto;
 }
 
+.carousel>.mid-caption {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
 .clear {
     clear: both;
 }
@@ -153,7 +163,22 @@ a:hover, a:focus {
 .album__name {
     font-size: 22px;
 }
-/* End Album*/
+
+.album__collapser {
+    cursor: pointer;
+}
+
+.album__collapser:hover {
+    cursor: pointer;    
+    background-color: #eee;
+}
+/* End Album */
+
+/* Image */
+.image__caption {
+    font-size: 22px;
+}
+/* End Image */
 
 /* Meetings */
 .meeting__content {
@@ -201,6 +226,10 @@ a:hover, a:focus {
 
 .unpublished a:hover{
     color: lightblue;
+}
+
+.unpublished>.image__content>img {
+    opacity:.5;
 }
 
 .form_inline {

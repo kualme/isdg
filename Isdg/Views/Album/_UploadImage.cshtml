@@ -1,12 +1,12 @@
 ﻿@model int
 <div class="album__images">
     <div class="form-group">
-        <label class="control-label col-md-1">Choose files</label>
+        <label class="control-label col-md-2">Choose files</label>
         <input type="file" class="album__image-upload form-control" data-album-id="@Model" multiple accept="image/*" />
     </div>
     <div class="form-group">
-        <div class="col-md-offset-1">
-            <input type="button" class="album__button-upload btn btn-default btn-sm" value="Upload" />
+        <div class="col-md-offset-2">
+            <input type="button" class="album__button-upload btn btn-default btn-sm" value="Upload" /><i class="fa fa-spinner fa-spin fa-lg fa-fw hidden"></i>
         </div>
     </div>
     <div class="text-danger error-message hidden"></div>

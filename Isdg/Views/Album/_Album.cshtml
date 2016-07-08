@@ -1,50 +1,92 @@
-﻿@model Isdg.Core.Data.Album
+﻿@model Isdg.Models.AlbumViewModel
 @if (Model == null)
 {    
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })    
 }
-else 
+else
 {
-    <div id="album_id_@Model.Id">    
+    <div id="album_id_@Model.Album.Id">    
         <div class="album">        
-            <div class="album__info"><span class="album__name">@Model.Name</span>
-                <span class="links">                
-                    <a role="button" onclick="showForm(this, 'album', 'album__edit')"><span class="glyphicon glyphicon-pencil"></span></a>                    
-                    <a role="button" onclick="showForm(this, 'album__info', 'album__delete')"><span class="glyphicon glyphicon-trash"></span></a>
-                    <a href="/"><span class="glyphicon glyphicon-picture"></span></a>
-                </span>
-                @Html.Partial("_Delete", Model)
-            </div>
+           @* @if (Model.Collapsed)
+            { 
+                <div class="album__info album__collapser" onclick="showAlbum(this, 'album', 'album__collapsed__content')"><span class="album__name">@Model.Album.Name</span> <span class="fa fa-plus"></span>                   
+                    <span class="links"> 
+                        @if (Model.CanEditAlbumName)
+                        {               
+                            <a role="button" title="Edit album name" onclick="showForm(this, 'album', 'album__edit')"><span class="fa fa-pencil"></span></a>                    
+                        }
+                        @if (Model.CanDeleteAlbum)
+                        {
+                            <a role="button" title="Delete album" onclick="showForm(this, 'album__info', 'album__delete')"><span class="fa fa-trash"></span></a>
+                        }
+                        @if (Model.CanEditAlbumContent)
+                        {
+                            <a href="@Url.Action("Details", new { albumId = Model.Album.Id })" title="Edit album content"><span class="fa fa-picture-o"></span></a>
+                        }
+                    </span>
+                    @Html.Partial("_Delete", Model.Album)
+                </div>
+            }
+            else
+            {
+                *@<div class="album__info"><span class="album__name">@Model.Album.Name</span>                    
+                    <span class="links"> 
+                        @if (Model.CanEditAlbumName)
+                        {               
+                            <a role="button" title="Edit album name" onclick="showForm(this, 'album', 'album__edit')"><span class="fa fa-pencil"></span></a>                    
+                        }
+                        @if (Model.CanDeleteAlbum)
+                        {
+                            <a role="button" title="Delete album" onclick="showForm(this, 'album__info', 'album__delete')"><span class="fa fa-trash"></span></a>
+                        }
+                        @if (Model.CanEditAlbumContent)
+                        {
+                            <a href="@Url.Action("Details", new { albumId = Model.Album.Id })" title="Edit album content"><span class="fa fa-picture-o"></span></a>
+                        }
+                    </span>
+                    @Html.Partial("_Delete", Model.Album)
+                </div>
+            @*}*@
             <hr />      
             @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
-            @Html.Partial("_Edit", Model)
-            @if (Model.Images != null && Model.Images.Count() > 0)
-            {
-                <div class="album__content" id="carousel_@Model.Id">
+            @Html.Partial("_Edit", Model.Album)
+            @*@{
+                var collapsedClass = Model.Collapsed ? "hidden" : "";
+            }*@
+            @if (Model.Album.Images != null && Model.Album.Images.Count() > 0)
+            {           
+                @*<div class="album__collapsed__content @collapsedClass">*@
+                <div class="album__content" id="carousel_@Model.Album.Id">
                     <div class="carousel">
-                        <div class="mid"><img src="@Model.Images.First().Path" style="height:400px;"></div>
+                        <div class="mid"><img src="@Model.Album.Images.First().Path" style="height:400px;"></div>
+                        <div class="mid-caption">@Model.Album.Images.First().Caption</div>
                         <div class="jcarousel-buttons">
-                            <a role="button" class="jcarousel-prev"><i class="glyphicon glyphicon-circle-arrow-left"></i></a>
-                            <a role="button" class="jcarousel-next"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                            @if (Model.Album.Images.Where(x => x.IsPublished).Count() > 7) 
+                            {
+                                <a role="button" class="jcarousel-prev"><i class="fa fa-chevron-circle-left"></i></a>
+                                <a role="button" class="jcarousel-next"><i class="fa fa-chevron-circle-right"></i></a>
+                            }
                         </div>
                         <div class="carousel-pretty">                        
                         <ul>
-                            @foreach (var image in Model.Images)
+                            @foreach (var image in Model.Album.Images)
                             {
                                 if (image.IsPublished) 
                                 {
-                                    <li><img src="@image.Path" style="max-width:100px;height:120px;cursor:pointer"></li>
+                                    <li><img alt="@image.Caption" title="@image.Caption" src="@image.Path"></li>
                                 }
                             }
                         </ul>
                         </div>                        
                         <div class="clear"></div>
                     </div>
-                    
-                    
+                                       
                 </div>
+                @*</div>*@     
             }
-            @Html.Partial("_UploadImage", Model.Id)
+            @*<div class="album__collapsed__content @collapsedClass">*@
+                @Html.Partial("_UploadImage", Model.Album.Id)
+            @*</div>*@
         </div>
     </div>
 }
