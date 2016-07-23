@@ -10,7 +10,7 @@ namespace Isdg.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Name and surname")]
         public string UserName { get; set; }
 
         [Required]
@@ -92,7 +92,7 @@ namespace Isdg.Models
         public string ConfirmPassword { get; set; }
         
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Name and surname")]
         public string UserName { get; set; }
 
         [Required]

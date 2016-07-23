@@ -26,11 +26,13 @@ namespace Isdg.Models
 
     public enum UserRole
     {
+        [Description("Unknown")]
+        Unknown = 0,
         [Description("Untrusted member")]
-        Untrusted = 0,
+        Untrusted = 1,
         [Description("Trusted member")]
-        Trusted = 1,
+        Trusted = 2,
         [Description("Administrator")]
-        Admin = 2
+        Admin = 3       
     }
 }

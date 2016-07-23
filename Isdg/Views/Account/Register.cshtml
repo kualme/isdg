@@ -35,8 +35,7 @@
         @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-            <span class="hint">User name is displayed to you and other users</span>
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })            
         </div>
     </div>
     <div class="form-group">

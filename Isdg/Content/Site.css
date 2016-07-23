@@ -40,6 +40,10 @@ a:hover, a:focus {
 .hint {
     color: #808080;
 }
+
+.text-error{
+    color: red;
+}
 /* Common */
 .common-header {
     background-color: #42599A;
@@ -69,7 +73,7 @@ a:hover, a:focus {
     line-height: 35px;
 }
 
-.news__content, .user__content, .album__content {
+.news__content, .award__content, .user__content, .album__content {
     margin: 0px 0px 30px 30px;
 }
 
@@ -95,7 +99,7 @@ a:hover, a:focus {
     width: 140px;
 }
 
-.news__author {
+.news__author, .award__author {
     font-style: italic;
 }
 
@@ -179,6 +183,20 @@ a:hover, a:focus {
     font-size: 22px;
 }
 /* End Image */
+
+/* Award */
+.award__heading{
+    font-size: 22px;
+}
+.award__image{
+    width: auto;
+    text-align: center;
+}
+.award__image>img{
+    margin: 10px;
+    height: 500px;
+}
+/* End Award */
 
 /* Meetings */
 .meeting__content {

@@ -59,7 +59,10 @@ else
                 <div class="album__content" id="carousel_@Model.Album.Id">
                     <div class="carousel">
                         <div class="mid"><img src="@Model.Album.Images.First().Path" style="height:400px;"></div>
-                        <div class="mid-caption">@Model.Album.Images.First().Caption</div>
+                        @if (Model.Album.Images.Any(x => x.IsPublished))
+                        {
+                            <div class="mid-caption">@Model.Album.Images.First(x => x.IsPublished).Caption</div>
+                        }
                         <div class="jcarousel-buttons">
                             @if (Model.Album.Images.Where(x => x.IsPublished).Count() > 7) 
                             {
@@ -85,7 +88,14 @@ else
                 @*</div>*@     
             }
             @*<div class="album__collapsed__content @collapsedClass">*@
+            @if (Isdg.Lib.UserHelper.HasAnyRole()) 
+            {
                 @Html.Partial("_UploadImage", Model.Album.Id)
+            }
+            else
+            {
+                <hr />
+            }
             @*</div>*@
         </div>
     </div>

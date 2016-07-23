@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("News", "Index", "News")</li>
                     <li>@Html.ActionLink("About ISDG", "ShowText", "Home", new { key = "About ISDG" }, null)</li>
                     <li>@Html.ActionLink("Statutes of ISDG", "ShowText", "Home", new { key = "Statutes of ISDG" }, null)</li>
-                    <li>@Html.ActionLink("Executive Board", "ExecutiveBoard", "Home")</li>
+                    <li>@Html.ActionLink("Executive Board", "ShowText", "Home", new { key = "Executive Board" }, null)</li>
                     <li>@Html.ActionLink("Isaacs' Award", "Index", "Award")</li>
                     <li>@Html.ActionLink("ISDG meetings", "ShowText", "Home", new { key = "ISDG meetings" }, null)</li>
                     <li>@Html.ActionLink("Related Meetings", "Related", "Meetings")</li>
@@ -47,7 +47,7 @@
                 @RenderBody()
                 <hr />
                 <footer>
-                    <p>&copy; 2009–@DateTime.Now.Year ISDG<span style="float: right;">This site is maintained by <a href="mailto:admin@isdg-site.org">Sergey S. Kumkov</a></span></p>                    
+                    <p>&copy; 2009–@DateTime.Now.Year ISDG<span style="float: right;">This site is maintained by <a href="mailto:sskumk@gmail.com">Sergey S. Kumkov</a></span></p>                    
                 </footer>
             </div>
          </div>        

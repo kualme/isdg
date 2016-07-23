@@ -34,51 +34,54 @@ namespace Isdg.Controllers
         public ActionResult Index()
         {
             var awards = awardService.GetAllAwards();
-            return View(awards);
+            return View(awards.Select(ToAwardViewModel));
         }
         
         [HttpPost]
-        public ActionResult CreateEditAward(CreateAwardViewModel model)
+        public ActionResult CreateEditAward(Award model)
         {
-            if (model.Award.Id == 0)
+            if (model.Id == 0)
             {                
                 var currentDate = System.DateTime.Now;
-                model.Award.ModifiedDate = currentDate;
-                model.Award.AddedDate = currentDate;
-                model.Award.IP = Request.UserHostAddress;
+                model.ModifiedDate = currentDate;
+                model.AddedDate = currentDate;
+                model.IP = Request.UserHostAddress;
 
                 if (Request.Files.Count > 0)
                 {
                     var path = SaveImage(Request.Files[0]);
-                    model.Award.PathToFirstPicture = path;
+                    model.PathToFirstPicture = path;
                 }
 
                 if (Request.Files.Count > 1)
                 {
                     var secondPath = SaveImage(Request.Files[1]);
-                    model.Award.PathToFirstPicture = secondPath;
+                    model.PathToSecondPicture = secondPath;
                 }
 
                 try
                 {
-                    model.Award.UserId = User.Identity.GetUserId();
-                    awardService.InsertAward(model.Award);                    
-                    return PartialView("_Award", model);
+                    model.UserId = User.Identity.GetUserId();
+                    awardService.InsertAward(model);
+                    return new JsonResult() { Data = new { success = true } };
+                    //return RedirectToAction("Index");
+                    //return PartialView("_Award", model);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    ModelState.AddModelError("", "Failed to create award");
-                    return PartialView("_Award", null);
+                    //ModelState.AddModelError("", "Failed to create award");
+                    //return PartialView("_Award", null);                    
+                    return new JsonResult() { Data = new { success = false, message = "Failed to create award" } };
                 }                
             }
             else
             {
                 try
                 {
-                    var editModel = awardService.GetAwardById(model.Award.Id);
-                    editModel.Heading = model.Award.Heading;
-                    editModel.Content = model.Award.Content;                    
+                    var editModel = awardService.GetAwardById(model.Id);
+                    editModel.Heading = model.Heading;
+                    editModel.Content = model.Content;                    
                     editModel.ModifiedDate = System.DateTime.Now;
                     editModel.IP = Request.UserHostAddress;
                     
@@ -91,17 +94,20 @@ namespace Isdg.Controllers
                     if (Request.Files.Count > 1)
                     {
                         var secondPath = SaveImage(Request.Files[1]);
-                        editModel.PathToFirstPicture = secondPath;
+                        editModel.PathToSecondPicture = secondPath;
                     }
                     
                     awardService.UpdateAward(editModel);                    
-                    return PartialView("_Award", editModel);
+                    //return PartialView("_Award", editModel);
+                    //return RedirectToAction("Index");
+                    return new JsonResult() { Data = new { success = true } };
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    ModelState.AddModelError("", "Failed to update award");
-                    return PartialView("_Award", model);
+                    //ModelState.AddModelError("", "Failed to update award");
+                    //return PartialView("_Award", model);
+                    return new JsonResult() { Data = new { success = false, message = "Failed to update award" } };
                 }                
             }                     
         }
@@ -130,7 +136,16 @@ namespace Isdg.Controllers
             var fileName = fileGuid + extension;
             var path = Path.Combine(Server.MapPath("~/Content/Award/"), fileName);
             file.SaveAs(path);
-            return path;
+            return Path.Combine("Content/Award/", fileName);
+        }
+
+        private AwardViewModel ToAwardViewModel(Award award)
+        {
+            return new AwardViewModel() 
+            {
+                Award = award,
+                UserName = UserHelper.GetUserName(UserManager, award.UserId)
+            };
         }
     }
 }

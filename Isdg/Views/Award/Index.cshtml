@@ -1,5 +1,5 @@
 ﻿@using Isdg.Core.Data
-@model IEnumerable<Award>
+@model IEnumerable<Isdg.Models.AwardViewModel>
 
 @{
     ViewBag.Title = "Isaacs' Award";
@@ -11,7 +11,7 @@
 
 @if (Isdg.Lib.UserHelper.IsAdmin()) 
 {
-    @Html.Partial("_Create", new Isdg.Models.CreateAwardViewModel())
+    @Html.Partial("_Create", new Award())
 }
 else
 {

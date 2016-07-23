@@ -18,5 +18,6 @@ namespace Isdg.Models
         public HttpPostedFileBase FirstImageUpload { get; set; }
         [DataType(DataType.Upload)]
         public HttpPostedFileBase SecondImageUpload { get; set; }
+        public string UserName { get; set; }
     }
 }

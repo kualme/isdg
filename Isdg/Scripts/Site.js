@@ -86,7 +86,56 @@ $(function () {
         });
     });
 });
-
+$(function () {
+    $(".award__submit").click(function () {
+        var parent = $(this).parents('.award__new');
+        var images = parent.children('.image');
+        var imageUploadFirst = $(images[0]).children('.award__image-upload-first');
+        var imageUploadSecond = $(images[1]).children('.award__image-upload-second');
+        var errorMessage = parent.children('.error-message');
+        var spinner = parent.find(".fa-spinner");
+        var formData = new FormData();
+        var totalFiles = imageUploadFirst.prop('files').length;
+        for (var i = 0; i < totalFiles; i++) {
+            var file = imageUploadFirst.prop('files')[i];
+            formData.append("FileUpload", file);
+        }
+        var totalFiles = imageUploadSecond.prop('files').length;
+        for (var j = 0; j < totalFiles; j++) {
+            var file = imageUploadSecond.prop('files')[j];
+            formData.append("FileUpload", file);
+        }
+        var model = parent.serializeArray();
+        for (var k = 0; k < model.length; k++) {
+            formData.append(model[k].name, model[k].value);
+        }
+        $.ajax({
+            type: "POST",
+            url: '/Award/CreateEditAward',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                spinner.removeClass("hidden");                
+                errorMessage.addClass("hidden");
+            },
+            complete: function () { spinner.addClass("hidden") },
+            success: function (response) {
+                if (response.success)
+                    window.location.reload();
+                else {
+                    errorMessage.removeClass("hidden");
+                    errorMessage.text(response.message);
+                }
+            },
+            error: function (error) {
+                errorMessage.removeClass("hidden");
+                errorMessage.text("An error occurred while downloading files");
+            }
+        });
+    });
+});
 function bindCarousel() {
     $(".carousel").each(function () {
         var $this = $(this);

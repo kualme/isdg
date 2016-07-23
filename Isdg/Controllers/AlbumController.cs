@@ -194,6 +194,11 @@ namespace Isdg.Controllers
                 albumService.InsertImage(image);
             }
 
+            if (!UserHelper.IsAdmin())
+            {
+                EmailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "image", Url.Action("Details", "Album", new { albumId = albumId }, Request.Url.Scheme), User.Identity.GetUserName());
+            }
+
             var message = Request.Files.Count == 1 ? "Image has been added successfully" : "Images have been added successfully";
             if (!isPublished)
                 message += ". They will be published after validation.";

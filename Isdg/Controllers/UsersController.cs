@@ -123,7 +123,7 @@ namespace Isdg.Controllers
         private UserRole GetRole(ApplicationUser user)
         {
             var roles = RoleManager.Roles;
-            var userRole = UserRole.Untrusted;
+            var userRole = UserRole.Unknown;
             foreach (var role in roles)
             {
                 if (user.Roles.Any(x => x.RoleId == role.Id))

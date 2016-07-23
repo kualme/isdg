@@ -11,8 +11,11 @@
             @*@Html.Partial("_Delete", Model)*@
         </div>
         <div class="user__content">
+            @{
+                var roleClass = Model.Role.ToDescription() == "Unknown" ? "text-error" : "";
+            }
             <p>@Model.UserName</p>
-            <p>@Model.Role.ToDescription()</p>
+            <p class="@roleClass">@Model.Role.ToDescription()</p>
             <p>@Html.DisplayNameFor(x => x.EmailConfirmed) @Html.DisplayFor(x => x.EmailConfirmed)</p>
             <p>@Html.DisplayNameFor(x => x.ReceiveNewsletter) @Html.DisplayFor(x => x.ReceiveNewsletter)</p>
         </div>        

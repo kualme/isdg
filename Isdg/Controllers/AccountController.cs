@@ -13,14 +13,16 @@ using Isdg.Services.Messages;
 using Isdg.Core.Data;
 using System.Configuration;
 using Isdg.Lib;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Isdg.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private ApplicationSignInManager signInManager;
+        private ApplicationUserManager userManager;
+        private ApplicationRoleManager roleManager;
         private IEmailSender emailSender;
 
         public AccountController(IEmailSender emailSender)
@@ -39,11 +41,11 @@ namespace Isdg.Controllers
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
             private set 
             { 
-                _signInManager = value; 
+                signInManager = value; 
             }
         }
 
@@ -51,11 +53,23 @@ namespace Isdg.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
-                _userManager = value;
+                userManager = value;
+            }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get 
+            {
+                return roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();                
+            }
+            private set
+            {
+                roleManager = value;
             }
         }
 
@@ -163,13 +177,14 @@ namespace Isdg.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await UserManager.AddToRoleAsync(user.Id, "Untrusted");
                     
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     emailSender.SendConfirmationEmail(model.Email, callbackUrl);
-                    emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
+                    emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account " + user.UserName, Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
                     
                     return RedirectToAction("Index", "News");
                 }
@@ -390,11 +405,12 @@ namespace Isdg.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await UserManager.AddToRoleAsync(user.Id, "Untrusted");
                         
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         emailSender.SendConfirmationEmail(model.Email, callbackUrl);
-                        emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account", Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
+                        emailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "account " + user.UserName, Url.Action("Details", "Users", new { id = user.Id }, Request.Url.Scheme));
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -458,16 +474,16 @@ namespace Isdg.Controllers
         {
             if (disposing)
             {
-                if (_userManager != null)
+                if (userManager != null)
                 {
-                    _userManager.Dispose();
-                    _userManager = null;
+                    userManager.Dispose();
+                    userManager = null;
                 }
 
-                if (_signInManager != null)
+                if (signInManager != null)
                 {
-                    _signInManager.Dispose();
-                    _signInManager = null;
+                    signInManager.Dispose();
+                    signInManager = null;
                 }
             }
 

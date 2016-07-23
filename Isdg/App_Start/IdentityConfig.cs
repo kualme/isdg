@@ -102,7 +102,55 @@ namespace Isdg
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);            
+        }
+    }
+
+    public class ApplicationRoleManager : RoleManager<IdentityRole, string>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole, string, IdentityUserRole>(context.Get<ApplicationDbContext>()));
+            
+            string roleName = "Untrusted";            
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new IdentityRole();
+                role.Id = Guid.NewGuid().ToString();
+                role.Name = roleName;
+
+                var roleresult = roleManager.Create(role);
+            }
+
+            roleName = "Trusted";
+            role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new IdentityRole();
+                role.Id = Guid.NewGuid().ToString();
+                role.Name = roleName;
+
+                var roleresult = roleManager.Create(role);
+            }
+
+            roleName = "Admin";
+            role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new IdentityRole();
+                role.Id = Guid.NewGuid().ToString();
+                role.Name = roleName;
+
+                var roleresult = roleManager.Create(role);
+            }
+
+            return roleManager;
         }
     }
 }
