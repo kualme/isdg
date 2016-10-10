@@ -38,6 +38,9 @@ namespace Isdg.Controllers
         [HttpPost]
         public ActionResult CreateEditNews(News model)
         {
+            if (!UserHelper.HasAnyRole())
+                throw new Exception(String.Format("User {0}-{1}-{2} hasn't any role", User.Identity.Name, User.Identity.IsAuthenticated, User.Identity.AuthenticationType));
+
             if (model.Id == 0)
             {                
                 var currentDate = System.DateTime.Now;

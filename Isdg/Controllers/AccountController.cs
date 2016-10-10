@@ -14,6 +14,7 @@ using Isdg.Core.Data;
 using System.Configuration;
 using Isdg.Lib;
 using Microsoft.AspNet.Identity.EntityFramework;
+using BotDetect.Web.Mvc;
 
 namespace Isdg.Controllers
 {
@@ -168,9 +169,10 @@ namespace Isdg.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [CaptchaValidation("CaptchaCode", "ExampleCaptcha", "Incorrect CAPTCHA code!")]
+        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && captchaValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReceiveNewsletter = model.ReceiveNewsletter, UsernameToDisplay = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
