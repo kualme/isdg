@@ -169,10 +169,10 @@ namespace Isdg.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [CaptchaValidation("CaptchaCode", "ExampleCaptcha", "Incorrect CAPTCHA code!")]
-        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid)
+        [CaptchaValidation("CaptchaCode", "RegistrationCaptcha", "Incorrect CAPTCHA code!")]
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid && captchaValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReceiveNewsletter = model.ReceiveNewsletter, UsernameToDisplay = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);

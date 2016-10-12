@@ -2,7 +2,7 @@
 @model Isdg.Models.RegisterViewModel
 @{
     ViewBag.Title = "Registration";
-    MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+    MvcCaptcha captcha = Isdg.Lib.CaptchaHelper.GetRegistrationCaptcha();
 }
 
 <h2>@ViewBag.Title</h2>
@@ -50,13 +50,13 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            @Html.Captcha(exampleCaptcha)
+            @Html.Captcha(captcha)
         </div>
     </div>
     <div class="form-group">
-        @Html.Label("Captcha code", new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.CaptchaCode, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBox("CaptchaCode", "", new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.CaptchaCode, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

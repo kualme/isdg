@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="IsdgMigrations\IsdgConfiguration.cs" />
     <Compile Include="Lib\AuthorizeWithRolesAttribute.cs" />
+    <Compile Include="Lib\CaptchaHelper.cs" />
     <Compile Include="Lib\Extensions\EnumExtensions.cs" />
     <Compile Include="Lib\HttpContextUserNameProvider.cs" />
     <Compile Include="Lib\UserHelper.cs" />

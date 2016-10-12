@@ -98,6 +98,10 @@ namespace Isdg.Models
         [Required]
         [Display(Name = "Receive newsletters")]
         public bool ReceiveNewsletter { get; set; }
+
+        [Required]
+        [Display(Name = "CAPTCHA code")]
+        public string CaptchaCode { get; set; }
     }
 
     public class ResetPasswordViewModel
