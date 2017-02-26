@@ -18,16 +18,16 @@ namespace Isdg.Controllers
     [AuthorizeWithRoles(Role = UserRole.Admin)]
     public class NewsletterController : BaseController
     {   
-        private ISentEmailService sendedEmailService;
+        private ISentEmailService sentEmailService;
 
         public NewsletterController(IEmailSender emailSender, ISentEmailService sendedEmailService, ILog log) : base(log, emailSender)
         {   
-            this.sendedEmailService = sendedEmailService;
+            this.sentEmailService = sendedEmailService;
         }
 
         public ActionResult Index()
         {
-            var emails = sendedEmailService.GetAllEmails();            
+            var emails = sentEmailService.GetAllEmails();            
             var model = emails.Select(x => new SentEmailViewModel() { Subject = x.Subject, Body = x.Body, UserName = UserHelper.GetUserName(UserManager, x.UserId), When = x.AddedDate });            
             return View(model);
         }
@@ -53,7 +53,7 @@ namespace Isdg.Controllers
                     ModifiedDate = currentDate,
                     IP = Request.UserHostAddress
                 };
-                sendedEmailService.InsertEmail(sendedEmail);
+                sentEmailService.InsertEmail(sendedEmail);
                 return PartialView("_SentEmail", new SentEmailViewModel() { Subject = model.Subject, Body = model.Body, When = currentDate, UserName = UserHelper.GetUserName(UserManager) });
             }
             catch (Exception ex)

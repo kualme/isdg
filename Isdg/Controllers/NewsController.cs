@@ -47,7 +47,7 @@ namespace Isdg.Controllers
                 model.ModifiedDate = currentDate;
                 model.AddedDate = currentDate;
                 model.IP = Request.UserHostAddress;
-                if (UserHelper.IsAdmin())
+                if (UserHelper.IsAdminOrTrusted())
                     model.IsPublished = true;
                 try
                 {
@@ -56,6 +56,10 @@ namespace Isdg.Controllers
                     if (!UserHelper.IsAdmin())
                     {
                         EmailSender.SendEmailOnCreate(UserHelper.GetAllAdminEmails(UserManager), "news", Url.Action("Details", "News", new { id = model.Id }, Request.Url.Scheme), User.Identity.GetUserName());
+                    }
+                    if (UserHelper.IsAdminOrTrusted())
+                    {
+                        EmailSender.SendEmail(UserHelper.GetAllEmailsToSendNewsletter(UserManager), "ISDG News", String.Format("{0}<p>Published by {1}</p>", model.Content, UserHelper.GetUserName(UserManager, model.UserId)));
                     }
                     return PartialView("_News", ToNewsViewModel(model));
                 }

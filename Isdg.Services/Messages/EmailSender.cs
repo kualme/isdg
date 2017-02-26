@@ -47,6 +47,13 @@ namespace Isdg.Services.Messages
                 bcc, cc, attachmentFilePath, attachmentFileName);
         }
 
+        public void SendEmail(IEnumerable<string> emails, string subject, string body)
+        {
+            foreach (var email in emails) {
+                SendEmail(subject, body, email);
+            }
+        }
+
         /// <summary>
         /// Sends an email
         /// </summary>

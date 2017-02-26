@@ -50,5 +50,19 @@ namespace Isdg.Lib
             }
             return adminEmails;
         }
+
+        public static List<string> GetAllEmailsToSendNewsletter(ApplicationUserManager manager)
+        {
+            var emails = new List<string>();
+            var users = manager.Users;
+            foreach (var user in users)
+            {
+                if (user.EmailConfirmed && user.ReceiveNewsletter)
+                {
+                    emails.Add(user.Email);
+                }
+            }
+            return emails;
+        }
     }
 }
