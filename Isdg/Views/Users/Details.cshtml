@@ -60,6 +60,9 @@
     </dl>
 </div>
 
+<div class="user__info">
 <p>    
-    @Html.ActionLink("Back to list", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Back to list", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | <a role="button" onclick="showForm(this, 'user__info', 'user__delete')"><span class="fa fa-trash"></span></a>
 </p>
+@Html.Partial("_Delete", Model, new ViewDataDictionary { { "goToListOnDelete", true } })
+</div>

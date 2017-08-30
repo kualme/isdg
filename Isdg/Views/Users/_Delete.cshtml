@@ -5,7 +5,14 @@
     <span class="delete_confirmation">Are you sure you want to delete this user?</span>
     @Html.AntiForgeryToken()
     <span class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('user', this)" />
+        @if (ViewData["goToListOnDelete"] != null && (bool)ViewData["goToListOnDelete"]) 
+        { 
+            <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="window.location.href = '/users'" />
+        } 
+        else 
+        {
+            <input type="submit" value="Delete" class="btn btn-default btn-sm" onclick="closeFormOnButton('user', this)" />
+        }
         <input type="button" value="Cancel" class="btn btn-default btn-sm" onclick="closeFormOnButton('user__delete', this)" />
     </span>
 }
