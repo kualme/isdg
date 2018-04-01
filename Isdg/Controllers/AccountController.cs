@@ -172,6 +172,12 @@ namespace Isdg.Controllers
         [CaptchaValidation("CaptchaCode", "RegistrationCaptcha", "Incorrect CAPTCHA code!")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (!String.IsNullOrEmpty(model.FakeField))
+            {
+                // Бот просится
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReceiveNewsletter = model.ReceiveNewsletter, UsernameToDisplay = model.UserName };

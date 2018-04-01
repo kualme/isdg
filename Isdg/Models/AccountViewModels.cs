@@ -102,6 +102,12 @@ namespace Isdg.Models
         [Required]
         [Display(Name = "CAPTCHA code")]
         public string CaptchaCode { get; set; }
+
+        /// <summary>
+        /// Если этой фейковое поле заполнено, то польщователь - бот
+        /// </summary>
+        [Display(Name = "Fake Field")]
+        public string FakeField { get; set; }
     }
 
     public class ResetPasswordViewModel
